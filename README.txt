@@ -13,3 +13,4 @@ In eclipse, right click on the left hand side (package explorer)
 Import
 Git>Projects from Git(smart import)> clone url
 Make sure you add your github username and pass
+Basically next/finish until added to packages

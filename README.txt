@@ -11,5 +11,5 @@ https://docs.google.com/document/d/1M5Ir3bMCBuWupPLdtnzz3vxd2QxgkwXiFyE_KTMzx-w/
 How to add this repo to eclipse:
 In eclipse, right click on the left hand side (package explorer)
 Import
-Git>Projects from Git> clone url
+Git>Projects from Git(smart import)> clone url
 Make sure you add your github username and pass

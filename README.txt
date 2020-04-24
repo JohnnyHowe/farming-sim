@@ -15,3 +15,5 @@ Git>Projects from Git(smart import)> clone url
 get the clone url from github and enter to eclipse
 Make sure you add your github username and pass
 Basically next/finish until added to packages
+
+remember to pull before u push

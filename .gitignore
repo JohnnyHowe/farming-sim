@@ -5,7 +5,6 @@ target/**
 *.ear
 *.class
 *.pydevproject
-.project
 .metadata
 bin/**
 tmp/**

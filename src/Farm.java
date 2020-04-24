@@ -68,8 +68,8 @@ public class Farm {
 	
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
-		farm = setUpFarm(in);
-		
+		Farm farm = setUpFarm(in);
+		farm.endGame();
 		in.close();
 		
 	}

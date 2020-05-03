@@ -7,12 +7,6 @@ public class Farm
 {
 	private String name;
 
-	// Defaults for bounuses
-//	private int growthMod = 1;
-//	private int happinessMod = 1;
-//	private int incomeMod = 1;
-//	private boolean storeDiscount;
-
 	/**
 	 * Constructor for the farm
 	 * @param name Name of farm

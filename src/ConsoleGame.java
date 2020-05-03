@@ -36,7 +36,7 @@ public class ConsoleGame extends Game {
         this.setGameLength(10);
         this.farm = new Farm("FarmName");
         this.farmer = new Farmer("FarmerName");
-        System.out.println(this.toString() + "\n");
+        System.out.println(this.toString());
     }
 
     /**
@@ -54,7 +54,7 @@ public class ConsoleGame extends Game {
      */
     public void runDay() {
         int dayNum = this.getCurrentDay() + 1;  // + 1 so it starts at 1 - looks better
-        System.out.println("What are you going to do today? (Day " + dayNum + ")");
+        System.out.println("\nWhat are you going to do today? (Day " + dayNum + ")");
         String input = this.scanner.nextLine();
         this.runInput(input);
     }
@@ -68,11 +68,26 @@ public class ConsoleGame extends Game {
      */
     private void runInput(String userInput) {
         switch(userInput.toLowerCase()) {
+            case "help":
+                // I am well aware this is not the best way to do this but that's okay
+                // This won't be in the final build
+                System.out.println("Commands:\nend game\nend day\nview farm name\n" +
+                        "view farmer name\nview game length");
+                break;
             case "end game":
                 System.exit(0);
                 break;
             case "end day":
                 this.increaseDayCounter();
+                break;
+            case "view farm name":
+                System.out.println(this.farm.getName());
+                break;
+            case "view farmer name":
+                System.out.println(this.farmer.getName());
+                break;
+            case "view game length":
+                System.out.println(this.getGameLength() + " days");
                 break;
             default:
                 System.out.println("Unknown action: " + userInput);

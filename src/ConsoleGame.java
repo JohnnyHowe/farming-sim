@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+
 /**
  * Game class - acts as game environment.
  * Runs game through console
@@ -45,25 +46,30 @@ public class ConsoleGame extends Game {
      */
     private void end() {
         System.out.println("You ended the game with " + this.getPoints() + " points.");
+        System.exit(0);
     }
 
     /**
      * runDay serves as the code inside the main game loop.
      */
     public void runDay() {
-        // Get user input
         System.out.println("What are you going to do today?");
-
-//        Scanner in = new Scanner(System.in);
-//        String input = "";
-//        while (in.hasNext()) {
-//            input = in.nextLine();
-//        }
-//        in.close();
-
         String input = this.scanner.nextLine();
-
+        this.runInput(input);
         System.out.println("Run day doing: " + input + "\n");
+    }
+
+    /**
+     * Given a string from the user input, run some command
+     *
+     * "end game" finishes the game, even if not all days are completed.
+     *
+     * @param userInput Input string
+     */
+    private void runInput(String userInput) {
+        if (userInput.toLowerCase().equals("end game")) {
+            this.end();
+        }
     }
 
     public static void main(String[] args) {

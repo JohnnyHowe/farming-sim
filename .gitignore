@@ -20,5 +20,5 @@ local.properties
 
 *.idea*
 .metadata*
-.iml
-*out*
+*.iml
+/out

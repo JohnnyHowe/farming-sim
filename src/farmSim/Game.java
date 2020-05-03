@@ -1,11 +1,13 @@
+package farmSim;
 
 /**
  * Game class - acts as game environment.
  * This is the file to run when the game is to be played.
  */
 public abstract class Game {
-    public Farm farm;		
-    public Farmer farmer;
+	public static Farm farm;		
+    public static Farmer farmer;
+    public static Store store;
 
     private int gameLength;     // How many days the game will last
     private int currentDay;     // Current game day
@@ -86,7 +88,7 @@ public abstract class Game {
      * in form "Game with farmer {farmer name} on farm {farm name}."
      */
     public String toString() {
-        return "Game with farmer " + this.farmer.getName() + " on farm " + this.farm.getName() + ".";
+        return "Game with farmer " + Game.farmer.getName() + " on farm " + Game.farm.getName() + ".";
     }
 
     public void run() {

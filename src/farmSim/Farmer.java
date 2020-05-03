@@ -1,10 +1,11 @@
+package farmSim;
 /**
  * Class to represent the farmer
  */
 public class Farmer
 {
 	private String name;
-	private float money;
+	private double money;
 
 	/**
 	 * Initialize the farmer.
@@ -20,7 +21,7 @@ public class Farmer
 	 * Get the money the player has
 	 * @return money Money player has
 	 */
-	public float getMoney()
+	public double getMoney()
 	{
 		return this.money;
 	}
@@ -32,5 +33,9 @@ public class Farmer
 	public String getName()
 	{
 		return this.name;
+	}
+	
+	public void addMoney(double money) {
+		this.money += money;
 	}
 }

@@ -1,3 +1,4 @@
+package farmSim;
 import java.util.Scanner;
 
 

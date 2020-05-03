@@ -1,3 +1,4 @@
+package farmSim;
 
 /**
  * Class representing the farm.
@@ -6,12 +7,13 @@
 public class Farm
 {
 	private String name;
+	public double growthMod = 1, happinessMod = 1, incomeMod = 1;
 
 	/**
 	 * Constructor for the farm
 	 * @param name Name of farm
 	 */
-	public Farm (String name)
+	public Farm(String name)
 	{
 		this.name = name;
 	}
@@ -34,4 +36,5 @@ public class Farm
 	{
 		return "This is farm " + name + ".";
 	}
+	
 }

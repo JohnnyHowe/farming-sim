@@ -18,4 +18,5 @@ public abstract class Crop extends FarmItem {
     	//remove from farms list of crops
     	Game.farmer.addMoney(income);
     }
+    
 }

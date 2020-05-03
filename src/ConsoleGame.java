@@ -7,26 +7,35 @@ import java.util.Scanner;
  */
 public class ConsoleGame extends Game {
 
+    Scanner scanner;
+
     /**
      * Initialize the game
      */
     public ConsoleGame() {
         super();
+        this.scanner = new Scanner(System.in);
     }
 
     /**
      * Set up the game
      * Creates Farm, Farmer
      */
-    private void setUp() {
-        Scanner in = new Scanner(System.in);
-        System.out.println("How many days will the game last?: ");
-        this.setGameLength(Integer.parseInt(in.nextLine()));
-        System.out.println("Farm name: ");
-        this.farm = new Farm(in.nextLine());
-        System.out.println("Farmer name: ");
-        this.farmer = new Farmer(in.nextLine());
-        in.close();
+    public void setUp() {
+//        Scanner in = new Scanner(System.in);
+//        System.out.println("How many days will the game last?: ");
+//        this.setGameLength(Integer.parseInt(in.nextLine()));
+//        System.out.println("Farm name: ");
+//        this.farm = new Farm(in.nextLine());
+//        System.out.println("Farmer name: ");
+//        this.farmer = new Farmer(in.nextLine());
+//        in.close();
+
+        // Couldn't be bothered typing it over and over again
+        this.setGameLength(10);
+        this.farm = new Farm("FarmName");
+        this.farmer = new Farmer("FarmerName");
+
     }
 
     /**
@@ -34,31 +43,31 @@ public class ConsoleGame extends Game {
      * String in the form "You ended the game with {points} points."
      * points is the returned value from the calculatePoints method.
      */
-    private void endGame() {
+    private void end() {
         System.out.println("You ended the game with " + this.getPoints() + " points.");
     }
 
     /**
      * runDay serves as the code inside the main game loop.
      */
-    private void runDay() {
+    public void runDay() {
         // Get user input
-        Scanner in = new Scanner(System.in);
-        String input = in.nextLine();
-        in.close();
+        System.out.println("What are you going to do today?");
+
+//        Scanner in = new Scanner(System.in);
+//        String input = "";
+//        while (in.hasNext()) {
+//            input = in.nextLine();
+//        }
+//        in.close();
+
+        String input = this.scanner.nextLine();
+
+        System.out.println("Run day doing: " + input + "\n");
     }
 
-    /**
-     * Main game loop.
-     *
-     * @param args command line args, they do nothing
-     */
     public static void main(String[] args) {
         ConsoleGame game = new ConsoleGame();
-        game.setUp();
-
-        // Game loop
-
-        // end game
+        game.run();
     }
 }

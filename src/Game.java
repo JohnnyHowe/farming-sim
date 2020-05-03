@@ -5,7 +5,7 @@ import java.util.Scanner;
  * Game class - acts as game environment.
  * This is the file to run when the game is to be played.
  */
-public class Game {
+public abstract class Game {
     public Farm farm;
     public Farmer farmer;
 
@@ -21,6 +21,20 @@ public class Game {
     }
 
     // ==================================================
+    // Interface method declarations
+    // ==================================================
+
+    /**
+     * Called once before the game loop
+     */
+    public abstract void setUp();
+
+    /**
+     * The method called once each game loop
+     */
+    public abstract void runDay();
+
+    // ==================================================
     // Basic getters and setters
     // ==================================================
 
@@ -31,6 +45,22 @@ public class Game {
      */
     public void setGameLength(int gameLength) {
         this.gameLength = gameLength;
+    }
+
+    /**
+     * Gets the current day (first day is day 0)
+     * @return currentDay
+     */
+    public int getCurrentDay() {
+        return this.currentDay;
+    }
+
+    /**
+     * Get the game length (in days)
+     * @return gameLength
+     */
+    public int getGameLength() {
+        return this.gameLength;
     }
 
     /**
@@ -52,6 +82,13 @@ public class Game {
      */
     public String toString() {
         return "Generic game with farmer " + this.farmer.getName() + " on farm " + this.farm.getName() + ".";
+    }
+
+    public void run() {
+        this.setUp();
+        while (this.getCurrentDay() < this.getGameLength()) {
+            this.runDay();
+        }
     }
 }
 

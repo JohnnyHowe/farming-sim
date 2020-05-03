@@ -1,12 +1,10 @@
-import java.util.Scanner;
-
 
 /**
  * Game class - acts as game environment.
  * This is the file to run when the game is to be played.
  */
 public abstract class Game {
-    public Farm farm;
+    public Farm farm;		
     public Farmer farmer;
 
     private int gameLength;     // How many days the game will last

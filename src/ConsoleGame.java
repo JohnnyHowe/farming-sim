@@ -8,7 +8,7 @@ import java.util.Scanner;
  */
 public class ConsoleGame extends Game {
 
-    Scanner scanner;
+    private Scanner scanner;
 
     /**
      * Initialize the game

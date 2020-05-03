@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 
 /**
  * Class representing the farm.

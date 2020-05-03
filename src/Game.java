@@ -54,6 +54,13 @@ public abstract class Game {
     }
 
     /**
+     * Increase the day counter by one.
+     */
+    public void increaseDayCounter() {
+        this.currentDay += 1;
+    }
+
+    /**
      * Get the game length (in days)
      * @return gameLength
      */
@@ -76,10 +83,10 @@ public abstract class Game {
 
     /**
      * Gets the string representation of the game.
-     * in form "Generic game with farmer {farmer name} on farm {farm name}."
+     * in form "Game with farmer {farmer name} on farm {farm name}."
      */
     public String toString() {
-        return "Generic game with farmer " + this.farmer.getName() + " on farm " + this.farm.getName() + ".";
+        return "Game with farmer " + this.farmer.getName() + " on farm " + this.farm.getName() + ".";
     }
 
     public void run() {

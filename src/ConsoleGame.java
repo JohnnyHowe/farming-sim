@@ -36,7 +36,7 @@ public class ConsoleGame extends Game {
         this.setGameLength(10);
         this.farm = new Farm("FarmName");
         this.farmer = new Farmer("FarmerName");
-
+        System.out.println(this.toString() + "\n");
     }
 
     /**
@@ -53,10 +53,10 @@ public class ConsoleGame extends Game {
      * runDay serves as the code inside the main game loop.
      */
     public void runDay() {
-        System.out.println("What are you going to do today?");
+        int dayNum = this.getCurrentDay() + 1;  // + 1 so it starts at 1 - looks better
+        System.out.println("What are you going to do today? (Day " + dayNum + ")");
         String input = this.scanner.nextLine();
         this.runInput(input);
-        System.out.println("Run day doing: " + input + "\n");
     }
 
     /**
@@ -67,8 +67,15 @@ public class ConsoleGame extends Game {
      * @param userInput Input string
      */
     private void runInput(String userInput) {
-        if (userInput.toLowerCase().equals("end game")) {
-            this.end();
+        switch(userInput.toLowerCase()) {
+            case "end game":
+                System.exit(0);
+                break;
+            case "end day":
+                this.increaseDayCounter();
+                break;
+            default:
+                System.out.println("Unknown action: " + userInput);
         }
     }
 

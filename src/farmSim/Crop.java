@@ -15,8 +15,12 @@ public abstract class Crop extends FarmItem {
     }
     
     public void harvest() {
-    	//remove from farms list of crops
+    	//remove from farm's list of crops
     	Game.farmer.addMoney(income);
     }
     
+    /*public void tend(Item item) {                        //draft, waiting on item implementantion
+    	this.grown += item.modifer * Game.farm.growthMod
+    }
+    */
 }

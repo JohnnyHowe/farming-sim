@@ -11,12 +11,12 @@ public abstract class CropList
 	public static Dictionary<String, Crop> GetAllCrops() {
 		Dictionary<String, Crop> allCrops = new Hashtable<String, Crop>();
 
-		allCrops.put("wheat", new Crop("Wheat", "Wheaty wheat", 2, 100, 5));
-		allCrops.put("sugar cane", new Crop("Sugar Cane", "Sugary Cane", 3, 150, 5));
-		allCrops.put(CACTUS_NAME, new Crop(CACTUS_NAME, CACTUS_DESC, CACTUS_PRICE, CACTUS_INCOME, CACTUS_THRESHOLD));//two different methods of initialization
-		allCrops.put(MUSH_NAME, new Crop(MUSH_NAME, MUSH_DESC, MUSH_PRICE, MUSH_INCOME, MUSH_THRESHOLD));
-		allCrops.put(MELON_NAME, new Crop(MELON_NAME, MELON_DESC, MELON_PRICE, MELON_INCOME, MELON_THRESHOLD));
-		allCrops.put(PUMP_NAME, new Crop(PUMP_NAME, PUMP_DESC, PUMP_PRICE, PUMP_INCOME, PUMP_THRESHOLD));
+		allCrops.put(WHEAT_NAME, new Wheat());
+		allCrops.put(CANE_NAME, new SugarCane());
+		allCrops.put(CACTUS_NAME, new Cactus());
+		allCrops.put(MUSH_NAME, new Mushroom());
+		allCrops.put(MELON_NAME, new Melon());
+		allCrops.put(PUMP_NAME, new Pumpkin());
 
 		return allCrops;
 	}

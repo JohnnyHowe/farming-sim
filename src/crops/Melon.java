@@ -1,11 +1,10 @@
 package crops;
 
-import farmSim.Crop;
-
+/**
+ * Class to represent Melon
+ */
 public class Melon extends Crop {
-	
-    public Melon(String name, String description, float price) {
-		super(CropList.MELON_NAME, CropList.MELON_DESC, CropList.MELON_PRICE, CropList.MELON_INCOME);
+    public Melon() {
+		super(CropList.MELON_NAME, CropList.MELON_DESC, CropList.MELON_PRICE, CropList.MELON_INCOME, CropList.MELON_THRESHOLD);
 	}
-
 }

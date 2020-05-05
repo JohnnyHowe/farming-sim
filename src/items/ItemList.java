@@ -30,23 +30,25 @@ public abstract class ItemList {
 	public final static double BONE_MULT = 2;				//Effect Multiplier
 	
 	//BRUSH
-	public final static String BONE_NAME = "Brush";		
-	public final static String BONE_DESC = "Spooky";		
-	public final static double BONE_PRICE = 2;			
-	public final static String BONE_EFFECT = "growth";	
-	public final static double BONE_MULT = 2;				
+	public final static String BRUSH_NAME = "Brush";		
+	public final static String BRUSH_DESC = "For brushing";		
+	public final static double BRUSH_PRICE = 2;			
+	public final static String BRUSH_EFFECT = "happiness";	
+	public final static double BRUSH_MULT = 2;				
 	
-	public final static String BONE_NAME = "Bonemeal";	
-	public final static String BONE_DESC = "Spooky";	
-	public final static double BONE_PRICE = 2;			
-	public final static String BONE_EFFECT = "growth";		
-	public final static double BONE_MULT = 2;			
+	//BREWINGSTAND
+	public final static String STAND_NAME = "Brewing Stand";	
+	public final static String STAND_DESC = "Quick drink this";	
+	public final static double STAND_PRICE = 2;			
+	public final static String STAND_EFFECT = "health";		
+	public final static double STAND_MULT = 2;			
 	
-	public final static String BONE_NAME = "Bonemeal";		
-	public final static String BONE_DESC = "Spooky";		
-	public final static double BONE_PRICE = 2;				
-	public final static String BONE_EFFECT = "growth";		
-	public final static double BONE_MULT = 2;				
+	//GOLEM"SROSE
+	public final static String ROSE_NAME = "Golem's Rose";		
+	public final static String ROSE_DESC = "It comes from the northern iron farms";		
+	public final static double ROSE_PRICE = 2;				
+	public final static String ROSE_EFFECT = "Income";		
+	public final static double ROSE_MULT = 2;				
 	
 
 }

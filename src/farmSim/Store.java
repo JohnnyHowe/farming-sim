@@ -1,5 +1,8 @@
 package farmSim;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Dictionary;
+
 import crops.CropList;
 import crops.Crop;
 
@@ -10,7 +13,8 @@ import crops.Crop;
 public class Store {
 	
 //	private ArrayList<FarmItem> stock;
-	private ArrayList<Crop> crops;
+//	private ArrayList<Crop> crops;
+    private Dictionary crops;
 
 	//private final int STOCK_SPACE = 12;
 
@@ -31,8 +35,17 @@ public class Store {
      * Get the arrayList of the crops
      * @return crops
      */
-    public ArrayList<Crop> getCrops() {
-        return this.crops;
+    public ArrayList<String> getCropNames() {
+        return Collections.list(this.crops.keys());
+    }
+
+    /**
+     * Given the name of the crop, return the object.
+     * @param name name of crop
+     * @return crop
+     */
+    public Crop getCrop(String name) {
+        return (Crop) this.crops.get(name);
     }
 
     public void endDay() {

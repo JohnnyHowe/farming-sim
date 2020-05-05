@@ -41,11 +41,36 @@ public class ConsoleGame extends Game {
         System.out.println(this.toString());
     }
 
-    public void viewStore() {
+    /**
+     * Show the available store items
+     */
+    private void viewStore() {
         System.out.println("Crops:");
-        for (Crop crop : this.store.getCrops()) {
+        for (String name : this.store.getCropNames()) {
+            Crop crop = this.store.getCrop(name);
             System.out.println(crop.getName() + " ($" + crop.getBuyPrice() + ")");
         }
+    }
+
+    /**
+     * Ask the user what they want to buy
+     */
+    private void buyItem() {
+        boolean done = false;
+        String item = "";
+
+        while (!done) {
+            System.out.println("What would you like to buy?");
+            item = this.scanner.nextLine().toLowerCase();
+
+            if (this.store.getCropNames().contains(item) || item.equals("nothing")) {
+                done = true;
+            } else {
+                System.out.println("Unknown item: " + item);
+                System.out.println("Try an item from the following: " + this.store.getCropNames());
+            }
+        }
+        System.out.println("Bought " + item);
     }
 
     /**
@@ -92,17 +117,43 @@ public class ConsoleGame extends Game {
             case "view farm name":
                 System.out.println(this.farm.getName());
                 break;
+            case "view farm":
+                break;
             case "view farmer name":
                 System.out.println(this.farmer.getName());
                 break;
             case "view game length":
                 System.out.println(this.getGameLength() + " days");
                 break;
-            case "view store":
-                this.viewStore();
+            case "visit store":
+                this.visitStore();
                 break;
             default:
                 System.out.println("Unknown action: " + userInput);
+        }
+    }
+
+    public void viewFarm() {
+        System.out.println(this.farm.toString());
+
+    }
+
+    public void visitStore() {
+        while(true) {   // Yeah i know its bad to idc
+            System.out.println("What would you like to do at the store?");
+            String item = this.scanner.nextLine().toLowerCase();
+            switch (item) {
+                case "leave":
+                    return;
+                case "view items":
+                    this.viewStore();
+                    return;
+                case "buy":
+                    this.buyItem();
+                    return;
+                default:
+                    System.out.println("Unknown command.");
+            }
         }
     }
 

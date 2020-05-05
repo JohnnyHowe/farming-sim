@@ -1,19 +1,19 @@
 package crops;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 
 /**
  * Class to easily manipulate crop attributes
  */
 public abstract class CropList
 {
-	public static ArrayList<Crop> GetAllCrops() {
-		ArrayList<Crop> allCrops = new ArrayList<Crop>();
+	public static Dictionary<String, Crop> GetAllCrops() {
+		Dictionary<String, Crop> allCrops = new Hashtable<String, Crop>();
 
-		// Define crops this way instead?
-		allCrops.add(new Crop("Wheat", "Wheaty wheat", 2, 100));
-		allCrops.add(new Crop("Sugar Cane", "Sugary Cane", 3, 120));
-		allCrops.add(new Crop("Cocaine", "The good stuff", 200, -20));
+		allCrops.put("wheat", new Crop("Wheat", "Wheaty wheat", 2, 100));
+		allCrops.put("sugar cane", new Crop("Sugar Cane", "Sugary Cane", 3, 150));
 
 		return allCrops;
 	}

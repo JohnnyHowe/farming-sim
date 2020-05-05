@@ -1,5 +1,7 @@
 package farmSim;
 
+import java.util.ArrayList;
+
 /**
  * Class representing the farm.
  * Is the environment for the game.
@@ -8,6 +10,7 @@ public class Farm
 {
 	private String name;
 	public double growthMod = 1, happinessMod = 1, incomeMod = 1;
+	private ArrayList<FarmItem> farmItems;
 
 	/**
 	 * Constructor for the farm
@@ -35,6 +38,14 @@ public class Farm
 	public String toString()
 	{
 		return "This is farm " + name + ".";
+	}
+
+	/**
+	 * Given a farm item, add it to the farm
+ 	 * @param farmItem item to add
+	 */
+	public void addFarmItem(FarmItem farmItem) {
+		this.farmItems.add(farmItem);
 	}
 	
 }

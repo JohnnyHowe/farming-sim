@@ -1,15 +1,14 @@
 package items;
 
 import farmSim.FarmItem;
-import farmSim.Game;
 
 
 public class Item extends FarmItem {
 	
 	private String effect;
-	private int effectMultiplier;
+	private double effectMultiplier;
 
-	public Item(String name, String description, double price, String effect, int effectMultiplier) {
+	public Item(String name, String description, double price, String effect, double effectMultiplier) {
 		super(name, description, price);
 		this.effect = effect;
 		this.effectMultiplier = effectMultiplier;
@@ -19,7 +18,7 @@ public class Item extends FarmItem {
 		return this.effect;
 	}
 	
-	public int getMod() {
+	public double getMod() {
 		return this.effectMultiplier;
 	}
 

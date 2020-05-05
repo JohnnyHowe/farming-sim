@@ -1,7 +1,10 @@
 package crops;
-
 import farmSim.Crop;
 
+
+/**
+ * Class to represent Wheat
+ */
 public class Wheat extends Crop {
 	
     public Wheat(String name, String description, float price) {

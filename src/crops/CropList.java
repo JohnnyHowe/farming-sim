@@ -1,6 +1,8 @@
 package crops;
 
-//Class to easily manipulate crop attributes
+/**
+ * Class to easily manipulate crop attributes
+ */
 public abstract class CropList {
 	
 	//WHEAT

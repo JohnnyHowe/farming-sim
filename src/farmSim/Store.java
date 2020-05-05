@@ -1,24 +1,17 @@
 package farmSim;
 import java.util.ArrayList;
-import crops.Wheat;
-
 
 /**
  * Class to represent the store.
  * has methods to buy crops and animals
  */
 public class Store {
-
-    private ArrayList<FarmItem> stock;
+	
+	//private ArrayList<FarmItem> stock;
 	//private final int STOCK_SPACE = 12;
 
-    /**
-     * Initialize the store
-     * This is where the stock is defined
-     */
     public Store() {
-        this.stock = new ArrayList<FarmItem>();
-        this.stock.add(new Wheat());
+    	//generate stock
     }
     
     public void endDay() {

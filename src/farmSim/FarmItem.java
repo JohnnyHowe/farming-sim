@@ -6,18 +6,15 @@ public abstract class FarmItem {
 	private String name;
 	private String description;
 
-//	private double salePrice;
+	private double salePrice;
 	private double purchasePrice;
 
-	public FarmItem() {
+	public FarmItem (String name, String description, double price) {
+		this.name = name;
+		this.description = description;
+		this.salePrice = price / 2;
+		this.purchasePrice = price;
 	}
-
-//	public FarmItem (String name, String description, double price) {
-//		this.name = name;
-//		this.description = description;
-//		this.salePrice = price / 2;
-//		this.purchasePrice = price;
-//	}
 
 	/**
 	 * Get the name of the item
@@ -48,7 +45,7 @@ public abstract class FarmItem {
 	 * @return sale price
 	 */
 	public double getSalePrice() { //Player selling to store
-		return this.price / 2;
+		return this.salePrice;
 	}
 
 

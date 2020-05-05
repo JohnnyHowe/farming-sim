@@ -18,7 +18,7 @@ public abstract class Game {
      */
     public Game() {
         this.currentDay = 0;
-        this.store = new farmSim.Store();
+        Game.store = new farmSim.Store();
     }
 
     // ==================================================

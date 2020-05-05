@@ -36,8 +36,8 @@ public class ConsoleGame extends Game {
 
         // Couldn't be bothered typing it over and over again
         this.setGameLength(10);
-        this.farm = new Farm("FarmName");
-        this.farmer = new Farmer("FarmerName");
+        Game.farm = new Farm("FarmName");
+        Game.farmer = new Farmer("FarmerName");
         System.out.println(this.toString());
     }
 
@@ -46,8 +46,8 @@ public class ConsoleGame extends Game {
      */
     private void viewStore() {
         System.out.println("Crops:");
-        for (String name : this.store.getCropNames()) {
-            Crop crop = this.store.getCrop(name);
+        for (String name : Game.store.getCropNames()) {
+            Crop crop = Game.store.getCrop(name);
             System.out.println(crop.getName() + " ($" + crop.getBuyPrice() + ")");
         }
     }
@@ -63,11 +63,11 @@ public class ConsoleGame extends Game {
             System.out.println("What would you like to buy?");
             item = this.scanner.nextLine().toLowerCase();
 
-            if (this.store.getCropNames().contains(item) || item.equals("nothing")) {
+            if (Game.store.getCropNames().contains(item) || item.equals("nothing")) {
                 done = true;
             } else {
                 System.out.println("Unknown item: " + item);
-                System.out.println("Try an item from the following: " + this.store.getCropNames());
+                System.out.println("Try an item from the following: " + Game.store.getCropNames());
             }
         }
         System.out.println("Bought " + item);
@@ -109,18 +109,18 @@ public class ConsoleGame extends Game {
                         "view farmer name\nview game length");
                 break;
             case "end game":
-                System.exit(0);
+                this.end();
                 break;
             case "end day":
                 this.increaseDayCounter();
                 break;
             case "view farm name":
-                System.out.println(this.farm.getName());
+                System.out.println(Game.farm.getName());
                 break;
             case "view farm":
                 break;
             case "view farmer name":
-                System.out.println(this.farmer.getName());
+                System.out.println(Game.farmer.getName());
                 break;
             case "view game length":
                 System.out.println(this.getGameLength() + " days");
@@ -134,7 +134,7 @@ public class ConsoleGame extends Game {
     }
 
     public void viewFarm() {
-        System.out.println(this.farm.toString());
+        System.out.println(Game.farm.toString());
 
     }
 

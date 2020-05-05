@@ -1,6 +1,7 @@
 package animals;
 
 import farmSim.FarmItem;
+import farmSim.Game;
 
 public class Animal extends FarmItem {
 	
@@ -14,5 +15,11 @@ public class Animal extends FarmItem {
 		this.health = health;
 		this.mood = mood;
 	}
-
+	
+	public void endDay() {
+		//example, test code
+		this.health -= 0.01;
+		this.mood -= 1 * Game.farm.happinessMod;
+		Game.farmer.addMoney(dailyProfit);
+	}
 }

@@ -3,10 +3,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Dictionary;
 
-import crops.CropList;
-import crops.Crop;
-import items.ItemList;
-import items.Item;
+import crops.*;
+import items.*;
+import animals.*;
 
 /**
  * Class to represent the store.
@@ -50,7 +49,7 @@ public class Store {
      * @return animals
      */
     public ArrayList<String> getAnimalNames() {
-    	return Collections.list(this.animal.keys());
+    	return Collections.list(this.animals.keys());
     }
 
     /**

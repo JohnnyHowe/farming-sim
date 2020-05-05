@@ -1,6 +1,9 @@
-package farmSim;
+package crops;
 
-public abstract class Crop extends FarmItem {
+import farmSim.FarmItem;
+import farmSim.Game;
+
+public class Crop extends FarmItem {
 	
     private double grown = 0;
     private double income;
@@ -9,7 +12,7 @@ public abstract class Crop extends FarmItem {
     	super(name, description, price);
     	this.income = income;
     }
-    
+
     public void endDay() {
     	this.grown = this.grown + (1 * Game.farm.growthMod);
     }

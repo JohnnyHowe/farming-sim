@@ -1,10 +1,23 @@
 package crops;
 
+import java.util.ArrayList;
+
 /**
  * Class to easily manipulate crop attributes
  */
-public abstract class CropList {
-	
+public abstract class CropList
+{
+	public static ArrayList<Crop> GetAllCrops() {
+		ArrayList<Crop> allCrops = new ArrayList<Crop>();
+
+		// Define crops this way instead?
+		allCrops.add(new Crop("Wheat", "Wheaty wheat", 2, 100));
+		allCrops.add(new Crop("Sugar Cane", "Sugary Cane", 3, 120));
+		allCrops.add(new Crop("Cocaine", "The good stuff", 200, -20));
+
+		return allCrops;
+	}
+
 	//WHEAT
 	public final static String WHEAT_NAME = "Wheat";
 	public final static String WHEAT_DESC = "Wheaty wheat";

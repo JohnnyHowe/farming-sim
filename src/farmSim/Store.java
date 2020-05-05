@@ -1,5 +1,7 @@
 package farmSim;
 import java.util.ArrayList;
+import crops.CropList;
+import crops.Crop;
 
 /**
  * Class to represent the store.
@@ -7,13 +9,32 @@ import java.util.ArrayList;
  */
 public class Store {
 	
-	//private ArrayList<FarmItem> stock;
+//	private ArrayList<FarmItem> stock;
+	private ArrayList<Crop> crops;
+
 	//private final int STOCK_SPACE = 12;
 
     public Store() {
-    	//generate stock
+        this.generateStock();
     }
-    
+
+    /**
+     * Set the stock arrayList to contain all the stock
+     * only wheat right now
+     */
+    private void generateStock() {
+//        this.stock = new ArrayList<FarmItem>();
+        this.crops = CropList.GetAllCrops();
+    }
+
+    /**
+     * Get the arrayList of the crops
+     * @return crops
+     */
+    public ArrayList<Crop> getCrops() {
+        return this.crops;
+    }
+
     public void endDay() {
     	//if STOCK_SPACE < len(stock):
     	//generate more stock

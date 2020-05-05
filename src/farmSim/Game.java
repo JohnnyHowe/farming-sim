@@ -5,7 +5,7 @@ package farmSim;
  * This is the file to run when the game is to be played.
  */
 public abstract class Game {
-	public static Farm farm;		
+	public static Farm farm;
     public static Farmer farmer;
     public static Store store;
 
@@ -18,6 +18,7 @@ public abstract class Game {
      */
     public Game() {
         this.currentDay = 0;
+        this.store = new farmSim.Store();
     }
 
     // ==================================================

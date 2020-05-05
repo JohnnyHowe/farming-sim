@@ -1,5 +1,6 @@
 package farmSim;
 import java.util.Scanner;
+import crops.Crop;
 
 
 /**
@@ -38,6 +39,13 @@ public class ConsoleGame extends Game {
         this.farm = new Farm("FarmName");
         this.farmer = new Farmer("FarmerName");
         System.out.println(this.toString());
+    }
+
+    public void viewStore() {
+        System.out.println("Crops:");
+        for (Crop crop : this.store.getCrops()) {
+            System.out.println(crop.getName() + " ($" + crop.getBuyPrice() + ")");
+        }
     }
 
     /**
@@ -89,6 +97,9 @@ public class ConsoleGame extends Game {
                 break;
             case "view game length":
                 System.out.println(this.getGameLength() + " days");
+                break;
+            case "view store":
+                this.viewStore();
                 break;
             default:
                 System.out.println("Unknown action: " + userInput);

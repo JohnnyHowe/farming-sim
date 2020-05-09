@@ -42,38 +42,6 @@ public class ConsoleGame extends Game {
     }
 
     /**
-     * Show the available store items
-     */
-    private void viewStore() {
-        System.out.println("Crops:");
-        for (String name : Game.store.getCropNames()) {
-            Crop crop = Game.store.getCrop(name);
-            System.out.println(crop.getName() + " ($" + crop.getBuyPrice() + ")");
-        }
-    }
-
-    /**
-     * Ask the user what they want to buy
-     */
-    private void buyItem() {
-        boolean done = false;
-        String item = "";
-
-        while (!done) {
-            System.out.println("What would you like to buy?");
-            item = this.scanner.nextLine().toLowerCase();
-
-            if (Game.store.getCropNames().contains(item) || item.equals("nothing")) {
-                done = true;
-            } else {
-                System.out.println("Unknown item: " + item);
-                System.out.println("Try an item from the following: " + Game.store.getCropNames());
-            }
-        }
-        System.out.println("Bought " + item);
-    }
-
-    /**
      * Prints the end game string to the console.
      * String in the form "You ended the game with {points} points."
      * points is the returned value from the calculatePoints method.
@@ -155,6 +123,39 @@ public class ConsoleGame extends Game {
                     System.out.println("Unknown command.");
             }
         }
+    }
+
+
+    /**
+     * Show the available store items
+     */
+    private void viewStore() {
+        System.out.println("Crops:");
+        for (String name : Game.store.getCropNames()) {
+            Crop crop = Game.store.getCrop(name);
+            System.out.println(crop.getName() + " ($" + crop.getBuyPrice() + ")");
+        }
+    }
+
+    /**
+     * Ask the user what they want to buy
+     */
+    private void buyItem() {
+        boolean done = false;
+        String item = "";
+
+        while (!done) {
+            System.out.println("What would you like to buy?");
+            item = this.scanner.nextLine().toLowerCase();
+
+            if (Game.store.getCropNamesLowerCase().contains(item) || item.equals("nothing")) {
+                done = true;
+            } else {
+                System.out.println("Unknown item: " + item);
+                System.out.println("Try an item from the following: " + Game.store.getCropNames());
+            }
+        }
+        System.out.println("Bought " + item);
     }
 
     public static void main(String[] args) {

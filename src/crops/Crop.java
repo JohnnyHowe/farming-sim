@@ -44,7 +44,7 @@ public class Crop extends FarmItem {
      * tend() to tend with water (no item)
      */
     public void tend(Item item) {
-    	if (item.getEffect() == "growth") {
+    	if (item.getEffect().equals("growth")) {
     		this.grown += item.getMod() * Game.farm.growthMod; //tended with item
     		//delete item from players inventory
     	} else {

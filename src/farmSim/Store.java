@@ -29,11 +29,23 @@ public class Store {
 
 
     /**
-     * Get the arrayList of crops
+     * Get the arrayList of crop names
      * @return crops
      */
     public ArrayList<String> getCropNames() {
         return Collections.list(this.crops.keys());
+    }
+
+    /**
+     * Get the arrayList of crops names (all in lower case)
+     * @return crops
+     */
+    public ArrayList<String> getCropNamesLowerCase() {
+        ArrayList<String> names = new ArrayList<String>();
+        for (String name : this.getCropNames()) {
+            names.add(name.toLowerCase());
+        }
+        return names;
     }
     
     /**
@@ -61,7 +73,6 @@ public class Store {
         return (Crop) this.crops.get(name);
     }
 
-
     public void upgradeField() { //boosts crop growth
     	//farm upgrades to boost the farms growth, happiness and income mods?
     	//you replow and fertilise the field, crop growth is faster
@@ -77,4 +88,16 @@ public class Store {
     	//you stepped up your advertising and market reach, global income is increased
     }
 
+    /**
+     * To be called when the farmer requests to buy something.
+     * @param farmer Farmer requesting to buy item
+     * @param itemName Name of FarmItem to buy
+     * @return Whether the purchase was successful
+     */
+    public boolean buy(Farmer farmer, String itemName) {
+//        if (farmer.hasFunds(CropList.)) {
+//
+//        }
+//        return false;
+    }
 }

@@ -27,6 +27,15 @@ public class Farmer
 	}
 
 	/**
+	 * Does the farmer have the funds?
+	 * @param cost Funds to check for
+	 * @return Whether the farmer has the funds
+	 */
+	public boolean hasFunds(float cost) {
+		return this.money >= cost;
+	}
+
+	/**
 	 * Get the farmers name
 	 * @return name Name of farmer
 	 */

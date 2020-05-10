@@ -22,9 +22,9 @@ public class Store {
      * Populate the store's stock to contain one of each game item
      */
     public Store() {
-        this.crops = CropList.GetAllCrops();
-        this.items = ItemList.GetAllItems();
-        this.animals = AnimalList.GetAllAnimals();
+        this.crops = ItemFactory.GetAllCrops();
+        this.items = ItemFactory.GetAllItems();
+        this.animals = ItemFactory.GetAllAnimals();
     }
 
 

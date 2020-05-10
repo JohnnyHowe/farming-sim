@@ -4,7 +4,14 @@ package crops;
  * Class to represent Melon
  */
 public class Melon extends Crop {
+	
+	public final static String MELON_NAME = "Melon";
+	public final static String MELON_DESC = "Watermelone";
+	public final static double MELON_PRICE = 6;
+	public final static double MELON_INCOME = 300;
+	public final static double MELON_THRESHOLD = 5;	
+	
     public Melon() {
-		super(CropList.MELON_NAME, CropList.MELON_DESC, CropList.MELON_PRICE, CropList.MELON_INCOME, CropList.MELON_THRESHOLD);
+		super(MELON_NAME, MELON_DESC, MELON_PRICE, MELON_INCOME, MELON_THRESHOLD);
 	}
 }

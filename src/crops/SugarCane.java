@@ -4,7 +4,14 @@ package crops;
  * Class to represent Sugar Cane
  */
 public class SugarCane extends Crop {
+	
+	public final static String CANE_NAME = "Sugar Cane";
+	public final static String CANE_DESC = "Sugary cane";
+	public final static double CANE_PRICE = 3;
+	public final static double CANE_INCOME = 150;
+	public final static double CANE_THRESHOLD = 5;	
+	
     public SugarCane() {
-		super(CropList.CANE_NAME, CropList.CANE_DESC, CropList.CANE_PRICE, CropList.CANE_INCOME, CropList.CANE_THRESHOLD);
+		super(CANE_NAME, CANE_DESC, CANE_PRICE, CANE_INCOME, CANE_THRESHOLD);
 	}
 }

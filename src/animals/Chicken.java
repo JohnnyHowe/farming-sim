@@ -4,7 +4,15 @@ package animals;
  * Class to represent Chicken
  */
 public class Chicken extends Animal {
+	
+	public final static String CHICKEN_NAME = "Chicken";
+	public final static String CHICKEN_DESC = "CLUCK";
+	public final static double CHICKEN_PRICE = 2;
+	public final static double CHICKEN_DAILY_PROF = 100;
+	public final static double CHICKEN_BASE_HEALTH = 5;
+	public final static double CHICKEN_BASE_MOOD = 5;
+	
 	public Chicken() {
-		super(AnimalList.CHICKEN_NAME, AnimalList.CHICKEN_DESC, AnimalList.CHICKEN_PRICE, AnimalList.CHICKEN_DAILY_PROF, AnimalList.CHICKEN_BASE_HEALTH, AnimalList.CHICKEN_BASE_MOOD);
+		super(CHICKEN_NAME, CHICKEN_DESC, CHICKEN_PRICE, CHICKEN_DAILY_PROF, CHICKEN_BASE_HEALTH, CHICKEN_BASE_MOOD);
 	}
 }

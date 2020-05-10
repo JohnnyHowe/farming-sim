@@ -4,7 +4,14 @@ package crops;
  * Class to represent Mushroom
  */
 public class Mushroom extends Crop {
+	
+	public final static String MUSH_NAME = "Mushroom";
+	public final static String MUSH_DESC = "Kind of, mushy...";
+	public final static double MUSH_PRICE = 4;
+	public final static double MUSH_INCOME = 200;
+	public final static double MUSH_THRESHOLD = 5;	
+	
     public Mushroom() {
-		super(CropList.MUSH_NAME, CropList.MUSH_DESC, CropList.MUSH_PRICE, CropList.MUSH_INCOME, CropList.MUSH_THRESHOLD);
+		super(MUSH_NAME, MUSH_DESC, MUSH_PRICE, MUSH_INCOME, MUSH_THRESHOLD);
 	}
 }

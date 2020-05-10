@@ -6,7 +6,14 @@ package items;
  * @see CropList
  */
 public class Bonemeal extends Item {
+	
+	public final static String BONE_NAME = "Bonemeal";		//Display Name
+	public final static String BONE_DESC = "Spooky";		//Description
+	public final static double BONE_PRICE = 2;				//Base Price
+	public final static String BONE_EFFECT = "growth";		//Item Effect
+	public final static double BONE_MULT = 2;
+	
 	public Bonemeal() {
-		super(ItemList.BONE_NAME, ItemList.BONE_DESC, ItemList.BONE_PRICE, ItemList.BONE_EFFECT, ItemList.BONE_MULT);
+		super(BONE_NAME, BONE_DESC, BONE_PRICE, BONE_EFFECT, BONE_MULT);
 	}
 }

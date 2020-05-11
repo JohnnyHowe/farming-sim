@@ -3,9 +3,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Dictionary;
 
-import crops.*;
-import items.*;
-import animals.*;
+import animals.Animal;
+import crops.Crop;
+import items.Item;
 
 /**
  * Class to represent the store.
@@ -13,9 +13,9 @@ import animals.*;
  */
 public class Store {
 	
-    private Dictionary crops;
-    private Dictionary items;
-    private Dictionary animals;
+    private Dictionary<String, Crop> crops;
+    private Dictionary<String, Item> items;
+    private Dictionary<String, Animal> animals;
 
 
     /**

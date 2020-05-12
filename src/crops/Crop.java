@@ -6,11 +6,11 @@ import items.Item;
 
 public class Crop extends FarmItem {
 	
-    private double grown = 0;
-    private double income;
-    private double threshold;
+    private float grown = 0;
+    private float income;
+    private float threshold;
     
-    public Crop (String name, String description, double price, double income, double threshold) {
+    public Crop (String name, String description, float price, float income, float threshold) {
     	super(name, description, price);
     	this.income = income;
     	this.threshold = threshold;

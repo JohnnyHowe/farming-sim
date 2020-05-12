@@ -42,13 +42,23 @@ public abstract class ItemFactory {
 
 		return allItems;
 	}
-	
-	public static FarmItem get(FarmItem item) {
+
+	/**
+	 * Get the name of the item passed in
+	 * @param item item to find name of
+	 * @return name
+	 */
+	public static FarmItem GetName(FarmItem item) {
 		return get(item.getName().toString());
 	}
-	
-	public static FarmItem get(String name) {
-		switch (name) {
+
+	/**
+	 * Given the name of an item, return a new instance of the item
+	 * @param name name of item to create (eg. "wheat")
+	 * @return
+	 */
+	public static FarmItem GetNew(String name) {
+		switch (name.toLowerCase()) {
 			case Bonemeal.BONE_NAME:
 				return new Bonemeal();
 			case BrewingStand.STAND_NAME:
@@ -76,8 +86,7 @@ public abstract class ItemFactory {
 			case Wheat.WHEAT_NAME:
 				return new Wheat();
 			default:
-				System.out.println("ERROR");
-				return new Wheat();
+				System.out.println("Couldn't find item " + name);
 		}
 	}
 	

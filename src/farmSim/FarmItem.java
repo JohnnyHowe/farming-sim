@@ -6,13 +6,13 @@ public abstract class FarmItem {
 	private String name;
 	private String description;
 
-	private double salePrice;
-	private double purchasePrice;
+	private float sellPrice;
+	private float purchasePrice;
 
-	public FarmItem (String name, String description, double price) {
+	public FarmItem (String name, String description, float price) {
 		this.name = name;
 		this.description = description;
-		this.salePrice = price / 2;
+		this.sellPrice = price / 2;
 		this.purchasePrice = price;
 	}
 
@@ -33,19 +33,19 @@ public abstract class FarmItem {
 	}
 
 	/**
-	 * Get the full price of the item
+     * How much does the player pay when BUYING the item?
 	 * @return price
 	 */
-	public double getBuyPrice() { //Player buying from store
+	public float getBuyPrice() { //Player buying from store
 		return this.purchasePrice;
 	}
 
 	/**
-	 * Get the sale price of the item
+     * How much does the player receive when SELLING the item?
 	 * @return sale price
 	 */
-	public double getSalePrice() { //Player selling to store
-		return this.salePrice;
+	public float getSellPrice() { //Player selling to store
+		return this.sellPrice;
 	}
 
 

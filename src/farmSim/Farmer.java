@@ -5,7 +5,7 @@ package farmSim;
 public class Farmer
 {
 	private String name;
-	private double money;
+	private float money;
 
 	/**
 	 * Initialize the farmer.
@@ -44,7 +44,21 @@ public class Farmer
 		return this.name;
 	}
 	
-	public void addMoney(double money) {
+	public void addMoney(float money) {
 		this.money += money;
+	}
+
+	/**
+	 * Decrease the amount of money the player has if they have enough.
+	 * @param money spending amount
+	 * @return whether the money was taken
+	 */
+	public boolean spendMoney(float money) {
+		if (this.hasFunds(money)) {
+			this.money -= money;
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

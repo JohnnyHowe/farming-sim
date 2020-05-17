@@ -48,5 +48,7 @@ public abstract class FarmItem {
 		return this.sellPrice;
 	}
 
+	protected abstract void endDay();
+
 
 }

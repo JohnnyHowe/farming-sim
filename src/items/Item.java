@@ -22,4 +22,8 @@ public class Item extends FarmItem {
 		return this.effectMultiplier;
 	}
 
+	public void endDay() {
+		;
+	}
+
 }

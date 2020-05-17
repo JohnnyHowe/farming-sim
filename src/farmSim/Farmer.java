@@ -45,7 +45,7 @@ public class Farmer
 	}
 	
 	public void addMoney(float money) {
-		this.money += money;
+		this.money += money * Game.farm.incomeMod;
 	}
 
 	/**

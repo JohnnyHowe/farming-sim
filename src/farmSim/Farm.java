@@ -48,4 +48,12 @@ public class Farm
 		this.farmItems.add(farmItem);
 	}
 	
+	/**
+	 * Given a farm item, remove it from the farm
+ 	 * @param farmItem item to remove
+	 */
+	public void removeFarmItem(FarmItem farmItem) {
+		this.farmItems.remove(farmItem);
+	}
+	
 }

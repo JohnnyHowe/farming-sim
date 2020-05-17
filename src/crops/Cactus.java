@@ -9,9 +9,8 @@ public class Cactus extends Crop {
 	public final static String CACTUS_DESC = "Ouch, Prickly";
 	public final static float CACTUS_PRICE = 5;
 	public final static float CACTUS_INCOME = 250;
-	public final static float CACTUS_THRESHOLD = 5;
 	
     public Cactus() {
-		super(CACTUS_NAME, CACTUS_DESC, CACTUS_PRICE, CACTUS_INCOME, CACTUS_THRESHOLD);
+		super(CACTUS_NAME, CACTUS_DESC, CACTUS_PRICE, CACTUS_INCOME);
 	}
 }

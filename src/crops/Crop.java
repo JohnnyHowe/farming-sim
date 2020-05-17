@@ -4,16 +4,19 @@ import farmSim.FarmItem;
 import farmSim.Game;
 import items.Item;
 
+/*
+ * Class for representing a "Crop"
+ * @author Alex Burling(arb142), Jonathon Howe(joh29)
+ */
 public class Crop extends FarmItem {
 	
-    private float grown = 0;
+    private float grown;
     private float income;
-    private float threshold;
     
-    public Crop (String name, String description, float price, float income, float threshold) {
+    public Crop (String name, String description, float price, float income) {
     	super(name, description, price);
     	this.income = income;
-    	this.threshold = threshold;
+    	this.grown = 0;
     }
     
     /*
@@ -24,9 +27,13 @@ public class Crop extends FarmItem {
     	this.grown += 1 * Game.farm.growthMod; //natural daily growth
     }
     
+    /*
+     * Handles a harvest action, removes the item from the farm
+     * and gives the farmer money proportional to it's growth
+     */
     public void harvest() {
-    	//remove from farm's list of crops
-    	Game.farmer.addMoney(income);
+    	Game.farm.removeFarmItem(this);
+    	Game.farmer.addMoney((float) (income * (grown * 0.1)));
     }
     
     /*
@@ -46,14 +53,10 @@ public class Crop extends FarmItem {
     public void tend(Item item) {
     	if (item.getEffect().equals("growth")) {
     		this.grown += item.getMod() * Game.farm.growthMod; //tended with item
-    		//delete item from players inventory
+    		Game.farm.removeFarmItem(item);
     	} else {
     		System.out.println("That item cant be used on crops!");
     	}
     	
-    }
-    
-    public boolean isGrown() {
-    	return (grown >= threshold);
     }
 }

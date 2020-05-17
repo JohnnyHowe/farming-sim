@@ -13,15 +13,6 @@ public abstract class Game {
     private int gameLength;     // How many days the game will last
     private int currentDay;     // Current game day
 
-    /**
-     * Initialize the game.
-     * Sets currentDay to zero.
-     */
-    public Game() {
-        this.currentDay = 0;
-        Game.store = new farmSim.Store();
-    }
-
     // ==================================================
     // Interface method declarations
     // ==================================================
@@ -29,7 +20,14 @@ public abstract class Game {
     /**
      * Called once before the game loop
      */
-    public abstract void setUp();
+    public void setUp() {
+        this.currentDay = 0;
+        Game.store = new Store();
+    }
+    
+    public void endGame() {
+    	
+    }
 
     /**
      * The method called once each game loop
@@ -97,7 +95,17 @@ public abstract class Game {
         this.setUp();
         while (this.getCurrentDay() < this.getGameLength()) {
             this.runDay();
+            //action = recieveAction
+            //actionHandler.handle(action);
         }
+        this.endGame();
+        
     }
+}
+
+abstract class actionHandler {
+	public static void handle(String action) {
+		//TODO Implement
+	}
 }
 

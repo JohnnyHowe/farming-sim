@@ -5,7 +5,7 @@ import farmSim.Game;
 import items.Item;
 
 /**
- * Class for representing an Animal
+ * Class for representing an Animal.
  * @author Alex Burling(arb142), Jonathon Howe(joh29)
  */
 public class Animal extends FarmItem {

@@ -9,6 +9,12 @@ public abstract class FarmItem {
 	private float sellPrice;
 	private float purchasePrice;
 
+	/**
+	 * 
+	 * @param name FarmItem name, used when viewing status of item
+	 * @param description FarmItem description, used when viewing status of item
+	 * @param price FarmItem price, used when buying or selling to store
+	 */
 	public FarmItem (String name, String description, float price) {
 		this.name = name;
 		this.description = description;

@@ -6,7 +6,14 @@ import items.Item;
 
 /**
  * Class for representing a Crop.
+ * Crops grow daily and can be harvested to receive income.
  * @author Alex Burling(arb142), Jonathon Howe(joh29)
+ * @see Cactus
+ * @see Melon
+ * @see Mushroom
+ * @see Pumpkin
+ * @see SugarCane
+ * @see Wheat
  */
 public class Crop extends FarmItem {
 	
@@ -16,6 +23,7 @@ public class Crop extends FarmItem {
     
     /**
      * Constructs the Crop from the FarmItem constructor and crop specific values (income, grown).
+     * Grown is always initialized to 0 and as such is not a param.
      * @param name Crop name, used when viewing status of item e.g. Wheat, Melon
      * @param description Crop description, used when viewing status of item
      * @param price Crop price, used when buying or selling to store

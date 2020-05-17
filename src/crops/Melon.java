@@ -3,6 +3,7 @@ package crops;
 /**
  * Class to represent Melon
  * @author Alex Burling(arb142)
+ * @see Crop
  */
 public class Melon extends Crop {
 	
@@ -14,7 +15,6 @@ public class Melon extends Crop {
 	/**
 	 * Constructs the Melon object from public constant values defined in Melon.java
 	 * Every Melon object is a deepcopy of each other (same attribute values and structure, but different objects)
-	 * TODO excluding name? allow custom names?
 	 */
     public Melon() {
 		super(MELON_NAME, MELON_DESC, MELON_PRICE, MELON_INCOME);

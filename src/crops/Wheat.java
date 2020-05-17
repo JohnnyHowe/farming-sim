@@ -3,6 +3,7 @@ package crops;
 /**
  * Class to represent Wheat
  * @author Alex Burling(arb142)
+ * @see Crop
  */
 public class Wheat extends Crop {
 	
@@ -14,7 +15,6 @@ public class Wheat extends Crop {
 	/**
 	 * Constructs the Wheat object from public constant values defined in Wheat.java
 	 * Every Wheat object is a deepcopy of each other (same attribute values and structure, but different objects)
-	 * TODO excluding name? allow custom names?
 	 */
     public Wheat() {
 		super(WHEAT_NAME, WHEAT_DESC, WHEAT_PRICE, WHEAT_INCOME);

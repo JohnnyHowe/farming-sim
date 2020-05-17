@@ -2,7 +2,15 @@ package items;
 
 import farmSim.FarmItem;
 
-
+/**
+ * Class for representing a useable Item.
+ * Generally used to boost daily actions
+ * @author Alex Burling(arb142), Jonathon Howe(joh29)
+ * @see AnimalFeed
+ * @see Bonemeal
+ * @see Brush
+ * @see GolemRose
+ */
 public class Item extends FarmItem {
 	
 	private String effect;

@@ -6,7 +6,12 @@ import items.Item;
 
 /**
  * Class for representing an Animal.
+ * Animals function as a daily income and require feeding and playing with
+ * to keep health and mood high.
  * @author Alex Burling(arb142), Jonathon Howe(joh29)
+ * @see Chicken
+ * @see Cow
+ * @see Sheep
  */
 public class Animal extends FarmItem {
 	

@@ -3,6 +3,7 @@ package animals;
 /**
  * Class to represent Cow
  * @author Alex Burling(arb142)
+ * @see Animal
  */
 public class Cow extends Animal {
 	

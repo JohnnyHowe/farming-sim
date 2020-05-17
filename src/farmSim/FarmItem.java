@@ -1,6 +1,12 @@
 package farmSim;
 
-
+/**
+ * General superclass for all game objects excluding farm, farmer, factory etc.
+ * @author Alex Burling(arb142), Jonathon Howe(joh29)
+ * @see Animal
+ * @see Crop
+ * @see Item
+ */
 public abstract class FarmItem {
 	
 	private String name;

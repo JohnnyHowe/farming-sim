@@ -3,6 +3,7 @@ package crops;
 /**
  * Class to represent Pumpkin
  * @author Alex Burling(arb142)
+ * @see Crop
  */
 public class Pumpkin extends Crop {
 	
@@ -14,7 +15,6 @@ public class Pumpkin extends Crop {
 	/**
 	 * Constructs the Pumpkin object from public constant values defined in Pumpkin.java
 	 * Every Pumpkin object is a deepcopy of each other (same attribute values and structure, but different objects)
-	 * TODO excluding name? allow custom names?
 	 */
     public Pumpkin() {
 		super(PUMP_NAME, PUMP_DESC, PUMP_PRICE, PUMP_INCOME);

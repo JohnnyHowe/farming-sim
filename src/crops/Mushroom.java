@@ -3,6 +3,7 @@ package crops;
 /**
  * Class to represent Mushroom
  * @author Alex Burling(arb142)
+ * @see Crop
  */
 public class Mushroom extends Crop {
 	
@@ -14,7 +15,6 @@ public class Mushroom extends Crop {
 	/**
 	 * Constructs the Mushroom object from public constant values defined in Mushroom.java
 	 * Every Mushroom object is a deepcopy of each other (same attribute values and structure, but different objects)
-	 * TODO excluding name? allow custom names?
 	 */
     public Mushroom() {
 		super(MUSH_NAME, MUSH_DESC, MUSH_PRICE, MUSH_INCOME);

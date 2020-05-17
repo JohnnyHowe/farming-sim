@@ -5,11 +5,11 @@ import farmSim.Game;
 
 public class Animal extends FarmItem {
 	
-	private double dailyProfit;
-	private double health;
-	private double mood;
+	private float dailyProfit;
+	private float health;
+	private float mood;
 	
-	public Animal(String name, String description, double price, double dailyProfit, double health, double mood) {
+	public Animal(String name, String description, float price, float dailyProfit, float health, float mood) {
 		super(name, description, price);
 		this.dailyProfit = dailyProfit;
 		this.health = health;

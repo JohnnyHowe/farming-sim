@@ -6,9 +6,9 @@ import farmSim.FarmItem;
 public class Item extends FarmItem {
 	
 	private String effect;
-	private double effectMultiplier;
+	private float effectMultiplier;
 
-	public Item(String name, String description, double price, String effect, double effectMultiplier) {
+	public Item(String name, String description, float price, String effect, float effectMultiplier) {
 		super(name, description, price);
 		this.effect = effect;
 		this.effectMultiplier = effectMultiplier;
@@ -18,7 +18,7 @@ public class Item extends FarmItem {
 		return this.effect;
 	}
 	
-	public double getMod() {
+	public float getMod() {
 		return this.effectMultiplier;
 	}
 

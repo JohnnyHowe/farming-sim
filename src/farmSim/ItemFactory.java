@@ -7,8 +7,20 @@ import animals.*;
 import crops.*;
 import items.*;
 
+/**
+ * Abstract Java Class responsible for generating game objects for various uses,
+ * e.g. supplying the store with duplicate items for the players inventory
+ * Follows a standard Factory design pattern
+ * @author Alex Burling(arb142)
+ * @version 1.0
+ */
 public abstract class ItemFactory {
 	
+	/**
+	 * Supplies a Dictionary of all available Animal objects within
+	 * the game, keyed with a String that is the Animal's "name"
+	 * @return Dictionary<String, Animal> a dictionary containing every Animal object
+	 */
 	public static Dictionary<String, Animal> GetAllAnimals() {
 		Dictionary<String, Animal> allAnimals = new Hashtable<String, Animal>();
 
@@ -19,6 +31,11 @@ public abstract class ItemFactory {
 		return allAnimals;
 	}
 	
+	/**
+	 * Supplies a Dictionary of all available Crop objects within
+	 * the game, keyed with a String that is the Crops's "name"
+	 * @return Dictionary<String, Crop> a dictionary containing every Crop object
+	 */
 	public static Dictionary<String, Crop> GetAllCrops() {
 		Dictionary<String, Crop> allCrops = new Hashtable<String, Crop>();
 
@@ -32,6 +49,11 @@ public abstract class ItemFactory {
 		return allCrops;
 	}
 	
+	/**
+	 * Supplies a Dictionary of all available Item objects within
+	 * the game, keyed with a String that is the Items's "name"
+	 * @return Dictionary<String, Item> a dictionary containing every Item object
+	 */
 	public static Dictionary<String, Item> GetAllItems() {
 		Dictionary<String, Item> allItems = new Hashtable<String, Item>();
 
@@ -44,21 +66,27 @@ public abstract class ItemFactory {
 	}
 
 	/**
-	 * Get the name of the item passed in
-	 * @param item item to find name of
-	 * @return name
+	 * Given an item as an object, return a new instance of the item
+	 * This method overloads GetNew(String name), so that either a String
+	 * representing the object, or another object of the same type can be
+	 * interpreted
+	 * @param item FarmItem Object to create (eg. "Wheat")
+	 * @return FarmItem the corresponding requested FarmItem
 	 */
-	public static FarmItem GetName(FarmItem item) {
-		return get(item.getName().toString());
+	public static FarmItem GetNew(FarmItem item) {
+		return GetNew(item.getName().toString());
 	}
 
 	/**
-	 * Given the name of an item, return a new instance of the item
-	 * @param name name of item to create (eg. "wheat")
-	 * @return
+	 * Given the name of an item as a string, return a new instance of the item
+	 * This method overloads GetNew(String name), so that either a String
+	 * representing the object, or another object of the same type can be
+	 * interpreted
+	 * @param name name of item to create (eg. "Wheat")
+	 * @return FarmItem the corresponding requested FarmItem
 	 */
 	public static FarmItem GetNew(String name) {
-		switch (name.toLowerCase()) {
+		switch (name) {
 			case Bonemeal.BONE_NAME:
 				return new Bonemeal();
 			case BrewingStand.STAND_NAME:
@@ -85,19 +113,23 @@ public abstract class ItemFactory {
 				return new SugarCane();
 			case Wheat.WHEAT_NAME:
 				return new Wheat();
-			default:
-				System.out.println("Couldn't find item " + name);
+			
 		}
+		System.out.println("Couldn't find item " + name);
+		return new Wheat(); //must return a FarmItem as stated in function def
 	}
 	
+	/*
+	 * Short temporary test case
+	 */
 	public static void main(String[] args) {
 		FarmItem a = new Bonemeal();
-		FarmItem b = ItemFactory.get(a);
-		FarmItem c = ItemFactory.get(Bonemeal.BONE_NAME);
-		System.out.println(a);
+		FarmItem b = ItemFactory.GetNew(a);
+		FarmItem c = ItemFactory.GetNew(Bonemeal.BONE_NAME);
+		System.out.println(a);//should see three different bonemeal objects
 		System.out.println(b);
 		System.out.println(c);
-		FarmItem d = ItemFactory.get("aaa");
-		System.out.println(d);
+		FarmItem d = ItemFactory.GetNew("aaa");
+		System.out.println(d);//should recieve a stdout and a wheat object
 	}
 }

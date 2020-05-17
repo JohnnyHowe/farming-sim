@@ -17,9 +17,13 @@ public class Animal extends FarmItem {
 	}
 	
 	public void endDay() {
-		//example, test code
-		this.health -= 0.01;
-		this.mood -= 1 * Game.farm.happinessMod;
-		Game.farmer.addMoney(dailyProfit);
+		health -= 1; //gets hungry
+		mood -= 0.5 * Game.farm.happinessMod; //misses farmer
+		if (health == 0) { //animal dies/runs away?
+			Game.farm.removeFarmItem(this);
+		} else if (health < 2) { //animal hungry/hurt so gets uspet
+			mood -= 1;
+		}
+		Game.farmer.addMoney(dailyProfit * health * mood);
 	}
 }

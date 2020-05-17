@@ -12,7 +12,6 @@ import items.*;
  * e.g. supplying the store with duplicate items for the players inventory
  * Follows a standard Factory design pattern
  * @author Alex Burling(arb142)
- * @version 1.0
  */
 public abstract class ItemFactory {
 	
@@ -59,7 +58,7 @@ public abstract class ItemFactory {
 
 		allItems.put(Bonemeal.BONE_NAME, new Bonemeal());//test items
 		allItems.put(Brush.BRUSH_NAME, new Brush());
-		allItems.put(BrewingStand.STAND_NAME, new BrewingStand());
+		allItems.put(AnimalFeed.FEED_NAME, new AnimalFeed());
 		allItems.put(GolemRose.ROSE_NAME, new GolemRose());
 
 		return allItems;
@@ -87,10 +86,10 @@ public abstract class ItemFactory {
 	 */
 	public static FarmItem GetNew(String name) {
 		switch (name) {
+			case AnimalFeed.FEED_NAME:
+				return new AnimalFeed();
 			case Bonemeal.BONE_NAME:
 				return new Bonemeal();
-			case BrewingStand.STAND_NAME:
-				return new BrewingStand();
 			case Brush.BRUSH_NAME:
 				return new Brush();
 			case Cactus.CACTUS_NAME:

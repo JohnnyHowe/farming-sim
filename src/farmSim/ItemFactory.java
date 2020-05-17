@@ -66,9 +66,8 @@ public abstract class ItemFactory {
 
 	/**
 	 * Given an item as an object, return a new instance of the item
-	 * This method overloads GetNew(String name), so that either a String
-	 * representing the object, or another object of the same type can be
-	 * interpreted
+	 * Overloaded function signature, call as
+     * GetNew(String name) to get item from a String
 	 * @param item FarmItem Object to create (eg. "Wheat")
 	 * @return FarmItem the corresponding requested FarmItem
 	 */
@@ -78,9 +77,9 @@ public abstract class ItemFactory {
 
 	/**
 	 * Given the name of an item as a string, return a new instance of the item
-	 * This method overloads GetNew(String name), so that either a String
-	 * representing the object, or another object of the same type can be
-	 * interpreted
+	 * Overloaded function signature, call as
+     * GetNew(FarmItem item) to get item from an object
+	 * TODO change implementation to use instanceof to support naming animal i.e. cow.name = 'Bessie'?
 	 * @param name name of item to create (eg. "Wheat")
 	 * @return FarmItem the corresponding requested FarmItem
 	 */

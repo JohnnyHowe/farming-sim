@@ -4,8 +4,8 @@ import farmSim.FarmItem;
 import farmSim.Game;
 import items.Item;
 
-/*
- * Class for representing a "Crop"
+/**
+ * Class for representing a Crop
  * @author Alex Burling(arb142), Jonathon Howe(joh29)
  */
 public class Crop extends FarmItem {
@@ -13,13 +13,17 @@ public class Crop extends FarmItem {
     private float grown;
     private float income;
     
+    /**
+     * Constructs the crop object with the:
+     * crop name - i.e. type
+     */
     public Crop (String name, String description, float price, float income) {
     	super(name, description, price);
     	this.income = income;
     	this.grown = 0;
     }
     
-    /*
+    /**
      * Handles end of the day actions
      * i.e. growth of crops
      */
@@ -27,7 +31,7 @@ public class Crop extends FarmItem {
     	this.grown += 1 * Game.farm.growthMod; //natural daily growth
     }
     
-    /*
+    /**
      * Handles a harvest action, removes the item from the farm
      * and gives the farmer money proportional to it's growth
      */

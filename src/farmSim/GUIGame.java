@@ -47,8 +47,7 @@ public class GUIGame extends Game {
         this.clearFrame();
 
         JLabel title = new JLabel("Welcome to Farming Simulator!", JLabel.CENTER);
-        Font titleFont = new Font(title.getFont().getName(), Font.PLAIN, 35);
-        title.setFont(titleFont);
+        this.setFontSize(title, 0.06f);
         this.scaleUp(title, 0.5f, 0.1f, 1f, 0.2f);
         this.frame.add(title);
 
@@ -57,6 +56,7 @@ public class GUIGame extends Game {
         this.frame.add(continueButton);
 
         JLabel nameLabel = new JLabel("Name:");
+        this.setFontSize(nameLabel, 0.03f);
         this.scaleUp(nameLabel, 0.4f, 0.6f, 0.2f, 0.1f);
         this.frame.add(nameLabel);
 
@@ -65,6 +65,11 @@ public class GUIGame extends Game {
         this.frame.add(nameField);
 
         this.frame.setVisible(true);
+    }
+
+    private void setFontSize(JComponent textItem, float relativeSize) {
+        Font font = new Font(textItem.getFont().getName(), Font.PLAIN, Math.round(this.frameScale * relativeSize));
+        textItem.setFont(font);
     }
 
     /**

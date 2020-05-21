@@ -55,13 +55,27 @@ public class GUIGame extends Game {
         this.scaleUp(continueButton, 0.5f, 0.8f, 0.5f, 0.1f);
         this.frame.add(continueButton);
 
+        // Number of days input
+        JLabel daysLabel = new JLabel("Days:");
+        this.setFontSize(daysLabel, 0.04f);
+        this.scaleUp(daysLabel, 0.4f, 0.6f, 0.2f, 0.08f);
+        this.frame.add(daysLabel);
+
+        JTextField daysField = new JTextField();
+        this.scaleUp(daysField, 0.6f, 0.6f, 0.3f, 0.1f);
+        this.setFontSize(daysField, 0.04f);
+        this.frame.add(daysField);
+
+        // Name text input
+        float nameY = 0.5f;
         JLabel nameLabel = new JLabel("Name:");
-        this.setFontSize(nameLabel, 0.03f);
-        this.scaleUp(nameLabel, 0.4f, 0.6f, 0.2f, 0.1f);
+        this.setFontSize(nameLabel, 0.04f);
+        this.scaleUp(nameLabel, 0.4f, nameY, 0.2f, 0.08f);
         this.frame.add(nameLabel);
 
         JTextField nameField = new JTextField();
-        this.scaleUp(nameField, 0.6f, 0.6f, 0.2f, 0.1f);
+        this.scaleUp(nameField, 0.6f, nameY, 0.3f, 0.1f);
+        this.setFontSize(nameField, 0.04f);
         this.frame.add(nameField);
 
         this.frame.setVisible(true);

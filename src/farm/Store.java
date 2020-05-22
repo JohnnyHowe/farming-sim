@@ -1,4 +1,4 @@
-package farmSim;
+package farm;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Dictionary;

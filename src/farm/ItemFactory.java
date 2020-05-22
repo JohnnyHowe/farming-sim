@@ -1,4 +1,4 @@
-package farmSim;
+package farm;
 
 import java.util.Dictionary;
 import java.util.Hashtable;

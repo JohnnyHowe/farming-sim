@@ -1,4 +1,4 @@
-package farmSim;
+package farm;
 
 import java.util.ArrayList;
 
@@ -59,11 +59,19 @@ public class Farm
 		this.farmItems.remove(farmItem);
 	}
 	
+	/**
+	 * Returns the farms "inventory"
+ 	 * @return ArrayList<FarmItem> List of FarmItems the farm "owns"
+ 	 */
+	public ArrayList<FarmItem> getFarmItems() {
+		return farmItems;
+	}
+	
+	public void cleanUp() {
+		cleanliness = 1;
+	}
 	public void endDay() {
 		cleanliness -= 0.2;
-		for (FarmItem item : farmItems) {
-			item.endDay();
-		}
 	}
 	
 	public void tend() {
@@ -71,3 +79,5 @@ public class Farm
 	}
 	
 }
+
+

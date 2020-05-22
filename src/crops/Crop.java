@@ -1,7 +1,7 @@
 package crops;
 
-import farmSim.FarmItem;
-import farmSim.Game;
+import farm.FarmItem;
+import game.Game;
 import items.Item;
 
 /**
@@ -38,6 +38,7 @@ public class Crop extends FarmItem {
     /**
      * Handles end of the day actions.
      * i.e. natural growth of crops.
+     * Implements superclass abstract method 
      */
     public void endDay() {
     	this.grown += 1 * Game.farm.growthMod; //natural daily growth

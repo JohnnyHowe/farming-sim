@@ -1,4 +1,4 @@
-package farmSim;
+package farm;
 
 /**
  * General superclass for all game objects excluding farm, farmer, factory etc.
@@ -60,7 +60,12 @@ public abstract class FarmItem {
 		return this.sellPrice;
 	}
 
-	protected abstract void endDay();
+	/**
+	 * Abstract method definition to simplify endDay gameloop in action handler.
+	 * Rather than dealing with each FarmItem subclass individually, each subclass
+	 * implements it's own endDay() with the correct outcome.
+	 */
+	public abstract void endDay();
 
 
 }

@@ -1,6 +1,8 @@
-package farmSim;
+package game;
 import java.util.Scanner;
 import crops.Crop;
+import farm.Farm;
+import farm.Farmer;
 
 
 /**
@@ -80,7 +82,7 @@ public class ConsoleGame extends Game {
                 this.end();
                 break;
             case "end day":
-                this.increaseDayCounter();
+                Game.increaseDayCounter();
                 break;
             case "view farm name":
                 System.out.println(Game.farm.getName());

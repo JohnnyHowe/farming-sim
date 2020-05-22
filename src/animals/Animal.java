@@ -1,7 +1,7 @@
 package animals;
 
-import farmSim.FarmItem;
-import farmSim.Game;
+import farm.FarmItem;
+import game.Game;
 import items.Item;
 
 /**
@@ -38,7 +38,8 @@ public class Animal extends FarmItem {
 	/**
 	 * Handles end of the day actions
 	 * i.e. deteriorates health/hunger, deteriorates mood as a factor of farm cleanliness
-	 * checks if animal is dead or injured, and adds money earned from animal
+	 * checks if animal is dead or injured, and adds money earned from animal.
+	 * Implements superclass abstract method 
 	 */
 	public void endDay() {
 		health -= 1; //gets hungry

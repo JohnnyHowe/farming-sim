@@ -1,4 +1,7 @@
-package farmSim;
+package farm;
+
+import game.Game;
+
 /**
  * Class to represent the farmer
  */
@@ -6,6 +9,7 @@ public class Farmer
 {
 	private String name;
 	private float money;
+	private int actionsToday;
 
 	/**
 	 * Initialize the farmer.
@@ -15,6 +19,18 @@ public class Farmer
 	{
 		this.name = name;
 		this.money = 0;
+		this.actionsToday = 0;
+	}
+	
+	/**
+	 * Resets farmer actions to 0
+	 */
+	public void resetActions() {
+		actionsToday = 0;
+	}
+	
+	public boolean canWork() {
+		return actionsToday < 2; //maybe we can define this elsewhere as not a magic number?
 	}
 
 	/**

@@ -1,6 +1,6 @@
 package items;
 
-import farmSim.FarmItem;
+import farm.FarmItem;
 
 /**
  * Class for representing a useable Item.
@@ -30,6 +30,12 @@ public class Item extends FarmItem {
 		return this.effectMultiplier;
 	}
 
+	/**
+	 * Implements superclass abstract method
+	 * At the end of the day, Item's shouldn't change anything about the farm
+	 * (as they are consumables used with player actions) this is just an
+	 * empty method. Must exist for: ((for FarmItem item: farmitems): item.endDay()).
+	 */
 	public void endDay() {
 		;
 	}

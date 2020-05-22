@@ -2,6 +2,8 @@ package game;
 
 import animals.Animal;
 import crops.Crop;
+import exceptions.InvalidActionException;
+import exceptions.OutOfActionsException;
 import farm.Farm;
 import farm.FarmItem;
 import farm.Farmer;
@@ -104,10 +106,22 @@ public abstract class Game {
             this.runDay();
             //action = recieveAction
             //actionHandler.handle(action);
+            //TODO add OutOfActions exception handler
+            //TODO add InvalidAction exception handler
         }
         this.endGame();
         
     }
+
+    /**
+	 * Abstract method definition to handle different store display methods.
+	 */
+	protected static void visitStore() {
+		;
+	}
+	
+	
+	
 }
 
 /**
@@ -125,8 +139,10 @@ abstract class actionHandler {
      * handle(String action, Item consume) to handle player actions that consume
      * an Item
 	 * @param action String represents player's action
+	 * @throws OutOfActionsException 
+	 * @throws InvalidActionException 
 	 */
-	public static void handle(String action) {
+	public void handle(String action) throws OutOfActionsException, InvalidActionException {
 		switch (action) {
 		case "statusCrops":	//View the status of the farm’s crops
 			break;
@@ -135,6 +151,7 @@ abstract class actionHandler {
 		case "statusFarm": //View the status of the farm including inventory
 			break;
 		case "goStore": //View the store
+			Game.visitStore();
 			break;
 		case "endDay": //End the game day
 			Game.farmer.resetActions();
@@ -150,7 +167,7 @@ abstract class actionHandler {
 						((Crop) item).tend();
 				}
 			} else {
-				;//TODO raise out of actions error
+				throw new OutOfActionsException();
 			}
 			break;
 		case "feed": //Feed the animals
@@ -160,7 +177,7 @@ abstract class actionHandler {
 						((Animal) item).feed();
 				}
 			} else {
-				;//TODO raise out of actions error
+				throw new OutOfActionsException();
 			}
 			break;
 		case "play": //Play with the animals
@@ -170,7 +187,7 @@ abstract class actionHandler {
 						((Animal) item).play();
 				}
 			} else {
-				;//TODO raise out of actions error
+				throw new OutOfActionsException();
 			}
 			break;
 		case "harvest": //Harvest crops
@@ -180,16 +197,18 @@ abstract class actionHandler {
 						((Crop) item).harvest();
 				}
 			} else {
-				;//TODO raise out of actions error
+				throw new OutOfActionsException();
 			}
 			break;
 		case "tendFarm": //Tend to the farmland (cleanliness)
 			if (Game.farmer.canWork()) {
 				Game.farm.cleanUp();
 			} else {
-				;//TODO raise out of actions error
+				throw new OutOfActionsException();
 			}
 			break;
+		default:
+			throw new InvalidActionException();
 		}
 	}
 		

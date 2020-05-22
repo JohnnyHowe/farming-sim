@@ -134,4 +134,9 @@ public class GUIGame extends Game {
         game.intoScreen();
         game.run();
     }
+
+    public static void visitStore() {
+		// TODO Auto-generated method stub
+		
+	}
 }

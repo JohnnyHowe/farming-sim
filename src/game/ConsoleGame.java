@@ -12,14 +12,14 @@ import farm.Farmer;
  */
 public class ConsoleGame extends Game {
 
-    private Scanner scanner;
+    private static Scanner scanner;
 
     /**
      * Initialize the game
      */
     public ConsoleGame() {
         super();
-        this.scanner = new Scanner(System.in);
+        ConsoleGame.scanner = new Scanner(System.in);
     }
 
     /**
@@ -59,7 +59,7 @@ public class ConsoleGame extends Game {
     public void runDay() {
         int dayNum = this.getCurrentDay() + 1;  // + 1 so it starts at 1 - looks better
         System.out.println("\nWhat are you going to do today? (Day " + dayNum + ")");
-        String input = this.scanner.nextLine();
+        String input = ConsoleGame.scanner.nextLine();
         this.runInput(input);
     }
 
@@ -96,7 +96,7 @@ public class ConsoleGame extends Game {
                 System.out.println(this.getGameLength() + " days");
                 break;
             case "visit store":
-                this.visitStore();
+                ConsoleGame.visitStore();
                 break;
             default:
                 System.out.println("Unknown action: " + userInput);
@@ -108,18 +108,18 @@ public class ConsoleGame extends Game {
 
     }
 
-    public void visitStore() {
+    public static void visitStore() {
         while(true) {   // Yeah i know its bad to idc
             System.out.println("What would you like to do at the store?");
-            String item = this.scanner.nextLine().toLowerCase();
+            String item = ConsoleGame.scanner.nextLine().toLowerCase();
             switch (item) {
                 case "leave":
                     return;
                 case "view items":
-                    this.viewStore();
+                    ConsoleGame.viewStore();
                     return;
                 case "buy":
-                    this.buyItem();
+                	ConsoleGame.buyItem();
                     return;
                 default:
                     System.out.println("Unknown command.");
@@ -131,7 +131,7 @@ public class ConsoleGame extends Game {
     /**
      * Show the available store items
      */
-    private void viewStore() {
+    private static void viewStore() {
         System.out.println("Crops:");
         for (String name : Game.store.getCropNames()) {
             Crop crop = Game.store.getCrop(name);
@@ -142,13 +142,13 @@ public class ConsoleGame extends Game {
     /**
      * Ask the user what they want to buy
      */
-    private void buyItem() {
+    private static void buyItem() {
         boolean done = false;
         String item = "";
 
         while (!done) {
             System.out.println("What would you like to buy?");
-            item = this.scanner.nextLine().toLowerCase();
+            item = ConsoleGame.scanner.nextLine().toLowerCase();
 
             if (Game.store.getCropNamesLowerCase().contains(item) || item.equals("nothing")) {
                 done = true;

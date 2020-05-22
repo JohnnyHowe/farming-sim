@@ -3,6 +3,7 @@ package game;
 import animals.Animal;
 import crops.Crop;
 import exceptions.InvalidActionException;
+import exceptions.InvalidItemException;
 import exceptions.OutOfActionsException;
 import farm.Farm;
 import farm.FarmItem;
@@ -18,6 +19,11 @@ public abstract class Game {
 	public static Farm farm;
     public static Farmer farmer;
     public static Store store;
+    
+    public enum Actions { CROP_STATUS, ANIMAL_STATUS, FARM_STATUS,
+    					VISIT_STORE, END_DAY, TEND_CROPS,
+    					FEED_ANIMALS, PLAY_ANIMALS, HARVEST_CROPS, 
+    					TEND_FARM} //Player's Action set
 
     private int gameLength;     // How many days the game will last
     private static int currentDay;     // Current game day
@@ -114,7 +120,11 @@ public abstract class Game {
     }
 
     /**
-	 * Abstract method definition to handle different store display methods.
+	 * While this would normally be abstract, abstract and static dont work so well.
+	 * And unfortunately you can not override static methods in Java. This is however
+	 * method hiding, and because Game is abstract, there will never be an instance of this method.
+	 * This exists to let actionHandler work properly, and is implemented in Game subclasses
+	 * (i.e. ConsoleGame, GUIGame)
 	 */
 	protected static void visitStore() {
 		;
@@ -142,25 +152,25 @@ abstract class actionHandler {
 	 * @throws OutOfActionsException 
 	 * @throws InvalidActionException 
 	 */
-	public void handle(String action) throws OutOfActionsException, InvalidActionException {
+	public void handle(Game.Actions action) throws OutOfActionsException, InvalidActionException {
 		switch (action) {
-		case "statusCrops":	//View the status of the farm’s crops
+		case CROP_STATUS:	//View the status of the farm’s crops
 			break;
-		case "statusAnimals": //View the status of the farm’s animals
+		case ANIMAL_STATUS: //View the status of the farm’s animals
 			break;
-		case "statusFarm": //View the status of the farm including inventory
+		case FARM_STATUS: //View the status of the farm including inventory
 			break;
-		case "goStore": //View the store
+		case VISIT_STORE: //View the store
 			Game.visitStore();
 			break;
-		case "endDay": //End the game day
+		case END_DAY: //End the game day
 			Game.farmer.resetActions();
 			Game.increaseDayCounter();
 			for (FarmItem item : Game.farm.getFarmItems()) {
 				item.endDay();
 			}
 			break;
-		case "tendCrops": //Tend to the crops
+		case TEND_CROPS: //Tend to the crops
 			if (Game.farmer.canWork()) {
 				for (FarmItem item : Game.farm.getFarmItems()) {
 					if (item instanceof Crop);
@@ -170,7 +180,7 @@ abstract class actionHandler {
 				throw new OutOfActionsException();
 			}
 			break;
-		case "feed": //Feed the animals
+		case FEED_ANIMALS: //Feed the animals
 			if (Game.farmer.canWork()) {
 				for (FarmItem item : Game.farm.getFarmItems()) {
 					if (item instanceof Animal);
@@ -180,7 +190,7 @@ abstract class actionHandler {
 				throw new OutOfActionsException();
 			}
 			break;
-		case "play": //Play with the animals
+		case PLAY_ANIMALS: //Play with the animals
 			if (Game.farmer.canWork()) {
 				for (FarmItem item : Game.farm.getFarmItems()) {
 					if (item instanceof Animal);
@@ -190,7 +200,7 @@ abstract class actionHandler {
 				throw new OutOfActionsException();
 			}
 			break;
-		case "harvest": //Harvest crops
+		case HARVEST_CROPS: //Harvest crops
 			if (Game.farmer.canWork()) {
 				for (FarmItem item : Game.farm.getFarmItems()) {
 					if (item instanceof Crop);
@@ -200,7 +210,7 @@ abstract class actionHandler {
 				throw new OutOfActionsException();
 			}
 			break;
-		case "tendFarm": //Tend to the farmland (cleanliness)
+		case TEND_FARM: //Tend to the farmland (cleanliness)
 			if (Game.farmer.canWork()) {
 				Game.farm.cleanUp();
 			} else {
@@ -212,21 +222,50 @@ abstract class actionHandler {
 		}
 	}
 		
-	
-	public static void handle(String action, Item consume) {
+	/**
+	 * Handles all of the actions a player can take that would consume an item.
+	 * Overloaded function signature, call as
+     * handle(String action) to handle player actions that don't consume an item.
+	 * @param action String represents player's action
+	 * @param consume FarmItem FarmItem to be consumed with action
+	 * @throws OutOfActionsException
+	 * @throws InvalidActionException
+	 * @throws InvalidItemException
+	 */
+	public static void handle(Game.Actions action, Item consume) throws OutOfActionsException, InvalidActionException, InvalidItemException {
 		switch (action) {
-		case "tendCrops": //Tend to the crops
-			for (FarmItem item : Game.farm.getFarmItems()) {
-				if (item instanceof Crop);
-				((Crop) item).tend();
-				item.endDay();
+		case TEND_CROPS: //Tend to the crops with consumable
+			if (Game.farmer.canWork()) {
+				for (FarmItem item : Game.farm.getFarmItems()) {
+					if (item instanceof Crop);
+						((Crop) item).tend(consume);
+				}
+			} else {
+				throw new OutOfActionsException();
 			}
 			break;
-		case "feed": //Feed the animals
+		case FEED_ANIMALS: //Feed the animals with consumable
+			if (Game.farmer.canWork()) {
+				for (FarmItem item : Game.farm.getFarmItems()) {
+					if (item instanceof Animal);
+						((Animal) item).feed(consume);
+				}
+			} else {
+				throw new OutOfActionsException();
+			}
 			break;
-		case "play": //Play with the animals
+		case PLAY_ANIMALS: //Play with the animals with consumable
+			if (Game.farmer.canWork()) {
+				for (FarmItem item : Game.farm.getFarmItems()) {
+					if (item instanceof Animal);
+						((Animal) item).play(consume);
+				}
+			} else {
+				throw new OutOfActionsException();
+			}
 			break;
+		default:
+				throw new InvalidActionException();
 		}
-	//TODO Implement
 	}
 }

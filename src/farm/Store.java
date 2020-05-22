@@ -5,6 +5,7 @@ import java.util.Dictionary;
 
 import animals.Animal;
 import crops.Crop;
+import game.Game;
 import items.Item;
 
 /**
@@ -39,8 +40,8 @@ public class Store {
      * Get the arrayList of crops names (all in lower case)
      * @return crops
      */
-    public ArrayList<String> getCropNamesLowerCase() {
-        ArrayList<String> names = new ArrayList<String>();
+    public ArrayList<String> getCropNamesLowerCase() { //Why?????? i cant think of any reason why you would need this
+        ArrayList<String> names = new ArrayList<String>();	
         for (String name : this.getCropNames()) {
             names.add(name.toLowerCase());
         }
@@ -72,21 +73,6 @@ public class Store {
         return (Crop) this.crops.get(name);
     }
 
-    public void upgradeField() { //boosts crop growth
-    	//farm upgrades to boost the farms growth, happiness and income mods?
-    	//you replow and fertilise the field, crop growth is faster
-    }
-
-    public void upgradePaddock() { //boosts animal happiness
-    	//farm upgrades to boost the farms growth, happiness and income mods?
-    	//you reseed and refence the animal paddocks, animal happiness drops slower
-    }
-    
-    public void upgradeStall() { //boosts income
-    	//farm upgrades to boost the farms growth, happiness and income mods?
-    	//you stepped up your advertising and market reach, global income is increased
-    }
-
     /**
      * Given the name of a farm item, return an instance of it.
      * Unlike the factory this does not create a new object, only references
@@ -96,7 +82,7 @@ public class Store {
      * @param name name of item
      * @return FarmItem item requested
      */
-    public FarmItem getFarmItemInfo(String name) {
+    public FarmItem getFarmItemInfo(String name) {// i assume this is for display, why not just refer to the dictionary with an index and increase the index
         FarmItem itemObj = null;    // = null to keep ide happy
 
         // Two of these will be null (3 if the name is invalid)
@@ -127,8 +113,7 @@ public class Store {
         FarmItem item = this.getFarmItemInfo(itemName);
         if (farmer.hasFunds(item.getBuyPrice())) {
             farmer.spendMoney(item.getBuyPrice());
-            // Send item to farm inventory
-            System.out.println("ITEM NOT SENT TO FARM INVENTORY - CODE NOT IN YET");
+            Game.farm.addFarmItem(ItemFactory.GetNew(itemName));
         } else {
             System.out.println("Insufficient funds for item " + itemName);
         }

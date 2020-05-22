@@ -4,6 +4,30 @@ import java.awt.*;
 
 
 /**
+ * I think you needa read this my man
+ * 4.3 Implementing a Graphical Application
+You will be implementing a graphical application for your game using Swing,
+which will be explained in labs. For the purposes of this assignment, we do not
+recommend writing the Swing code by hand, and instead using the interface
+builder offered by the Eclipse IDE. This lets you build graphical interfaces in
+Swing by dragging and dropping components onto a canvas onscreen, and it will
+automatically generate the code to create the graphical application you built.
+Please note, you are required to ensure that any automatically generated
+code complies with the rest of your code style, so you will need to change
+variable/method names and code layout.
+Once you have built your interface, the next task is to wire up the graphical
+components to the methods your command line application supplies, and to update the onscreen text fields with the new values of your class attributes/member
+variables. Most of these functions are triggered on onClick() methods from
+buttons. Start small, and complete Section 2.1 “Setting up the Game” first to
+get used to GUI programming. You might need to slightly adjust your methods
+to achieve this. Then move onto the main game.
+Note that this is the largest task to complete and many students under
+estimate how much time it will take. Try to be at this stage one week after the
+term break if possible.
+
+ */
+
+/**
  * Game class - acts as game environment.
  * Runs game through GUI window
  */

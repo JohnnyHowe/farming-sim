@@ -1,5 +1,6 @@
 package crops;
 
+import exceptions.InvalidItemException;
 import farm.FarmItem;
 import game.Game;
 import items.Item;
@@ -70,13 +71,14 @@ public class Crop extends FarmItem {
      * Overloaded function signature, call as
      * tend() to tend with water (no item)
      * @param item FarmItem to use while tending, only accepts items with effect "growth"
+     * @throws InvalidItemException 
      */
-    public void tend(Item item) {
+    public void tend(Item item) throws InvalidItemException {
     	if (item.getEffect().equals("growth")) {
     		this.grown += item.getMod() * Game.farm.growthMod; //tended with item
     		Game.farm.removeFarmItem(item);
     	} else {
-    		System.out.println("That item cant be used on crops!");
+    		throw new InvalidItemException();
     	}
     	
     }

@@ -1,5 +1,6 @@
 package animals;
 
+import exceptions.InvalidItemException;
 import farm.FarmItem;
 import game.Game;
 import items.Item;
@@ -68,13 +69,14 @@ public class Animal extends FarmItem {
      * Overloaded function signature, call as
      * feed() to feed with excess organics i.e. crop offcuts (no item)
      * @param item FarmItem to use while feeding, only accepts items with effect "health"
+     * @throws InvalidItemException 
      */
-    public void feed(Item item) {
+    public void feed(Item item) throws InvalidItemException {
     	if (item.getEffect().equals("health")) {
     		this.health += item.getMod() * 1; //fed with item
     		Game.farm.removeFarmItem(item);
     	} else {
-    		System.out.println("That item cant be used on animals in this way!");
+    		throw new InvalidItemException();
     	} 
     }
 	
@@ -94,13 +96,14 @@ public class Animal extends FarmItem {
      * Overloaded function signature, call as
      * play() to play without an item i.e pat animal (no item)
      * @param item FarmItem to use while playing, only accepts items with effect "mood"
+     * @throws InvalidItemException 
      */
-	public void play(Item item) {
+	public void play(Item item) throws InvalidItemException {
     	if (item.getEffect().equals("mood")) {
     		this.mood += item.getMod() * 1 * Game.farm.happinessMod; //played with item/brushed animal
     		Game.farm.removeFarmItem(item);
     	} else {
-    		System.out.println("That item cant be used on animals in this way!");
+    		throw new InvalidItemException();
     	} 
 	}
 }

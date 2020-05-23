@@ -12,8 +12,7 @@ import items.Item;
  * Action Handler class
  * Exists to simplify game loop and handle behind scenes computation
  * for player actions
- * This is the file to run when the game is to be played.
- * 
+ * @author Alex Burling(arb142)
  */
 abstract class ActionHandler {
 	
@@ -28,23 +27,28 @@ abstract class ActionHandler {
 	 */
 	public static void handle(Game.Actions action) throws OutOfActionsException {
 		switch (action) {
+		
 			case END_GAME:
-				Game.getInstance().end();
+				Game.getInstance().endGame();
+				break;
 			case HELP:
 				Game.getInstance().displayHelp();
 				break;
+				
 			case VISIT_STORE: //View the store
 				Game.getInstance().visitStore();
 				break;
+				
 			case END_DAY: //End the game day
-				Game.farmer.resetActions();
+				Game.getFarmer().resetActions();
 				Game.getInstance().increaseDayCounter();
 				for (FarmItem item : Game.getFarm().getFarmItems()) {
 					item.endDay();
 				}
 				break;
+				
 			case TEND_CROPS: //Tend to the crops
-				if (Game.farmer.canWork()) {
+				if (Game.getFarmer().canWork()) {
 					for (FarmItem item : Game.getFarm().getFarmItems()) {
 						if (item instanceof Crop) {
 							((Crop) item).tend();
@@ -55,7 +59,7 @@ abstract class ActionHandler {
 				}
 				break;
 			case FEED_ANIMALS: //Feed the animals
-				if (Game.farmer.canWork()) {
+				if (Game.getFarmer().canWork()) {
 					for (FarmItem item : Game.getFarm().getFarmItems()) {
 						if (item instanceof Animal) {
 							((Animal) item).feed();
@@ -66,7 +70,7 @@ abstract class ActionHandler {
 				}
 				break;
 			case PLAY_ANIMALS: //Play with the animals
-				if (Game.farmer.canWork()) {
+				if (Game.getFarmer().canWork()) {
 					for (FarmItem item : Game.getFarm().getFarmItems()) {
 						if (item instanceof Animal) {
 							((Animal) item).play();
@@ -77,7 +81,7 @@ abstract class ActionHandler {
 				}
 				break;
 			case HARVEST_CROPS: //Harvest crops
-				if (Game.farmer.canWork()) {
+				if (Game.getFarmer().canWork()) {
 					for (FarmItem item : Game.getFarm().getFarmItems()) {
 						if (item instanceof Crop) {
 							((Crop) item).harvest();
@@ -112,7 +116,7 @@ abstract class ActionHandler {
 	public static void handle(Game.Actions action, Item consume) throws OutOfActionsException, InvalidActionException, InvalidItemException {
 		switch (action) {
 		case TEND_CROPS: //Tend to the crops with consumable
-			if (Game.farmer.canWork()) {
+			if (Game.getFarmer().canWork()) {
 				for (FarmItem item : Game.getFarm().getFarmItems()) {
 					if (item instanceof Crop);
 						((Crop) item).tend(consume);
@@ -122,7 +126,7 @@ abstract class ActionHandler {
 			}
 			break;
 		case FEED_ANIMALS: //Feed the animals with consumable
-			if (Game.farmer.canWork()) {
+			if (Game.getFarmer().canWork()) {
 				for (FarmItem item : Game.getFarm().getFarmItems()) {
 					if (item instanceof Animal);
 						((Animal) item).feed(consume);
@@ -132,7 +136,7 @@ abstract class ActionHandler {
 			}
 			break;
 		case PLAY_ANIMALS: //Play with the animals with consumable
-			if (Game.farmer.canWork()) {
+			if (Game.getFarmer().canWork()) {
 				for (FarmItem item : Game.getFarm().getFarmItems()) {
 					if (item instanceof Animal);
 						((Animal) item).play(consume);

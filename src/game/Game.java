@@ -4,33 +4,72 @@ import farm.Farm;
 import farm.Farmer;
 import farm.Store;
 
+
 /**
- * Game class - acts as game environment.
- * This is the file to run when the game is to be played.
+ * Game class - acts as game environment structure. Built on a pseudo singleton structure,
+ * handles the creation of each other singleton within the simulator.
+ * Acts as a superclass to build logic off of for different i/o methods.
+ * @author Alex Burling(arb142), Jonathon Howe(joh29)
+ * @see ConsoleGame
+ * @see GUIGame
  */
 public abstract class Game {
 	
-	protected static Farm farm;
-    protected static Farmer farmer;
-    protected static Store store;
-    protected static Game gameInstance;
+	private static Farm farm;
+    private static Farmer farmer;
+    private static Store store;
+    private static Game gameInstance;
+
+    private static int gameLength;     // How many days the game will last
+    private static int currentDay = 0;     // Current game day
     
+    /**
+     * Public enum to handle player actions.
+     * Contains all possible player actions.
+     */
     public enum Actions {VISIT_STORE, END_DAY, TEND_CROPS,
     					FEED_ANIMALS, PLAY_ANIMALS, HARVEST_CROPS, 
-    					TEND_FARM, GAME_INFO, END_GAME, HELP} //Player's Action set
+    					TEND_FARM, GAME_INFO, END_GAME, HELP
+    					} 
 
-    protected static int gameLength;     // How many days the game will last
-    protected static int currentDay = 0;     // Current game day
+    /**
+     * Public enum to handle player actions at the store.
+     * Contains all possible store actions.
+     */
+    public enum StoreActions {VIEW_STOCK, BUY, SELL, LEAVE}
     
-
+   
+    /*=============================
+     * SINGLETON STATIC RETRIEVERS
+     * ============================
+     */
+    
+    /**
+     * Constructor to initalise game singleton, and store self in static 
+     * reference for later retrieval
+     * @param length int Game length in days
+     */
     public Game(int length) {
     	gameLength = length;
+    	gameInstance = this;
     }
     
+    /**
+     * Instance access function for singleton Game object.
+     * Note, this will never be the Game class, always a subclass of Game.
+     * @return Game Game instance
+     * @see Game
+     */
     public static Game getInstance() {
     	return gameInstance;
     }
     
+    /**
+     * Instance access function for singleton Store object.
+     * If you do not have a store, one will be provided for you.
+     * @return Store Store instance
+     * @see Store
+     */
     public static Store getStore() {
     	if (store == null) {
     		store = new Store();
@@ -38,6 +77,12 @@ public abstract class Game {
     	return store;
     }
     
+    /**
+     * Instance access function for singleton Farm object.
+     * If you do not have a farm, one will be provided for you.
+     * @return Farm Farm instance
+     * @see Farm
+     */
     public static Farm getFarm() {
     	if (farm == null) {
     		farm = new Farm();
@@ -45,6 +90,12 @@ public abstract class Game {
     	return farm;
     }
     
+    /**
+     * Instance access function for singleton Farmer object.
+     * If you do not have a farmer, one will be provided for you.
+     * @return Farmer Farmer instance
+     * @see Farmer
+     */
     public static Farmer getFarmer() {
     	if (farmer == null) {
     		farmer = new Farmer();
@@ -52,30 +103,16 @@ public abstract class Game {
     	return farmer;
     }
 
-    /**
-     * Called once before the game loop
-     */
-    public void setUp() {
-        Game.currentDay = 0;
-        Game.store = new Store();
-    }
     
-    public void endGame() {
-    	
-    }
-
-    /**
-     * Given a number of days, set the max game length.
-     *
-     * @param gameLength Number of days game will last.
+    
+    /*=============================
+     * BASIC LOGIC GETS & SETS
+     * ============================
      */
-    public void setGameLength(int gameLength) {
-        Game.gameLength = gameLength;
-    }
-
+    
     /**
      * Gets the current day (first day is day 0)
-     * @return currentDay
+     * @return currentDay int
      */
     public int getCurrentDay() {
         return Game.currentDay;
@@ -89,54 +126,61 @@ public abstract class Game {
     }
 
     /**
-     * Get the game length (in days)
-     * @return gameLength
+     * Get the game length
+     * @return gameLength int Game length in days
      */
     public int getGameLength() {
         return gameLength;
     }
 
     /**
-     * Returns the points the player has earned.
-     *
-     * @return points
+     * Calculates the player's score
+     * @return points int Player score
      */
-    public int getPoints() {
+    public int getScore() {
+    	//TODO calculate points from something
+    	//could return total value of farm?
+    	//could be end game fuction only, would harvest/sell all inventory (as its the end of the game) and return total cash?
         return 69420;
     }
-
-    // ==================================================
-    // Other
-    // ==================================================
-
-    /**
-     * Gets the string representation of the game.
-     * in form "Game with farmer {farmer name} on farm {farm name}."
+    
+    
+    
+    /*=============================
+     * GAME LOOP FUNCS
+     * ============================
      */
-    public String toString() {
-        return "Game with farmer " + Game.farmer.getName() + " on farm " + Game.farm.getName() + ".";
-    }
-
+    
+    /**
+     * Initialises game loop
+     */
     public void run() {
-        this.setUp();
         while (Game.getInstance().getCurrentDay() < Game.getInstance().getGameLength()) {
             this.runDay();
-            //action = recieveAction
-            //actionHandler.handle(action);
-            //TODO add OutOfActions exception handler
-            //TODO add InvalidAction exception handler
         }
         this.endGame();
-        
     }
-    
 
+
+    /**
+     * Main game loop function
+     */
     protected abstract void runDay();
 
+    /**
+     * Handles store events
+     * i.e. enteres another loop until player is done in store
+     */
 	protected abstract void visitStore();
+	
+	/**
+	 * Handles ending the game
+	 */
+	protected abstract void endGame();
 
-	protected abstract void end();
-
+    /**
+     * Prints a string displaying all available commands to System.out
+     */
 	protected abstract void displayHelp();
 
 }

@@ -153,6 +153,8 @@ public class GUIGame extends Game {
     }
 
     public static void main(String[] args) {
+    	//may be a tad broken, may be best to start GUI from ground up with interface?
+    	//see ConsoleGame on correct method of initialisation.
         GUIGame game = new GUIGame();
         game.setGameLength(10);
         game.intoScreen();

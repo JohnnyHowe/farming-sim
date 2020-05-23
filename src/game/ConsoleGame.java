@@ -6,40 +6,34 @@ import exceptions.OutOfActionsException;
 
 
 /**
- * Game class - acts as game environment.
- * Runs game through console
- * Does not check whether input is valid as this is only for development purposes.
+ * Game sub class - acts as game environment. Built on a pseudo singleton structure,
+ * handles the creation of each other singleton within the simulator.
+ * Acts as implementation for specific i/o e.g. console
+ * @author Alex Burling(arb142), Jonathon Howe(joh29)
+ * @see Game
  */
 public class ConsoleGame extends Game {
 
     private static Scanner scanner;
+    private static boolean atStore;
 
     /**
-     * Initialize the game
-     * @param farmerName 
-     * @param farmName 
-     * @param gameLen 
+     * Constructor for ConsoleGame, same as super however initializes and stores a scanner
+     * @param length int Game length in days
      */
     public ConsoleGame(int length) {
         super(length);
         ConsoleGame.scanner = new Scanner(System.in);
     }
 
-    /**
-     * Set up the game
-     * Creates Farm, Farmer
-     */
-    public void setUp() {
-;
-    }
 
     /**
      * Prints the end game string to the console.
      * String in the form "You ended the game with {points} points."
-     * points is the returned value from the calculatePoints method.
+     * points is the returned value from the getScore method.
      */
-    public void end() {
-        System.out.println("You ended the game with " + ConsoleGame.getInstance().getPoints() + " points.");
+    public void endGame() {
+        System.out.println("You ended the game with " + ConsoleGame.getInstance().getScore() + " points.");
         System.exit(0);
     }
 
@@ -48,22 +42,27 @@ public class ConsoleGame extends Game {
      */
     public void runDay() {
         System.out.println("\nWhat are you going to do today? (Day " + (Game.getInstance().getCurrentDay() + 1) + ")");
-        String input = ConsoleGame.scanner.nextLine();
-        this.runInput(input);
+        handleInput();
+    }
+    
+    /**
+     * Prints farm as a string to console
+     */
+    public void viewFarm() {
+        System.out.println(Game.getFarm().toString());
+
     }
 
     /**
-     * Given a string from the user input, run some command
-     *
-     * "end game" finishes the game, even if not all days are completed.
-     *
-     * @param userInput String string
+     * Takes user input from commandline, parses, and handles action
+     * accordingly. Catches relevant exceptions.
      */
-    private void runInput(String userInput) {
+    private void handleInput() {
+        String userIn = ConsoleGame.scanner.nextLine();
     	Game.Actions input = Actions.HELP;
     	
     	try {
-			input = inputParser(userInput);
+			input = inputParser(userIn);
 		} catch (InvalidActionException e) {
 			System.out.println("Unknown Command:" + e.getMessage());
 		}
@@ -75,6 +74,13 @@ public class ConsoleGame extends Game {
 		}
     }
    
+    /**
+     * Handles dirty user input 
+     * @param input String input from scanner in
+     * @return Game.Actions an enum to pass to ActionHandler
+     * @throws InvalidActionException
+     * @see ActionHandler
+     */
     private Game.Actions inputParser(String input) throws InvalidActionException {
     	switch (input.trim().toLowerCase()) {
     		case "tend farmland":
@@ -100,13 +106,9 @@ public class ConsoleGame extends Game {
     	}
     }
 
-    public void viewFarm() {
-        System.out.println(Game.farm.toString());
-
-    }
-
     public void visitStore() {
-        while(true) {   // Yeah i know its bad to idc
+    	atStore = true;
+        while(atStore) {
             System.out.println("What would you like to do at the store?");
             String item = ConsoleGame.scanner.nextLine().toLowerCase();
             switch (item) {
@@ -130,8 +132,8 @@ public class ConsoleGame extends Game {
      */
     private static void viewStore() {
         System.out.println("Crops:");
-        for (String name : Game.store.getCropNames()) {
-            Crop crop = Game.store.getCrop(name);
+        for (String name : Game.getStore().getCropNames()) {
+            Crop crop = Game.getStore().getCrop(name);
             System.out.println(crop.getName() + " ($" + crop.getBuyPrice() + ")");
         }
     }
@@ -147,22 +149,25 @@ public class ConsoleGame extends Game {
             System.out.println("What would you like to buy?");
             item = ConsoleGame.scanner.nextLine().toLowerCase();
 
-            if (Game.store.getCropNamesLowerCase().contains(item) || item.equals("nothing")) {
+            if (Game.getStore().getCropNamesLowerCase().contains(item) || item.equals("nothing")) {
                 done = true;
             } else {
                 System.out.println("Unknown item: " + item);
-                System.out.println("Try an item from the following: " + Game.store.getCropNames());
+                System.out.println("Try an item from the following: " + Game.getStore().getCropNames());
             }
         }
         System.out.println("Bought " + item);
     }
     
+    /**
+     * Prints a string displaying all available commands to System.out
+     */
     public void displayHelp() {
 		System.out.println("Commands:\nTend Farmland\nTend Crops\nHarvest Crops\nPlay with Animals\nFeed Animals\nVisit Store\nEnd Day\nEnd Game\nHelp(this)");
 	}
 
     public static void main(String[] args) {
-    	/* game code
+    	/* console game start code
         Scanner in = new Scanner(System.in);
         System.out.println("How many days will the game last?: ");
         gameInstance = new ConsoleGame(Integer.parseInt(in.nextLine()));
@@ -174,7 +179,7 @@ public class ConsoleGame extends Game {
         */
         
     	//dev quickstart code
-    	gameInstance = new ConsoleGame(10);
+    	new ConsoleGame(10);
     	Game.getFarm().setName("DEVFarmName");
     	Game.getFarmer().setName("DEVFarmerName");
         Game.getInstance().run();

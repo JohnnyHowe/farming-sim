@@ -1,22 +1,24 @@
 package crops;
 
 /**
- * Class to represent Wheat
+ * Structure and attribute subclass to construct Wheat objects.
+ * <p>
+ * This class provides the superclass constructor with the correct
+ * parameters, and provides an easy place for them to be set.<br>
+ * Every instance of this object is a deep-copy of each other.
+ * 
  * @author Alex Burling(arb142)
+ * @version 1.0
  * @see Crop
  */
 public class Wheat extends Crop {
 	
-	public final static String WHEAT_NAME = "Wheat";		//Display Name
-	public final static String WHEAT_DESC = "Wheaty wheat";	//Description
-	public final static float WHEAT_PRICE = 2;				//Base Price
-	public final static float WHEAT_INCOME = 100;			//Money gained by player on harvest
+	public final static String WHEAT_NAME = "Wheat";
+	public final static String WHEAT_DESC = "Wheaty wheat";
+	public final static float WHEAT_PRICE = 2;
+	public final static float WHEAT_INCOME = 100;
 	private final static FarmItems WHEAT_ENUM = FarmItems.WHEAT;
 	
-	/**
-	 * Constructs the Wheat object from public constant values defined in Wheat.java
-	 * Every Wheat object is a deepcopy of each other (same attribute values and structure, but different objects)
-	 */
     public Wheat() {
 		super(WHEAT_NAME, WHEAT_DESC, WHEAT_PRICE, WHEAT_INCOME, WHEAT_ENUM);
 	}

@@ -24,12 +24,12 @@ import items.Item;
  */
 public abstract class Crop extends FarmItem {
 	
-
     private float grown;
     private float income;
     
     /**
-     * Constructs the Crop from the FarmItem constructor and crop specific values (income, grown).
+     * Constructs the Crop from the FarmItem constructor and crop specific values 
+     * (income, grown).
      * Grown is always initialized to 0 and as such is not a param.
      * @param name Crop name, used when viewing status of item e.g. Wheat, Melon
      * @param description Crop description, used when viewing status of item
@@ -42,19 +42,24 @@ public abstract class Crop extends FarmItem {
     	this.grown = 0;
     }
     
-    /**
-     * Handles end of the day actions.
-     * i.e. natural growth of crops.
-     * Implements superclass abstract method 
-     */
+	/**
+	 * Handles end of the day actions for Crop objects
+	 * <p>
+	 * Every FarmItem subclass must implement an endDay() function, to simplify game
+	 * loop.
+	 * 
+	 * This is to handle crop specific logic and attributes.<br>
+	 * i.e. natural plant growth<br>
+	 */
     public void endDay() {
     	this.grown += 1 * Game.getFarm().getMod("growth"); //natural daily growth
     }
     
     /**
-     * Handles a harvest action.
-     * i.e removes the item from the farm
-     * and gives the farmer money proportional to it's growth.
+     * Updates Farm inventory and Farmer cash consistent with harvesting and 
+     * selling as a daily action
+	 * <p>
+     * i.e. removes crop from the farm and adds money proportional to it's growth.<br>
      */
     public void harvest() {
     	Game.getFarm().removeFarmItem(this);
@@ -62,26 +67,32 @@ public abstract class Crop extends FarmItem {
     }
     
     /**
-     * Handles tending the plant as a daily action
-     * i.e. increases growth of crop.
-     * Overloaded function signature, call as
-     * tend(Item item) to tend with an item
+     * Updates object attributes consistent with tending the crop as a daily action
+	 * <p>
+     * This function takes no parameters, and acts as standard tending.
+     * i.e. increases growth of crop at no cost.<br>
+     * 
+     * To tend with a growth item, call with Item as parameter
+     * ({@link #tend(Item)})
      */
     public void tend() {
     	this.grown += 1 * Game.getFarm().getMod("growth");	//tended with water
     }
     
     /**
-     * Handles tending the plant as a daily action
-     * i.e. increases growth of crop.
-     * Overloaded function signature, call as
-     * tend() to tend with water (no item)
-     * @param item FarmItem to use while tending, only accepts items with effect "growth"
-     * @throws InvalidItemException 
+     * Updates object attributes consistent with tending the crop with an item
+     *  as a daily action
+	 * <p>
+     * This function takes one item, to be consumed.
+     * i.e. increases growth of crop multiplied by item modifier ({@link Item#getMod()})<br>
+     * 
+     * To play without a growth item, call without Item as parameter ({@link #play()})
+     * @param item FarmItem to use while playing
+     * @throws InvalidItemException if ({@link Item#getEffect()}) != "growth"
      */
     public void tend(Item item) throws InvalidItemException {
     	if (item.getEffect().equals("growth")) {
-    		this.grown += item.getMod() * Game.getFarm().getMod("growth"); //tended with item
+    		this.grown += item.getMod() * Game.getFarm().getMod("growth");
     		Game.getFarm().removeFarmItem(item);
     	} else {
     		throw new InvalidItemException();

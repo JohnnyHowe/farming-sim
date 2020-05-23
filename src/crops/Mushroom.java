@@ -1,8 +1,14 @@
 package crops;
 
 /**
- * Class to represent Mushroom
+ * Structure and attribute subclass to construct Mushroom objects.
+ * <p>
+ * This class provides the superclass constructor with the correct
+ * parameters, and provides an easy place for them to be set.<br>
+ * Every instance of this object is a deep-copy of each other.
+ * 
  * @author Alex Burling(arb142)
+ * @version 1.0
  * @see Crop
  */
 public class Mushroom extends Crop {
@@ -12,11 +18,7 @@ public class Mushroom extends Crop {
 	public final static float MUSH_PRICE = 4;
 	public final static float MUSH_INCOME = 200;
 	private final static FarmItems MUSH_ENUM = FarmItems.MUSHROOM;
-	
-	/**
-	 * Constructs the Mushroom object from public constant values defined in Mushroom.java
-	 * Every Mushroom object is a deepcopy of each other (same attribute values and structure, but different objects)
-	 */
+
     public Mushroom() {
 		super(MUSH_NAME, MUSH_DESC, MUSH_PRICE, MUSH_INCOME, MUSH_ENUM);
 	}

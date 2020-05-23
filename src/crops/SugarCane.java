@@ -1,8 +1,14 @@
 package crops;
 
 /**
- * Class to represent Sugar cane
+ * Structure and attribute subclass to construct SugarCane objects.
+ * <p>
+ * This class provides the superclass constructor with the correct
+ * parameters, and provides an easy place for them to be set.<br>
+ * Every instance of this object is a deep-copy of each other.
+ * 
  * @author Alex Burling(arb142)
+ * @version 1.0
  * @see Crop
  */
 public class SugarCane extends Crop {
@@ -12,11 +18,7 @@ public class SugarCane extends Crop {
 	public final static float CANE_PRICE = 3;
 	public final static float CANE_INCOME = 150;
 	private final static FarmItems CANE_ENUM = FarmItems.SUGAR_CANE;
-	
-	/**
-	 * Constructs the Sugar cane object from public constant values defined in Sugar cane.java
-	 * Every Sugar cane object is a deepcopy of each other (same attribute values and structure, but different objects)
-	 */
+
     public SugarCane() {
 		super(CANE_NAME, CANE_DESC, CANE_PRICE, CANE_INCOME, CANE_ENUM);
 	}

@@ -2,6 +2,8 @@ package farm;
 
 import java.util.ArrayList;
 
+import game.Game;
+
 /**
  * Class representing the farm.
  * Is the environment for the game.
@@ -16,21 +18,16 @@ public class Farm
 	private ArrayList<FarmItem> farmItems; //farms "inventory"
 
 	/**
-	 * Constructor for the farm
-	 * @param name Name of farm
-	 */
-	public Farm(String name)
-	{
-		this.name = name;
-	}
-
-	/**
 	 * Gets the name of the farm
 	 * @return name of farm
 	 */
 	public String getName()
 	{
 		return this.name;
+	}
+	
+	public void setName(String name) {
+		Game.getFarm().name = name;
 	}
 
 	/**

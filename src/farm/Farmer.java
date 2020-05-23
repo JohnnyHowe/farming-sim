@@ -8,20 +8,9 @@ import game.Game;
 public class Farmer
 {
 	private String name;
-	private float money;
-	private int actionsToday;
+	private float money = 100;
+	private int actionsToday = 0;;
 
-	/**
-	 * Initialize the farmer.
-	 * @param name Name of farmer.
-	 */
-	public Farmer(String name)
-	{
-		this.name = name;
-		this.money = 0;
-		this.actionsToday = 0;
-	}
-	
 	/**
 	 * Resets farmer actions to 0
 	 */
@@ -58,6 +47,10 @@ public class Farmer
 	public String getName()
 	{
 		return this.name;
+	}
+	
+	public void setName(String name) {
+		Game.getFarmer().name = name;
 	}
 	
 	public void addMoney(float money) {

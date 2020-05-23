@@ -23,25 +23,32 @@ public abstract class Game {
     protected static int currentDay = 0;     // Current game day
     
 
-    public Game() {
-    	gameInstance = this;
-    	store = new Store();
+    public Game(int length) {
+    	gameLength = length;
     }
-    
     
     public static Game getInstance() {
     	return gameInstance;
     }
     
     public static Store getStore() {
+    	if (store == null) {
+    		store = new Store();
+    	}
     	return store;
     }
     
     public static Farm getFarm() {
+    	if (farm == null) {
+    		farm = new Farm();
+    	}
     	return farm;
     }
     
     public static Farmer getFarmer() {
+    	if (farmer == null) {
+    		farmer = new Farmer();
+    	}
     	return farmer;
     }
 

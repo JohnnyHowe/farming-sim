@@ -3,8 +3,6 @@ import java.util.Scanner;
 import crops.Crop;
 import exceptions.InvalidActionException;
 import exceptions.OutOfActionsException;
-import farm.Farm;
-import farm.Farmer;
 
 
 /**
@@ -22,11 +20,8 @@ public class ConsoleGame extends Game {
      * @param farmName 
      * @param gameLen 
      */
-    public ConsoleGame(int gameLen, String farmName, String farmerName) {
-        super();
-        farm = new Farm(farmName);
-        farmer = new Farmer(farmerName);
-        gameLength = gameLen;
+    public ConsoleGame(int length) {
+        super(length);
         ConsoleGame.scanner = new Scanner(System.in);
     }
 
@@ -167,23 +162,22 @@ public class ConsoleGame extends Game {
 	}
 
     public static void main(String[] args) {
-    	
-    /*regular game code
-      Scanner in = new Scanner(System.in);
-      System.out.println("How many days will the game last?: ");
-      int gameLen = Integer.parseInt(in.nextLine());
-      System.out.println("Farm name: ");
-      String farmName = in.nextLine();
-      System.out.println("Farmer name: ");
-      String farmerName = in.nextLine();
-      in.close();
-      */
-
-      // Dev test code
-    	int gameLen = 10;
-    	String farmName = "DEVFarmName";
-    	String farmerName = "DEVFarmerName";
-        ConsoleGame game = new ConsoleGame(gameLen, farmName, farmerName);
-        game.run();
+    	/* game code
+        Scanner in = new Scanner(System.in);
+        System.out.println("How many days will the game last?: ");
+        gameInstance = new ConsoleGame(Integer.parseInt(in.nextLine()));
+        System.out.println("Farm name: ");
+        Game.getFarm().setName(in.nextLine());
+        System.out.println("Farmer name: ");
+        Game.getFarmer().setName(in.nextLine());
+        in.close();
+        */
+        
+    	//dev quickstart code
+    	gameInstance = new ConsoleGame(10);
+    	Game.getFarm().setName("DEVFarmName");
+    	Game.getFarmer().setName("DEVFarmerName");
+        Game.getInstance().run();
     }
+
 }

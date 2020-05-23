@@ -11,7 +11,7 @@ import farm.FarmItem;
  * @see Brush
  * @see GolemRose
  */
-public class Item extends FarmItem {
+public abstract class Item extends FarmItem {
 	
 	private String effect;
 	private float effectMultiplier;

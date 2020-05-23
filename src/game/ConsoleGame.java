@@ -183,6 +183,7 @@ public class ConsoleGame extends Game {
     	Game.getFarm().setName("DEVFarmName");
     	Game.getFarmer().setName("DEVFarmerName");
         Game.getInstance().run();
+        //TODO split run to static
     }
 
 }

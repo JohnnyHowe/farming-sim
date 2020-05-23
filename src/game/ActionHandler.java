@@ -31,6 +31,7 @@ abstract class ActionHandler {
 			case END_GAME:
 				Game.getInstance().endGame();
 				break;
+				
 			case HELP:
 				Game.getInstance().displayHelp();
 				break;
@@ -49,6 +50,7 @@ abstract class ActionHandler {
 				
 			case TEND_CROPS: //Tend to the crops
 				if (Game.getFarmer().canWork()) {
+					
 					for (FarmItem item : Game.getFarm().getFarmItems()) {
 						if (item instanceof Crop) {
 							((Crop) item).tend();
@@ -58,6 +60,7 @@ abstract class ActionHandler {
 					throw new OutOfActionsException();
 				}
 				break;
+				
 			case FEED_ANIMALS: //Feed the animals
 				if (Game.getFarmer().canWork()) {
 					for (FarmItem item : Game.getFarm().getFarmItems()) {
@@ -69,6 +72,7 @@ abstract class ActionHandler {
 					throw new OutOfActionsException();
 				}
 				break;
+				
 			case PLAY_ANIMALS: //Play with the animals
 				if (Game.getFarmer().canWork()) {
 					for (FarmItem item : Game.getFarm().getFarmItems()) {
@@ -80,6 +84,7 @@ abstract class ActionHandler {
 					throw new OutOfActionsException();
 				}
 				break;
+				
 			case HARVEST_CROPS: //Harvest crops
 				if (Game.getFarmer().canWork()) {
 					for (FarmItem item : Game.getFarm().getFarmItems()) {
@@ -91,6 +96,7 @@ abstract class ActionHandler {
 					throw new OutOfActionsException();
 				}
 				break;
+				
 			case TEND_FARM: //Tend to the farmland (cleanliness)
 				if (Game.getFarmer().canWork()) {
 					Game.getFarm().cleanUp();
@@ -98,6 +104,7 @@ abstract class ActionHandler {
 					throw new OutOfActionsException();
 				}
 				break;
+				
 			default:
 				break;
 		}

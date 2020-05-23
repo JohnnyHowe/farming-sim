@@ -12,7 +12,7 @@ import items.Item;
  * expanding on the FarmItem structure.<br>
  * Animals function as a daily income (rewarded at {@link #endDay}) and require 
  * feeding and playing with to keep health and mood high.
- * 
+ *  
  * @version 1.0
  * @author Alex Burling(arb142)
  * @see FarmItem
@@ -43,44 +43,56 @@ public abstract class Animal extends FarmItem {
 	}
 	
 	/**
-	 * Handles end of the day actions
-	 * i.e. deteriorates health/hunger, deteriorates mood as a factor of farm cleanliness
-	 * checks if animal is dead or injured, and adds money earned from animal.
-	 * Implements superclass abstract method 
+	 * Handles end of the day actions for Animal objects
+	 * <p>
+	 * Every FarmItem subclass must implement an endDay() function, to simplify game loop.
+	 * 
+	 * This is to handle animal specific logic and attributes.<br>
+	 * i.e. deteriorates health and mood, which drop at constant value, and adds profit.<br>
+	 * 
+	 * However mood will deteriorate faster when low health, and animal will die/run away on 0.<br>
+	 * Profit earned at the end of each day is dependent on health, mood, and internal value.
 	 */
 	@Override
 	public void endDay() {
-		health -= 1; //gets hungry
-		mood -= 0.5 / Game.getFarm().cleanliness; //unclean environment?
-		if (health == 0) { //animal dies/runs away?
+		health -= 0.5;
+		mood -= 0.5 / Game.getFarm().getMod("cleanliness");
+		if (health <= 0) {
 			Game.getFarm().removeFarmItem(this);
-		} else if (health < 2) { //animal hungry/hurt so gets uspet
+		} else if (health < 2) {
 			mood -= 1;
 		}
 		Game.getFarmer().addMoney(dailyProfit * health * mood);
 	}
 	
 	/**
-     * Handles feeding the animal as a daily action
-     * i.e. increases animal health at no cost
-     * Overloaded function signature, call as
-     * feed(Item item) to feed with an item
+	 * Updates object attributes consistent with feeding the animal as a daily action
+	 * <p>
+	 * This function takes no parameters, and acts as standard feeding.
+     * i.e. increases animal health at no cost.<br>
+     * 
+     * To feed with a health item, call with Item as parameter
+     * ({@link #feed(Item)})
 	 */
     public void feed() {
-    	this.health += 1;	//fed with default / wheat chaff??
+    	this.health += 2;
     }
     
     /**
-     * Handles feeding the animal as a daily action
-     * i.e. increases animal health with an item
-     * Overloaded function signature, call as
-     * feed() to feed with excess organics i.e. crop offcuts (no item)
-     * @param item FarmItem to use while feeding, only accepts items with effect "health"
-     * @throws InvalidItemException 
+     * Updates object attributes consistent with feeding the animal with an item as a daily action.
+	 * <p>
+	 * This function takes one item, to be consumed.
+     * i.e. increases animal health multiplied by item modifier ({@link Item#getMod()})<br>
+     * 
+     * To feed without a health item, call without Item as parameter
+     * ({@link #feed()})
+     * 
+     * @param item FarmItem to use while feeding
+     * @throws InvalidItemException if ({@link Item#getEffect()}) != "health"
      */
     public void feed(Item item) throws InvalidItemException {
     	if (item.getEffect().equals("health")) {
-    		this.health += item.getMod() * 1; //fed with item
+    		this.health += item.getMod() * 2;
     		Game.getFarm().removeFarmItem(item);
     	} else {
     		throw new InvalidItemException();
@@ -88,26 +100,32 @@ public abstract class Animal extends FarmItem {
     }
 	
     /**
-     * Handles playing with the animal as a daily action
-     * i.e. increases animal mood at no cost
-     * Overloaded function signature, call as
-     * play(Item item) to play with an item
+     * Updates object attributes consistent with playing with the animal as a daily action
+     * <p>
+     * This function takes no parameters, and acts as standard playing.
+     * i.e. increases animal mood at no cost.<br>
+     * 
+     * To play with a mood item, call with Item as parameter
+     * ({@link #play(Item)})
      */
 	public void play() {
-		this.mood += 1 * Game.getFarm().happinessMod ; //play with animals/pat
+		this.mood += 1 * Game.getFarm().getMod("happiness") ; //play with animals/pat
 	}
 	
     /**
-     * Handles playing with the animal as a daily action
-     * i.e. increases animal mood with an item
-     * Overloaded function signature, call as
-     * play() to play without an item i.e pat animal (no item)
-     * @param item FarmItem to use while playing, only accepts items with effect "mood"
-     * @throws InvalidItemException 
+     * Updates object attributes consistent with playing with the animal with an item as a daily action.
+     * <p>
+     * This function takes one item, to be consumed.
+     * i.e. increases animal mood multiplied by item modifier ({@link Item#getMod()})<br>
+     * 
+     * To play without a mood item, call without Item as parameter
+     * ({@link #play()})
+     * @param item FarmItem to use while playing
+     * @throws InvalidItemException if ({@link Item#getEffect()}) != "mood"
      */
 	public void play(Item item) throws InvalidItemException {
     	if (item.getEffect().equals("mood")) {
-    		this.mood += item.getMod() * 1 * Game.getFarm().happinessMod; //played with item/brushed animal
+    		mood += item.getMod() * 1 * Game.getFarm().getMod("happiness");
     		Game.getFarm().removeFarmItem(item);
     	} else {
     		throw new InvalidItemException();

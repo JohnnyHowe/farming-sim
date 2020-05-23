@@ -48,7 +48,7 @@ public abstract class Crop extends FarmItem {
      * Implements superclass abstract method 
      */
     public void endDay() {
-    	this.grown += 1 * Game.getFarm().growthMod; //natural daily growth
+    	this.grown += 1 * Game.getFarm().getMod("growth"); //natural daily growth
     }
     
     /**
@@ -68,7 +68,7 @@ public abstract class Crop extends FarmItem {
      * tend(Item item) to tend with an item
      */
     public void tend() {
-    	this.grown += 1 * Game.getFarm().growthMod;	//tended with water
+    	this.grown += 1 * Game.getFarm().getMod("growth");	//tended with water
     }
     
     /**
@@ -81,7 +81,7 @@ public abstract class Crop extends FarmItem {
      */
     public void tend(Item item) throws InvalidItemException {
     	if (item.getEffect().equals("growth")) {
-    		this.grown += item.getMod() * Game.getFarm().growthMod; //tended with item
+    		this.grown += item.getMod() * Game.getFarm().getMod("growth"); //tended with item
     		Game.getFarm().removeFarmItem(item);
     	} else {
     		throw new InvalidItemException();

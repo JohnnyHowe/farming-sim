@@ -1,22 +1,25 @@
 package crops;
 
 /**
- * Class to represent Cactus
+ * Structure and attribute subclass to construct Cactus objects.
+ * <p>
+ * This class provides the superclass constructor with the correct
+ * parameters, and provides an easy place for them to be set.<br>
+ * Every instance of this object is a deep-copy of each other.
+ * 
  * @author Alex Burling(arb142)
+ * @version 1.0
  * @see Crop
  */
 public class Cactus extends Crop {
 	
-	public final static String CACTUS_NAME = "Cactus";
-	public final static String CACTUS_DESC = "Ouch, Prickly";
-	public final static float CACTUS_PRICE = 5;
-	public final static float CACTUS_INCOME = 250;
+	private final static String CACTUS_NAME = "Cactus";
+	private final static String CACTUS_DESC = "Ouch, Prickly";
+	private final static float CACTUS_PRICE = 5;
+	private final static float CACTUS_INCOME = 250;
+	private final static FarmItems CACTUS_ENUM = FarmItems.CACTUS;
 	
-	/**
-	 * Constructs the Cactus object from public constant values defined in Cactus.java
-	 * Every Cactus object is a deepcopy of each other (same attribute values and structure, but different objects)
-	 */
     public Cactus() {
-		super(CACTUS_NAME, CACTUS_DESC, CACTUS_PRICE, CACTUS_INCOME);
+		super(CACTUS_NAME, CACTUS_DESC, CACTUS_PRICE, CACTUS_INCOME,CACTUS_ENUM);
 	}
 }

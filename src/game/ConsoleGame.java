@@ -82,27 +82,27 @@ public class ConsoleGame extends Game {
      * @see ActionHandler
      */
     private Game.Actions inputParser(String input) throws InvalidActionException {
-    	switch (input.trim().toLowerCase()) {
-    		case "tend farmland":
+    	switch (input.replace(" ", "").toLowerCase()) {
+    		case "tendfarmland":
     			return Actions.TEND_FARM;
-    		case "tend crops":
+    		case "tendcrops":
     			return Actions.TEND_CROPS;
-    		case "harvest crops":
+    		case "harvestcrops":
     			return Actions.HARVEST_CROPS;
-    		case "play with animals":
+    		case "playwithanimals":
     			return Actions.PLAY_ANIMALS;
-    		case "feed animals":
+    		case "feedanimals":
     			return Actions.FEED_ANIMALS;
-    		case "visit store":
+    		case "visitstore":
     			return Actions.VISIT_STORE;
-    		case "end day":
+    		case "endday":
     			return Actions.END_DAY;
-    		case "end game":
+    		case "endgame":
     			return Actions.END_GAME;
     		case "help":
     			return Actions.HELP;
     		default:
-    			throw new InvalidActionException(input.trim().toLowerCase());
+    			throw new InvalidActionException(input.replace(" ", "").toLowerCase());
     	}
     }
 

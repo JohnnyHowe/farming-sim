@@ -1,13 +1,12 @@
 /**
- * Custom animal objects created for Farm Simulator game
+ * Custom animal object logic and structure created for Farm Simulator game
  * <p>
  * Contains the structure for an animal object and the unique constructors for
- * the animal subclasses, extends FarmItem,
+ * the animal subclasses.<br> Animal extends FarmItem and all others extend Animal.
  * 
  * @author Alex Burling(arb142)
  * @version 1.0
  * @see Animal
  * @see FarmItem
- * @see farm
  */
 package animals;

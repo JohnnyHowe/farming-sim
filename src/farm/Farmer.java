@@ -9,7 +9,7 @@ public class Farmer
 {
 	private String name;
 	private float money = 100;
-	private int actionsToday = 0;;
+	private int actionsToday = 0;
 	
 	/**
 	 * Simple boolean function to check if the farmer can still complete

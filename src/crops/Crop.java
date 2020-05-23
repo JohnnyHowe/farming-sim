@@ -6,9 +6,15 @@ import game.Game;
 import items.Item;
 
 /**
- * Class for representing a Crop.
- * Crops grow daily and can be harvested to receive income.
- * @author Alex Burling(arb142), Jonathon Howe(joh29)
+ * Logic and structure superclass to construct different crops.
+ * <p>
+ * This class provides each crop with the logic and structure required, by
+ * expanding on the FarmItem structure.<br>
+ * Crops grow daily and can be harvested to receive income. Income is calculated
+ * proportionally to crop growth ({@link #harvest}).
+ * 
+ * @version 1.0
+ * @author Alex Burling(arb142)
  * @see Cactus
  * @see Melon
  * @see Mushroom
@@ -30,8 +36,8 @@ public abstract class Crop extends FarmItem {
      * @param price Crop price, used when buying or selling to store
      * @param income Crop income, used when crop is harvested
      */
-    public Crop (String name, String description, float price, float income) {
-    	super(name, description, price);
+    public Crop (String name, String description, float price, float income, FarmItems selfEnum) {
+    	super(name, description, price, selfEnum);
     	this.income = income;
     	this.grown = 0;
     }

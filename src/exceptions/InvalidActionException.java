@@ -5,10 +5,12 @@ package exceptions;
  */
 public class InvalidActionException extends Exception {
 	
+
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3062656714637574054L;
+	private static final long serialVersionUID = -6832037948940277007L;
 
 	/**
 	 * 

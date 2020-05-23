@@ -12,12 +12,13 @@ public class FeedBag extends Item {
 	private final static float FEED_PRICE = 4;			
 	private final static String FEED_EFFECT = "health";		
 	private final static float FEED_MULT = 3;	
+	private final static FarmItems FEED_ENUM = FarmItems.FEED_BAG;
 	
 	/**
 	 * Constructs the Animal feed object from public constant values defined in AnimalFeed.java.
 	 * Every Animal feed object is a deepcopy of each other (same attribute values and structure, but different objects)
 	 */
 	public FeedBag() {
-		super(FEED_NAME, FEED_DESC, FEED_PRICE, FEED_EFFECT, FEED_MULT);
+		super(FEED_NAME, FEED_DESC, FEED_PRICE, FEED_EFFECT, FEED_MULT, FEED_ENUM);
 	}
 }

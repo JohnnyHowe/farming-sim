@@ -7,9 +7,10 @@ public class Grain extends Item {
 	private final static float GRAIN_PRICE = 2;			
 	private final static String GRAIN_EFFECT = "health";	
 	private final static float GRAIN_MULT = 2;	
+	private final static FarmItems GRAIN_ENUM = FarmItems.GRAIN;
 	
 	public Grain(){
-		super(GRAIN_NAME, GRAIN_DESC, GRAIN_PRICE, GRAIN_EFFECT, GRAIN_MULT);
+		super(GRAIN_NAME, GRAIN_DESC, GRAIN_PRICE, GRAIN_EFFECT, GRAIN_MULT, GRAIN_ENUM);
 	}
 
 }

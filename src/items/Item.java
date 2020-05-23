@@ -16,8 +16,8 @@ public abstract class Item extends FarmItem {
 	private String effect;
 	private float effectMultiplier;
 
-	public Item(String name, String description, float price, String effect, float effectMultiplier) {
-		super(name, description, price);
+	public Item(String name, String description, float price, String effect, float effectMultiplier, FarmItems selfEnum) {
+		super(name, description, price, selfEnum);
 		this.effect = effect;
 		this.effectMultiplier = effectMultiplier;
 	}

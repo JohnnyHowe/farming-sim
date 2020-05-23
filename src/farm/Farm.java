@@ -11,10 +11,10 @@ import game.Game;
 public class Farm
 {
 	private String name; //"farm name"
-	public double growthMod = 1; //how effective is the farm at growing crops (bonus when growing(end day + tend)) 0->2
-	public double happinessMod = 1; //how effective is the farmer at keeping animals happy (bonus when playing) TODO stop mood from decreasing as quickly for higher mod? 0->2
-	public double incomeMod = 1; //how effective is the farmer at marketing (increases value of money in addMoney(money) 0->2
-	public double cleanliness = 1; //how clean is the farm (effects animal mood) TODO make effect other things too? 1->0
+	private double growthMod = 1; //how effective is the farm at growing crops (bonus when growing(end day + tend)) 0->2
+	private double happinessMod = 1; //how effective is the farmer at keeping animals happy (bonus when playing) TODO stop mood from decreasing as quickly for higher mod? 0->2
+	private double incomeMod = 1; //how effective is the farmer at marketing (increases value of money in addMoney(money) 0->2
+	private double cleanliness = 1; //how clean is the farm (effects animal mood) TODO make effect other things too? 1->0
 	private ArrayList<FarmItem> farmItems; //farms "inventory"
 
 	/**
@@ -83,6 +83,8 @@ public class Farm
 				return happinessMod;
 			case "income":
 				return incomeMod;
+			case "cleanliness":
+				return cleanliness;
 			default:
 				return 1;
 		}

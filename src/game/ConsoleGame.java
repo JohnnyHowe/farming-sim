@@ -1,6 +1,8 @@
 package game;
 import java.util.Scanner;
 import crops.Crop;
+import exceptions.InvalidActionException;
+import exceptions.OutOfActionsException;
 import farm.Farm;
 import farm.Farmer;
 
@@ -16,9 +18,15 @@ public class ConsoleGame extends Game {
 
     /**
      * Initialize the game
+     * @param farmerName 
+     * @param farmName 
+     * @param gameLen 
      */
-    public ConsoleGame() {
+    public ConsoleGame(int gameLen, String farmName, String farmerName) {
         super();
+        farm = new Farm(farmName);
+        farmer = new Farmer(farmerName);
+        gameLength = gameLen;
         ConsoleGame.scanner = new Scanner(System.in);
     }
 
@@ -27,20 +35,7 @@ public class ConsoleGame extends Game {
      * Creates Farm, Farmer
      */
     public void setUp() {
-//        Scanner in = new Scanner(System.in);
-//        System.out.println("How many days will the game last?: ");
-//        this.setGameLength(Integer.parseInt(in.nextLine()));
-//        System.out.println("Farm name: ");
-//        this.farm = new Farm(in.nextLine());
-//        System.out.println("Farmer name: ");
-//        this.farmer = new Farmer(in.nextLine());
-//        in.close();
-
-        // Couldn't be bothered typing it over and over again
-        this.setGameLength(10);
-        Game.farm = new Farm("FarmName");
-        Game.farmer = new Farmer("FarmerName");
-        System.out.println(this.toString());
+;
     }
 
     /**
@@ -48,8 +43,8 @@ public class ConsoleGame extends Game {
      * String in the form "You ended the game with {points} points."
      * points is the returned value from the calculatePoints method.
      */
-    private void end() {
-        System.out.println("You ended the game with " + this.getPoints() + " points.");
+    public void end() {
+        System.out.println("You ended the game with " + ConsoleGame.getInstance().getPoints() + " points.");
         System.exit(0);
     }
 
@@ -57,8 +52,7 @@ public class ConsoleGame extends Game {
      * runDay serves as the code inside the main game loop.
      */
     public void runDay() {
-        int dayNum = this.getCurrentDay() + 1;  // + 1 so it starts at 1 - looks better
-        System.out.println("\nWhat are you going to do today? (Day " + dayNum + ")");
+        System.out.println("\nWhat are you going to do today? (Day " + (Game.getInstance().getCurrentDay() + 1) + ")");
         String input = ConsoleGame.scanner.nextLine();
         this.runInput(input);
     }
@@ -68,39 +62,47 @@ public class ConsoleGame extends Game {
      *
      * "end game" finishes the game, even if not all days are completed.
      *
-     * @param userInput Input string
+     * @param userInput String string
      */
     private void runInput(String userInput) {
-        switch(userInput.toLowerCase()) {
-            case "help":
-                // I am well aware this is not the best way to do this but that's okay
-                // This won't be in the final build
-                System.out.println("Commands:\nend game\nend day\nview farm name\n" +
-                        "view farmer name\nview game length");
-                break;
-            case "end game":
-                this.end();
-                break;
-            case "end day":
-                Game.increaseDayCounter();
-                break;
-            case "view farm name":
-                System.out.println(Game.farm.getName());
-                break;
-            case "view farm":
-                break;
-            case "view farmer name":
-                System.out.println(Game.farmer.getName());
-                break;
-            case "view game length":
-                System.out.println(this.getGameLength() + " days");
-                break;
-            case "visit store":
-                ConsoleGame.visitStore();
-                break;
-            default:
-                System.out.println("Unknown action: " + userInput);
-        }
+    	Game.Actions input = Actions.HELP;
+    	
+    	try {
+			input = inputParser(userInput);
+		} catch (InvalidActionException e) {
+			System.out.println("Unknown Command:" + e.getMessage());
+		}
+    	
+    	try {
+			ActionHandler.handle(input);
+		} catch (OutOfActionsException e) {
+			System.out.println(e.getMessage());
+		}
+    }
+   
+    private Game.Actions inputParser(String input) throws InvalidActionException {
+    	switch (input.trim().toLowerCase()) {
+    		case "tend farmland":
+    			return Actions.TEND_FARM;
+    		case "tend crops":
+    			return Actions.TEND_CROPS;
+    		case "harvest crops":
+    			return Actions.HARVEST_CROPS;
+    		case "play with animals":
+    			return Actions.PLAY_ANIMALS;
+    		case "feed animals":
+    			return Actions.FEED_ANIMALS;
+    		case "visit store":
+    			return Actions.VISIT_STORE;
+    		case "end day":
+    			return Actions.END_DAY;
+    		case "end game":
+    			return Actions.END_GAME;
+    		case "help":
+    			return Actions.HELP;
+    		default:
+    			throw new InvalidActionException(input.trim().toLowerCase());
+    	}
     }
 
     public void viewFarm() {
@@ -108,7 +110,7 @@ public class ConsoleGame extends Game {
 
     }
 
-    public static void visitStore() {
+    public void visitStore() {
         while(true) {   // Yeah i know its bad to idc
             System.out.println("What would you like to do at the store?");
             String item = ConsoleGame.scanner.nextLine().toLowerCase();
@@ -159,9 +161,29 @@ public class ConsoleGame extends Game {
         }
         System.out.println("Bought " + item);
     }
+    
+    public void displayHelp() {
+		System.out.println("Commands:\nTend Farmland\nTend Crops\nHarvest Crops\nPlay with Animals\nFeed Animals\nVisit Store\nEnd Day\nEnd Game\nHelp(this)");
+	}
 
     public static void main(String[] args) {
-        ConsoleGame game = new ConsoleGame();
+    	
+    /*regular game code
+      Scanner in = new Scanner(System.in);
+      System.out.println("How many days will the game last?: ");
+      int gameLen = Integer.parseInt(in.nextLine());
+      System.out.println("Farm name: ");
+      String farmName = in.nextLine();
+      System.out.println("Farmer name: ");
+      String farmerName = in.nextLine();
+      in.close();
+      */
+
+      // Dev test code
+    	int gameLen = 10;
+    	String farmName = "DEVFarmName";
+    	String farmerName = "DEVFarmerName";
+        ConsoleGame game = new ConsoleGame(gameLen, farmName, farmerName);
         game.run();
     }
 }

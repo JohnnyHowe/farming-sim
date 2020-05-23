@@ -16,4 +16,8 @@ public class OutOfActionsException extends Exception {
 	public OutOfActionsException() {
 		super("You are out of daily actions.");
 	}
+	
+	public OutOfActionsException(String message) {
+		super(message);
+	}
 }

@@ -78,6 +78,20 @@ public class Farm
 		cleanliness = 1;
 	}
 	
+	public double getMod(String mod) {
+		switch (mod) {
+			case "growth":
+				return growthMod;
+			case "happiness":
+				return happinessMod;
+			case "income":
+				return incomeMod;
+			default:
+				return 1;
+		}
+		
+	}
+	
 }
 
 

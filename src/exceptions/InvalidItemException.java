@@ -16,4 +16,8 @@ public class InvalidItemException extends Exception {
 	public InvalidItemException() {
 		super("You can't use that item like that!");
 	}
+	
+	public InvalidItemException(String message) {
+		super(message);
+	}
 }

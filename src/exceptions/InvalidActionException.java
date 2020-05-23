@@ -16,4 +16,8 @@ public class InvalidActionException extends Exception {
 	public InvalidActionException() {
 		super("That isn't a valid action.");
 	}
+	
+	public InvalidActionException(String message) {
+			super(message);
+	}
 }

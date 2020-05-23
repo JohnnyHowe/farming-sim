@@ -44,13 +44,13 @@ public class Animal extends FarmItem {
 	 */
 	public void endDay() {
 		health -= 1; //gets hungry
-		mood -= 0.5 / Game.farm.cleanliness; //unclean environment?
+		mood -= 0.5 / Game.getFarm().cleanliness; //unclean environment?
 		if (health == 0) { //animal dies/runs away?
-			Game.farm.removeFarmItem(this);
+			Game.getFarm().removeFarmItem(this);
 		} else if (health < 2) { //animal hungry/hurt so gets uspet
 			mood -= 1;
 		}
-		Game.farmer.addMoney(dailyProfit * health * mood);
+		Game.getFarmer().addMoney(dailyProfit * health * mood);
 	}
 	
 	/**
@@ -74,7 +74,7 @@ public class Animal extends FarmItem {
     public void feed(Item item) throws InvalidItemException {
     	if (item.getEffect().equals("health")) {
     		this.health += item.getMod() * 1; //fed with item
-    		Game.farm.removeFarmItem(item);
+    		Game.getFarm().removeFarmItem(item);
     	} else {
     		throw new InvalidItemException();
     	} 
@@ -87,7 +87,7 @@ public class Animal extends FarmItem {
      * play(Item item) to play with an item
      */
 	public void play() {
-		this.mood += 1 * Game.farm.happinessMod ; //play with animals/pat
+		this.mood += 1 * Game.getFarm().happinessMod ; //play with animals/pat
 	}
 	
     /**
@@ -100,8 +100,8 @@ public class Animal extends FarmItem {
      */
 	public void play(Item item) throws InvalidItemException {
     	if (item.getEffect().equals("mood")) {
-    		this.mood += item.getMod() * 1 * Game.farm.happinessMod; //played with item/brushed animal
-    		Game.farm.removeFarmItem(item);
+    		this.mood += item.getMod() * 1 * Game.getFarm().happinessMod; //played with item/brushed animal
+    		Game.getFarm().removeFarmItem(item);
     	} else {
     		throw new InvalidItemException();
     	} 

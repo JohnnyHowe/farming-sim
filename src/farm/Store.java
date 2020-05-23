@@ -5,6 +5,7 @@ import java.util.Dictionary;
 
 import animals.Animal;
 import crops.Crop;
+import exceptions.InsufficientFundsException;
 import game.Game;
 import items.Item;
 
@@ -108,14 +109,15 @@ public class Store {
      * @param farm Farm to send item to
      * @param itemName Name of FarmItem to buy
      * @return Whether the purchase was successful
+     * @throws InsufficientFundsException 
      */
-    public boolean buy(Farmer farmer, Farm farm, String itemName) {
+    public boolean buy(Farmer farmer, Farm farm, String itemName) throws InsufficientFundsException {
         FarmItem item = this.getFarmItemInfo(itemName);
         if (farmer.hasFunds(item.getBuyPrice())) {
             farmer.spendMoney(item.getBuyPrice());
-            Game.farm.addFarmItem(ItemFactory.GetNew(itemName));
+            Game.getFarm().addFarmItem(ItemFactory.GetNew(itemName));
         } else {
-            System.out.println("Insufficient funds for item " + itemName);
+            throw new InsufficientFundsException();
         }
 
         return false;

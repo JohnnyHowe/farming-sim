@@ -15,6 +15,10 @@ public class InsufficientFundsException extends Exception {
 	 * 
 	 */
 	public InsufficientFundsException() {
-		super("That isn't a valid action.");
+		super("You don't have enough money for that!");
+	}
+	
+	public InsufficientFundsException(String message) {
+		super(message);
 	}
 }

@@ -159,7 +159,17 @@ public class GUIGame extends Game {
         game.run();
     }
 
-    public static void visitStore() {
+    public void visitStore() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void end() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	protected void displayHelp() {
 		// TODO Auto-generated method stub
 		
 	}

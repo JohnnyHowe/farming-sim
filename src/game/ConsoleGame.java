@@ -1,6 +1,5 @@
 package game;
 import java.util.Scanner;
-import crops.Crop;
 import exceptions.InvalidActionException;
 import exceptions.OutOfActionsException;
 
@@ -131,17 +130,21 @@ public class ConsoleGame extends Game {
      * Show the available store items
      */
     private static void viewStore() {
+    	;/*
         System.out.println("Crops:");
         for (String name : Game.getStore().getCropNames()) {
             Crop crop = Game.getStore().getCrop(name);
             System.out.println(crop.getName() + " ($" + crop.getBuyPrice() + ")");
         }
+        */
     }
 
     /**
      * Ask the user what they want to buy
      */
     private static void buyItem() {
+    	;
+    	/*
         boolean done = false;
         String item = "";
 
@@ -149,7 +152,7 @@ public class ConsoleGame extends Game {
             System.out.println("What would you like to buy?");
             item = ConsoleGame.scanner.nextLine().toLowerCase();
 
-            if (Game.getStore().getCropNamesLowerCase().contains(item) || item.equals("nothing")) {
+            if (Game.getStore().getCropNames().contains(item) || item.equals("nothing")) {
                 done = true;
             } else {
                 System.out.println("Unknown item: " + item);
@@ -157,6 +160,7 @@ public class ConsoleGame extends Game {
             }
         }
         System.out.println("Bought " + item);
+        */
     }
     
     /**

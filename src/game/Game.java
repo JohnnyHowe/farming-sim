@@ -3,6 +3,7 @@ package game;
 import farm.Farm;
 import farm.Farmer;
 import farm.Store;
+import game.guiGame.introScreen;
 
 
 /**
@@ -11,7 +12,7 @@ import farm.Store;
  * Acts as a superclass to build logic off of for different i/o methods.
  * @author Alex Burling(arb142), Jonathon Howe(joh29)
  * @see ConsoleGame
- * @see GUIGame
+ * @see introScreen
  */
 public abstract class Game {
 	

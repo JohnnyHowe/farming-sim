@@ -5,6 +5,7 @@ import java.util.Hashtable;
 
 import animals.*;
 import crops.*;
+import farm.FarmItem.FarmItems;
 import items.*;
 
 /**
@@ -20,12 +21,12 @@ public abstract class ItemFactory {
 	 * the game, keyed with a String that is the Animal's "name"
 	 * @return Dictionary<String, Animal> a dictionary containing every Animal object
 	 */
-	public static Dictionary<String, Animal> GetAllAnimals() {
-		Dictionary<String, Animal> allAnimals = new Hashtable<String, Animal>();
+	public static Dictionary<FarmItems, Animal> GetAllAnimals() {
+		Dictionary<FarmItems, Animal> allAnimals = new Hashtable<FarmItems, Animal>();
 
-		allAnimals.put(Cow.COW_NAME, new Cow());
-		allAnimals.put(Sheep.SHEEP_NAME, new Sheep());
-		allAnimals.put(Chicken.CHICKEN_NAME, new Chicken());
+		allAnimals.put(FarmItems.COW, new Cow());
+		allAnimals.put(FarmItems.SHEEP, new Sheep());
+		allAnimals.put(FarmItems.CHICKEN, new Chicken());
 
 		return allAnimals;
 	}
@@ -35,15 +36,15 @@ public abstract class ItemFactory {
 	 * the game, keyed with a String that is the Crops's "name"
 	 * @return Dictionary<String, Crop> a dictionary containing every Crop object
 	 */
-	public static Dictionary<String, Crop> GetAllCrops() {
-		Dictionary<String, Crop> allCrops = new Hashtable<String, Crop>();
+	public static Dictionary<FarmItems, Crop> GetAllCrops() {
+		Dictionary<FarmItems, Crop> allCrops = new Hashtable<FarmItems, Crop>();
 
-		allCrops.put(Wheat.WHEAT_NAME, new Wheat());
-		allCrops.put(SugarCane.CANE_NAME, new SugarCane());
-		allCrops.put(Cactus.CACTUS_NAME, new Cactus());
-		allCrops.put(Mushroom.MUSH_NAME, new Mushroom());
-		allCrops.put(Melon.MELON_NAME, new Melon());
-		allCrops.put(Pumpkin.PUMP_NAME, new Pumpkin());
+		allCrops.put(FarmItems.WHEAT, new Wheat());
+		allCrops.put(FarmItems.SUGAR_CANE, new SugarCane());
+		allCrops.put(FarmItems.CACTUS, new Cactus());
+		allCrops.put(FarmItems.MUSHROOM, new Mushroom());
+		allCrops.put(FarmItems.MELON, new Melon());
+		allCrops.put(FarmItems.PUMPKIN, new Pumpkin());
 
 		return allCrops;
 	}
@@ -53,13 +54,15 @@ public abstract class ItemFactory {
 	 * the game, keyed with a String that is the Items's "name"
 	 * @return Dictionary<String, Item> a dictionary containing every Item object
 	 */
-	public static Dictionary<String, Item> GetAllItems() {
-		Dictionary<String, Item> allItems = new Hashtable<String, Item>();
+	public static Dictionary<FarmItems, Item> GetAllItems() {
+		Dictionary<FarmItems, Item> allItems = new Hashtable<FarmItems, Item>();
 
-		allItems.put(Bonemeal.BONE_NAME, new Bonemeal());//test items
-		allItems.put(Brush.BRUSH_NAME, new Brush());
-		allItems.put(AnimalFeed.FEED_NAME, new AnimalFeed());
-		allItems.put(GolemRose.ROSE_NAME, new GolemRose());
+		allItems.put(FarmItems.GRAIN, new Grain());
+		allItems.put(FarmItems.FEED_BAG, new FeedBag());
+		allItems.put(FarmItems.BONEMEAL, new Bonemeal());//test items
+		allItems.put(FarmItems.FERTILISER, new Fertiliser());
+		allItems.put(FarmItems.BRUSH, new Brush());
+		allItems.put(FarmItems.SHAMPOO, new Shampoo());
 
 		return allItems;
 	}
@@ -72,7 +75,7 @@ public abstract class ItemFactory {
 	 * @return FarmItem the corresponding requested FarmItem
 	 */
 	public static FarmItem GetNew(FarmItem item) {
-		return GetNew(item.getName().toString());
+		return GetNew(item.getEnum());
 	}
 
 	/**
@@ -83,51 +86,54 @@ public abstract class ItemFactory {
 	 * @param name name of item to create (eg. "Wheat")
 	 * @return FarmItem the corresponding requested FarmItem
 	 */
-	public static FarmItem GetNew(String name) {
+	public static FarmItem GetNew(FarmItems name) {
 		switch (name) {
-			case AnimalFeed.FEED_NAME:
-				return new AnimalFeed();
-			case Bonemeal.BONE_NAME:
-				return new Bonemeal();
-			case Brush.BRUSH_NAME:
-				return new Brush();
-			case Cactus.CACTUS_NAME:
-				return new Cactus();
-			case Chicken.CHICKEN_NAME:
-				return new Chicken();
-			case Cow.COW_NAME:
+			case COW:
 				return new Cow();
-			case GolemRose.ROSE_NAME:
-				return new GolemRose();
-			case Melon.MELON_NAME:
-				return new Melon();
-			case Mushroom.MUSH_NAME:
-				return new Mushroom();
-			case Pumpkin.PUMP_NAME:
-				return new Pumpkin();
-			case Sheep.SHEEP_NAME:
+				
+			case SHEEP:
 				return new Sheep();
-			case SugarCane.CANE_NAME:
-				return new SugarCane();
-			case Wheat.WHEAT_NAME:
-				return new Wheat();
+				
+			case CHICKEN:
+				return new Chicken();
+				
+			case CACTUS:
+				return new Cactus();
+				
+			case MELON:
+				return new Melon();
+				
+			case MUSHROOM:
+				return new Mushroom();
+				
+			case PUMPKIN:
+				return new Pumpkin();
 			
+			case SUGAR_CANE:
+				return new SugarCane();
+				
+			case WHEAT:
+				return new Wheat();
+				
+			case GRAIN:
+				return new Grain();
+				
+			case FEED_BAG:
+				return new FeedBag();
+				
+			case BONEMEAL:
+				return new Bonemeal();
+				
+			case FERTILISER:
+				return new Fertiliser();
+			
+			case BRUSH:
+				return new Brush();
+				
+			case SHAMPOO:
+				return new Shampoo();
 		}
 		System.out.println("Couldn't find item " + name);
 		return new Wheat(); //must return a FarmItem as stated in function def
-	}
-	
-	/*
-	 * Short temporary test case
-	 */
-	public static void main(String[] args) {
-		FarmItem a = new Bonemeal();
-		FarmItem b = ItemFactory.GetNew(a);
-		FarmItem c = ItemFactory.GetNew(Bonemeal.BONE_NAME);
-		System.out.println(a);//should see three different bonemeal objects
-		System.out.println(b);
-		System.out.println(c);
-		FarmItem d = ItemFactory.GetNew("aaa");
-		System.out.println(d);//should recieve a stdout and a wheat object
 	}
 }

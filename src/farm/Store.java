@@ -6,7 +6,7 @@ import java.util.Dictionary;
 import animals.Animal;
 import crops.Crop;
 import exceptions.InsufficientFundsException;
-import game.Game;
+import farm.FarmItem.FarmItems;
 import items.Item;
 
 /**
@@ -15,9 +15,9 @@ import items.Item;
  */
 public class Store {
 	
-    private Dictionary<String, Crop> crops;
-    private Dictionary<String, Item> items;
-    private Dictionary<String, Animal> animals;
+    private Dictionary<FarmItems, Crop> crops;
+    private Dictionary<FarmItems, Item> items;
+    private Dictionary<FarmItems, Animal> animals;
 
 
     /**
@@ -33,27 +33,15 @@ public class Store {
      * Get the arrayList of crop names
      * @return crops
      */
-    public ArrayList<String> getCropNames() {
+    public ArrayList<FarmItems> getCropNames() {
         return Collections.list(this.crops.keys());
-    }
-
-    /**
-     * Get the arrayList of crops names (all in lower case)
-     * @return crops
-     */
-    public ArrayList<String> getCropNamesLowerCase() { //Why?????? i cant think of any reason why you would need this
-        ArrayList<String> names = new ArrayList<String>();	
-        for (String name : this.getCropNames()) {
-            names.add(name.toLowerCase());
-        }
-        return names;
     }
     
     /**
      * Get the arrayList of items
      * @return items
      */
-    public ArrayList<String> getItemNames() {
+    public ArrayList<FarmItems> getItemNames() {
     	return Collections.list(this.items.keys());
     }
     
@@ -61,7 +49,7 @@ public class Store {
      * Get the arrayList of animals
      * @return animals
      */
-    public ArrayList<String> getAnimalNames() {
+    public ArrayList<FarmItems> getAnimalNames() {
     	return Collections.list(this.animals.keys());
     }
 
@@ -104,7 +92,6 @@ public class Store {
 
     /**
      * To be called when the farmer requests to buy something.
-     * If the player doesn't have enough money, a message is displayed to the console
      * @param farmer Farmer requesting to buy item
      * @param farm Farm to send item to
      * @param itemName Name of FarmItem to buy
@@ -115,7 +102,7 @@ public class Store {
         FarmItem item = this.getFarmItemInfo(itemName);
         if (farmer.hasFunds(item.getBuyPrice())) {
             farmer.spendMoney(item.getBuyPrice());
-            Game.getFarm().addFarmItem(ItemFactory.GetNew(itemName));
+            //Game.getFarm().addFarmItem(ItemFactory.GetNew(itemName));
         } else {
             throw new InsufficientFundsException();
         }

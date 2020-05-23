@@ -7,11 +7,11 @@ package items;
  */
 public class Brush extends Item {
 	
-	public final static String BRUSH_NAME = "Brush";		
-	public final static String BRUSH_DESC = "For brushing";		
-	public final static float BRUSH_PRICE = 2;			
-	public final static String BRUSH_EFFECT = "mood";	
-	public final static float BRUSH_MULT = 2;		
+	private final static String BRUSH_NAME = "Brush";		
+	private final static String BRUSH_DESC = "For brushing";		
+	private final static float BRUSH_PRICE = 2;			
+	private final static String BRUSH_EFFECT = "mood";	
+	private final static float BRUSH_MULT = 2;		
 	
 	/**
 	 * Constructs the Brush object from public constant values defined in Brush.java.

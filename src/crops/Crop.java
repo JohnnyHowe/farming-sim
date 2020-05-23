@@ -16,7 +16,7 @@ import items.Item;
  * @see SugarCane
  * @see Wheat
  */
-public class Crop extends FarmItem {
+public abstract class Crop extends FarmItem {
 	
 
     private float grown;

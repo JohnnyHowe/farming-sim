@@ -14,6 +14,10 @@ public abstract class FarmItem {
 
 	private float sellPrice;
 	private float purchasePrice;
+	private FarmItems selfEnum;
+	
+	public static enum FarmItems {COW, SHEEP, CHICKEN, CACTUS, MELON, MUSHROOM, PUMPKIN, SUGAR_CANE, WHEAT,
+		GRAIN, FEED_BAG, BONEMEAL, FERTILISER, BRUSH, SHAMPOO};
 
 	/**
 	 * 
@@ -21,11 +25,12 @@ public abstract class FarmItem {
 	 * @param description FarmItem description, used when viewing status of item
 	 * @param price FarmItem price, used when buying or selling to store
 	 */
-	public FarmItem (String name, String description, float price) {
+	public FarmItem (String name, String description, float price, FarmItems selfEnum) {
 		this.name = name;
 		this.description = description;
 		this.sellPrice = price / 2;
 		this.purchasePrice = price;
+		this.selfEnum = selfEnum;
 	}
 
 	/**
@@ -66,6 +71,10 @@ public abstract class FarmItem {
 	 * implements it's own endDay() with the correct outcome.
 	 */
 	public abstract void endDay();
+
+	public FarmItems getEnum() {
+		return selfEnum;
+	}
 
 
 }

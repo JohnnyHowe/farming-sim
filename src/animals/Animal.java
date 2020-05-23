@@ -6,15 +6,21 @@ import game.Game;
 import items.Item;
 
 /**
- * Class for representing an Animal.
- * Animals function as a daily income and require feeding and playing with
- * to keep health and mood high.
- * @author Alex Burling(arb142), Jonathon Howe(joh29)
+ * Logic and structure superclass to construct different animals.
+ * <p>
+ * This class provides each animal with the logic and structure required, by
+ * expanding on the FarmItem structure.<br>
+ * Animals function as a daily income (rewarded at {@link #endDay}) and require 
+ * feeding and playing with to keep health and mood high.
+ * 
+ * @version 1.0
+ * @author Alex Burling(arb142)
+ * @see FarmItem
  * @see Chicken
  * @see Cow
  * @see Sheep
  */
-public class Animal extends FarmItem {
+public abstract class Animal extends FarmItem {
 	
 	private float dailyProfit;
 	private float health;
@@ -29,8 +35,8 @@ public class Animal extends FarmItem {
 	 * @param health Animal's base health, deteriorates daily, used when calculating the income from each animal
 	 * @param mood Animal's base mood, deteriorates daily, used when calculating the income from each animal
 	 */
-	public Animal(String name, String description, float price, float dailyProfit, float health, float mood) {
-		super(name, description, price);
+	public Animal(String name, String description, float price, float dailyProfit, float health, float mood, FarmItems selfEnum) {
+		super(name, description, price, selfEnum);
 		this.dailyProfit = dailyProfit;
 		this.health = health;
 		this.mood = mood;
@@ -42,6 +48,7 @@ public class Animal extends FarmItem {
 	 * checks if animal is dead or injured, and adds money earned from animal.
 	 * Implements superclass abstract method 
 	 */
+	@Override
 	public void endDay() {
 		health -= 1; //gets hungry
 		mood -= 0.5 / Game.getFarm().cleanliness; //unclean environment?

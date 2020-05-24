@@ -140,12 +140,6 @@ public class MainScreen {
      */
     public void draw(JFrame frame) {
         frame.setContentPane(new MainScreen().mainPanel);
-
-        // Test items
-        Game.getFarm().addFarmItem(new Wheat());
-//        Game.getFarm().addFarmItem(new Melon());
-//        Game.getFarm().addFarmItem(new Sheep());
-//        Game.getFarm().addFarmItem(new SugarCane());
         frame.pack();
     }
 }

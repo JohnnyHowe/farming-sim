@@ -2,6 +2,7 @@ package game.guiGame;
 
 import animals.Animal;
 import crops.*;
+import exceptions.InsufficientFundsException;
 import farm.Farm;
 import farm.FarmItem;
 import farm.ItemFactory;
@@ -20,6 +21,7 @@ public class StoreScreen {
     private JButton previousButton;
     private JLabel itemNumberLabel;
     private JLabel itemNameLabel;
+    private JButton buyButton;
 
     private JFrame frame;
     private int currentSlot = 0;
@@ -41,19 +43,33 @@ public class StoreScreen {
                 updateCurrentItem();
             }
         });
+        buyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Game.getStore().buy(getSelectedItem());
+                } catch (InsufficientFundsException error) {
+                    // Not enough money
+                }
+            }
+        });
     }
 
-    private void updateCurrentItem() {
+    private FarmItem getSelectedItem() {
         List<Crop> crops = Collections.list(ItemFactory.GetAllCrops().elements());
         List<Animal> animals = Collections.list(ItemFactory.GetAllAnimals().elements());
         List<Item> items = Collections.list(ItemFactory.GetAllItems().elements());
         if (currentSlot < crops.size()) {
-            itemNameLabel.setText(crops.get(currentSlot).getName());
+            return (FarmItem) crops.get(currentSlot);
         } else if (currentSlot < crops.size() + animals.size()) {
-            itemNameLabel.setText(animals.get(currentSlot - crops.size()).getName());
+            return (FarmItem) crops.get(currentSlot - crops.size());
         } else {
-            itemNameLabel.setText(items.get(currentSlot - crops.size() - animals.size()).getName());
+            return (FarmItem) crops.get(currentSlot - crops.size() - animals.size());
         }
+    }
+
+    private void updateCurrentItem() {
+        itemNameLabel.setText(getSelectedItem().getName());
     }
 
     /**

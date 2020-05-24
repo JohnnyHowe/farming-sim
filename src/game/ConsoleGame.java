@@ -1,7 +1,6 @@
 package game;
 import java.util.Scanner;
 
-import crops.Wheat;
 import exceptions.InvalidActionException;
 import exceptions.OutOfActionsException;
 import farm.FarmItem;
@@ -60,19 +59,15 @@ public class ConsoleGame extends Game {
      */
     public void viewFarm() {
         System.out.println(Game.getFarm().toString());
-        System.out.println("You have " + (2 - Game.getFarmer().getActions()) + " actions left.");
+        System.out.println("It's day " + (Game.getInstance().getCurrentDay() + 1) + "/" + Game.getInstance().getGameLength() + ". You have " + 
+        (2 - Game.getFarmer().getActions()) + " actions left.");
         System.out.println("You have currently have: ");
-        Game.getFarm().addFarmItem(new Wheat());
-        try {
             for (FarmItem item: Game.getFarm().getPaddockItems()) {
             	System.out.println(item.getName());
             }
             for (FarmItem item: Game.getFarm().getConsumables()) {
             	System.out.println(item.getName());
             }
-        } catch (NullPointerException e) {
-        	System.out.println("Nothing in your inventory");
-        }
 
     }
 

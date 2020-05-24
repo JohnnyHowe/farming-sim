@@ -2,6 +2,7 @@ package farm;
 
 import java.util.ArrayList;
 
+import crops.Wheat;
 import game.Game;
 import items.Item;
 
@@ -16,8 +17,8 @@ public class Farm
 	private double happinessMod = 1; //how effective is the farmer at keeping animals happy (bonus when playing) TODO stop mood from decreasing as quickly for higher mod? 0->2
 	private double incomeMod = 1; //how effective is the farmer at marketing (increases value of money in addMoney(money) 0->2
 	private double cleanliness = 1; //how clean is the farm (effects animal mood) TODO make effect other things too? 1->0
-	private ArrayList<FarmItem> paddockItems; //farms "inventory"
-	private ArrayList<FarmItem> consumableItems;
+	private ArrayList<FarmItem> paddockItems = new ArrayList<FarmItem>(); //farms "inventory"
+	private ArrayList<FarmItem> consumableItems = new ArrayList<FarmItem>();
 	
 	/**
 	 * Gets the name of the farm
@@ -103,6 +104,11 @@ public class Farm
 				return 1;
 		}
 		
+	}
+	
+	public static void main(String[] args) {
+		ArrayList<FarmItem> paddockItems;
+		paddockItems.add(new Wheat());
 	}
 	
 }

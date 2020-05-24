@@ -16,7 +16,7 @@ public class GUIGame extends game.Game {
     }
 
     public void visitStore() {
-
+        System.out.println("At Store");
     }
 
     public void endGame() {

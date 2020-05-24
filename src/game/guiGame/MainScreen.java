@@ -47,6 +47,7 @@ public class MainScreen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Go to Store");
+                StoreScreen.make();
             }
         });
         tendFarmButton.addActionListener(new ActionListener() {
@@ -81,12 +82,6 @@ public class MainScreen {
                 changeSelectedSlot(-1);
                 updateItemNumberLabel();
                 updateCurrentItem();
-            }
-        });
-        goToFarmButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Go to Farm");
             }
         });
     }
@@ -151,7 +146,6 @@ public class MainScreen {
 //        Game.getFarm().addFarmItem(new Melon());
 //        Game.getFarm().addFarmItem(new Sheep());
 //        Game.getFarm().addFarmItem(new SugarCane());
-
         frame.pack();
     }
 }

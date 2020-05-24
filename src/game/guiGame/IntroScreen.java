@@ -21,6 +21,10 @@ public class IntroScreen {
     private JTextField farmerNameField;
     private JLabel farmerNameLabel;
 
+    public static String finalFarmerName;
+    public static String finalFarmName;
+    public static int finalDays;
+
     public static boolean startGame = false;
 
     public IntroScreen() {
@@ -81,6 +85,12 @@ public class IntroScreen {
         return farmNameField.getText();
     }
 
+    public void setFinals(String farmerName, String farmName, int days) {
+        finalFarmerName = farmerName;
+        finalFarmName = farmName;
+        finalDays = days;
+    }
+
     private void createUIComponents() {
         daysSlider = new JSlider(JSlider.HORIZONTAL, 1, 20, 10);
         daysSlider.setMajorTickSpacing(5);
@@ -88,14 +98,15 @@ public class IntroScreen {
         daysSlider.setPaintTicks(true);
         daysSlider.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
-                dayNumberLabel.setText(Integer.toString(daysSlider.getValue()));
+                dayNumberLabel.setText(Integer.toString(getNumDays()));
             }
         });
 
         nextButton = new JButton("Next");
         nextButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                startGame = true;
+                setFinals(getFarmerName(), getFarmName(), getNumDays());
+                startGame = checkName(getFarmName()) && checkName(getFarmerName());
             }
         });
     }

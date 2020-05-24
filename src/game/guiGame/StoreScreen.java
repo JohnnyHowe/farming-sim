@@ -25,6 +25,8 @@ public class StoreScreen {
     private JLabel itemCostLabel;
     private JLabel itemSellLabel;
     private JLabel moneyLabel;
+    private JLabel brokeLabel;
+    private JLabel itemDescLabel;
 
     private JFrame frame;
     private int currentSlot = 0;
@@ -51,10 +53,10 @@ public class StoreScreen {
             public void actionPerformed(ActionEvent e) {
                 try {
                     Game.getStore().buy(getSelectedItem());
-                    moneyLabel.setText("Money: $" + Game.getFarmer().getMoney());
                 } catch (InsufficientFundsException error) {
-                    // Not enough money
+                    brokeLabel.setVisible(true);
                 }
+                updateMoneyLabel();
             }
         });
     }
@@ -72,11 +74,16 @@ public class StoreScreen {
         }
     }
 
+    private void updateMoneyLabel() {
+        moneyLabel.setText("Money: $" + Game.getFarmer().getMoney());
+    }
+
     private void updateCurrentItem() {
         FarmItem selection = getSelectedItem();
         itemNameLabel.setText(selection.getName());
         itemCostLabel.setText("Buy Price: $" + selection.getBuyPrice());
         itemSellLabel.setText("Sell Price: $" + selection.getSellPrice());
+        itemDescLabel.setText("<html>" + selection.getDescription() + "</html>");
     }
 
     /**
@@ -85,6 +92,7 @@ public class StoreScreen {
      * @param change
      */
     private void changeSelectedSlot(int change) {
+        brokeLabel.setVisible(false);
         currentSlot = Math.max(Math.min(currentSlot + change, 14), 0);
         previousButton.setEnabled(true);
         nextButton.setEnabled(true);

@@ -35,6 +35,7 @@ public class MainScreen {
     private JButton goToFarmButton;
     private JPanel titlePanel;
     private JLabel gamePanelTitle;
+    private JButton endDayButton;
 
     private JPanel paddockPanel;
 
@@ -66,6 +67,7 @@ public class MainScreen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("End Game");
+//                Game.getInstance().endGame();
             }
         });
         nextButton.addActionListener(new ActionListener() {
@@ -84,6 +86,11 @@ public class MainScreen {
                 updateCurrentItem();
             }
         });
+//        endDayButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//            }
+//        });
     }
 
     /**
@@ -128,6 +135,12 @@ public class MainScreen {
         } else if (currentSlot == 8) {
             nextButton.setEnabled(false);
         }
+    }
+
+    private void setInfoPanel() {
+        daysLabel.setText("Day: " + Game.getInstance().getCurrentDay());
+//        actionsLeftLabel.setText(Game.getInstance().get());
+        farmerInfoLabel.setText("Farmer " + Game.getFarmer().getName() + " on farm " + Game.getFarm().getName());
     }
 
     /**

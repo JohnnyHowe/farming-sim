@@ -3,7 +3,7 @@ package game;
 import farm.Farm;
 import farm.Farmer;
 import farm.Store;
-import game.guiGame.introScreen;
+import game.guiGame.IntroScreen;
 
 
 /**
@@ -12,7 +12,7 @@ import game.guiGame.introScreen;
  * Acts as a superclass to build logic off of for different i/o methods.
  * @author Alex Burling(arb142), Jonathon Howe(joh29)
  * @see ConsoleGame
- * @see introScreen
+ * @see IntroScreen
  */
 public abstract class Game {
 	
@@ -51,9 +51,13 @@ public abstract class Game {
      */
     public Game(int length) {
     	gameLength = length;
-    	gameInstance = this;
+    	setInstance(this);
     }
-    
+
+    public static void setInstance(Game instance) {
+        gameInstance = instance;
+    }
+
     /**
      * Instance access function for singleton Game object.
      * Note, this will never be the Game class, always a subclass of Game.
@@ -104,7 +108,6 @@ public abstract class Game {
     }
 
     
-    
     /*=============================
      * BASIC LOGIC GETS & SETS
      * ============================
@@ -116,6 +119,14 @@ public abstract class Game {
      */
     public int getCurrentDay() {
         return Game.currentDay;
+    }
+
+    /**
+     * Sets the game length
+     * @param length game length in days
+     */
+    public void setGameLength(int length) {
+        Game.gameLength = length;
     }
 
     /**

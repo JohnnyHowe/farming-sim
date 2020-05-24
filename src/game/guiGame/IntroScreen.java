@@ -28,31 +28,19 @@ public class IntroScreen {
     public static boolean startGame = false;
 
     public IntroScreen() {
-//        nextButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-                // Is the name valid?
-//                endLoop();
-//                if (checkName(getFarmerName()) && checkName(getFarmName())) {
-//                    endLoop();
-//                } else {
-//                    System.out.println("Bad name lol");
-//                }
-//            }
-//        });
     }
 
     public void endLoop() {
         IntroScreen.startGame = true;
     }
 
-    public void run() {
-        JFrame frame = new JFrame("Farming Simulator");
-        frame.setSize(600, 600);
-        frame.setContentPane(new IntroScreen().mainPanel);
+    public void run(JFrame frame) {
+//        JFrame frame = new JFrame("Farming Simulator");
+//        frame.setSize(600, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
         frame.setVisible(true);
+        frame.setContentPane(new IntroScreen().mainPanel);
+        frame.pack();
 
         // Intro screen loop
         while (!startGame) {

@@ -14,6 +14,7 @@ public class MainScreen {
     private JButton visitStoreButton;
     private JPanel mainPanel;
     private JLabel farmerInfoLabel;
+    private JLabel actionsLeftLabel;
 
     public MainScreen() {
         visitStoreButton.addActionListener(new ActionListener() {

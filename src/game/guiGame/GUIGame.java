@@ -1,7 +1,6 @@
 package game.guiGame;
 
 
-import crops.Wheat;
 import game.Game;
 
 import javax.swing.*;
@@ -36,18 +35,28 @@ public class GUIGame extends game.Game {
         this.endGame();
     }
 
-    private void runGUI() {
+    public static void main(String[] args) {
+        // Make frame
+        new GUIGame();
         JFrame frame = new JFrame("Farming Simulator");
+        frame.setSize(600, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
-        IntroScreen introScreen = new IntroScreen();
-        introScreen.draw(frame);
-    }
+        // Intro screen
+//        IntroScreen introScreen = new IntroScreen();
+//        introScreen.run(frame);
+//        Game.getInstance().setGameLength(introScreen.finalDays);
+//        Game.getInstance().getFarmer().setName(introScreen.finalFarmerName);
+//        Game.getInstance().getFarm().setName(introScreen.finalFarmName);
+        Game.getInstance().setGameLength(10);
+        Game.getInstance().getFarmer().setName("RC");
+        Game.getInstance().getFarm().setName("Ur Mom");
 
-    public static void main(String[] args) {
-        // Make frame
-        GUIGame game = new GUIGame();
-        game.runGUI();
+        // Run game
+        MainScreen mainScreen = new MainScreen();
+        frame.getContentPane().removeAll();
+        frame.repaint();
+        mainScreen.draw(frame);
     }
 }

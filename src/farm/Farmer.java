@@ -65,6 +65,10 @@ public class Farmer
 		name = newName;
 	}
 	
+	public float getMoney() {
+		return money;
+	}
+	
 	/**
 	 * Adds to farmer's money
 	 * Note, money is multiplied by farm's incomeMod before adding to total.

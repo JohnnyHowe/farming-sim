@@ -5,7 +5,6 @@ import exceptions.InvalidActionException;
 import exceptions.OutOfActionsException;
 import farm.FarmItem;
 
-
 /**
  * Game sub class - acts as game environment. Built on a pseudo singleton structure,
  * handles the creation of each other singleton within the simulator.
@@ -16,7 +15,7 @@ import farm.FarmItem;
 public class ConsoleGame extends Game {
 
     private static Scanner scanner;
-    private static boolean atStore;
+    public static boolean atStore;
 
     /**
      * Constructor for ConsoleGame, same as super however initializes and stores a scanner
@@ -47,28 +46,19 @@ public class ConsoleGame extends Game {
     }
     
     private void printInfo() {
-    	viewFarm();
-    	
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	/**
-     * Prints farm as a string to console
-     */
-    public void viewFarm() {
         System.out.println(Game.getFarm().toString());
-        System.out.println("It's day " + (Game.getInstance().getCurrentDay() + 1) + "/" + Game.getInstance().getGameLength() + ". You have " + 
-        (2 - Game.getFarmer().getActions()) + " actions left.");
-        System.out.println("You have currently have: ");
-            for (FarmItem item: Game.getFarm().getPaddockItems()) {
-            	System.out.println(item.getName());
-            }
-            for (FarmItem item: Game.getFarm().getConsumables()) {
-            	System.out.println(item.getName());
-            }
-
+        System.out.println("It's day " + (Game.getInstance().getCurrentDay() + 1) + "/" + Game.getInstance().getGameLength() + 
+        		". You have $" + Game.getFarmer().getMoney() + " and " +
+        (2 - Game.getFarmer().getActions()) + " action(s) left.");
+        System.out.println("You have 9 paddocks, which contain: ");
+        for (FarmItem item: Game.getFarm().getPaddockItems()) {
+            System.out.println(item.getName());
+        }
+        System.out.println();
+        System.out.println("You have the following consumables:");
+        for (FarmItem item: Game.getFarm().getConsumables()) {
+            System.out.println(item.getName());
+        }
     }
 
     /**
@@ -104,49 +94,60 @@ public class ConsoleGame extends Game {
      */
     private Game.Actions inputParser(String input) throws InvalidActionException {
     	switch (input.replace(" ", "").toLowerCase()) {
-    		case "tendfarmland":
-    			return Actions.TEND_FARM;
-    		case "tendcrops":
-    			return Actions.TEND_CROPS;
-    		case "harvestcrops":
-    			return Actions.HARVEST_CROPS;
-    		case "playwanimals":
-    			return Actions.PLAY_ANIMALS;
-    		case "feedanimals":
-    			return Actions.FEED_ANIMALS;
-    		case "visitstore":
-    			return Actions.VISIT_STORE;
-    		case "endday":
-    			return Actions.END_DAY;
-    		case "endgame":
-    			return Actions.END_GAME;
-    		case "help":
-    			return Actions.HELP;
-    		case "farmstatus":
-    			return Actions.INFO;
-    		default:
-    			throw new InvalidActionException(input.replace(" ", "").toLowerCase());
+    		case "tendfarmland": return Actions.TEND_FARM;
+    		
+    		case "tendcrops": return Actions.TEND_CROPS;
+    		
+    		case "harvestcrops": return Actions.HARVEST_CROPS;
+    		
+    		case "playwanimals": return Actions.PLAY_ANIMALS;
+    		
+    		case "feedanimals": return Actions.FEED_ANIMALS;
+    		
+    		case "visitstore": return Actions.VISIT_STORE;
+    		
+    		case "endday": return Actions.END_DAY;
+    		
+    		case "endgame": return Actions.END_GAME;
+    		
+    		case "help": return Actions.HELP;
+    		
+    		case "farmstatus": return Actions.INFO;
+    		
+    		default: throw new InvalidActionException(input.replace(" ", "").toLowerCase());
     	}
     }
 
+    private Game.StoreActions storeInputParser(String input) throws InvalidActionException {
+    	switch (input.replace(" ", "").toLowerCase()) {
+    		case "viewstock": return StoreActions.VIEW_STOCK;
+    		
+    		case "buy": return StoreActions.BUY;
+    		
+    		case "sell": return StoreActions.SELL;
+    		
+    		case "leave": return StoreActions.LEAVE;
+    		
+    		case "help": return StoreActions.HELP;
+    		
+    		default: throw new InvalidActionException(input.replace(" ", "").toLowerCase());
+    	}
+    }
+    
     public void visitStore() {
     	atStore = true;
         while(atStore) {
             System.out.println("What would you like to do at the store?");
-            String item = ConsoleGame.scanner.nextLine().toLowerCase();
-            switch (item) {
-                case "leave":
-                    return;
-                case "view items":
-                    ConsoleGame.viewStore();
-                    return;
-                case "buy":
-                	ConsoleGame.buyItem();
-                    return;
-                default:
-                    System.out.println("Unknown command.");
+            String userIn = ConsoleGame.scanner.nextLine();
+        	Game.StoreActions input = StoreActions.HELP;
+        	
+        	try {
+    			input = storeInputParser(userIn);
+    		} catch (InvalidActionException e) {
+    			System.out.println("Unknown Command:" + e.getMessage());
+    		}
+    		ActionHandler.storeHandle(input);
             }
-        }
     }
 
 
@@ -191,11 +192,15 @@ public class ConsoleGame extends Game {
      * Prints a string displaying all available commands to System.out
      */
     public void displayHelp() {
-		System.out.println("Commands:\nTend Farmland\t| Tend Crops\t| Harvest Crops\n"
-				+ "Play w Animals\t| Feed Animals\t| Visit Store\n"
-				+ "End Day\t\t| End Game\t| Help(this)\n"
+		System.out.println("Commands:\nTend Farmland\t|Tend Crops\t|Harvest Crops\n"
+				+ "Play w Animals\t|Feed Animals\t|Visit Store\n"
+				+ "End Day\t\t|End Game\t|Help(this)\n"
 				+ "Farm Status");
 	}
+    
+    public void displayStoreHelp() {
+    	System.out.println("Store Commands:\nView Stock\t|Buy\t|Sell\nLeave");
+    }
 
     public static void main(String[] args) {
     	/* console game start code

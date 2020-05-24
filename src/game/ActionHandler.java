@@ -23,91 +23,29 @@ abstract class ActionHandler {
      * an Item
 	 * @param action String represents player's action
 	 * @throws OutOfActionsException 
-	 * @throws InvalidActionException 
 	 */
 	public static void handle(Game.Actions action) throws OutOfActionsException {
 		switch (action) {
 		
-			case END_GAME:
-				Game.getInstance().endGame();
-				break;
+			case END_GAME: endGame(); break;
 				
-			case HELP:
-				Game.getInstance().displayHelp();
-				break;
+			case HELP: help(); break;
 				
-			case VISIT_STORE: //View the store
-				Game.getInstance().visitStore();
-				break;
+			case VISIT_STORE: visitStore(); break;
 				
-			case END_DAY: //End the game day
-				Game.getFarmer().resetActions();
-				Game.getInstance().increaseDayCounter();
-				for (FarmItem item : Game.getFarm().getPaddockItems()) {
-					item.endDay();
-				}
-				break;
+			case END_DAY: endDay(); break;
 				
-			case TEND_CROPS: //Tend to the crops
-				if (Game.getFarmer().canWork()) {
-					
-					for (FarmItem item : Game.getFarm().getPaddockItems()) {
-						if (item instanceof Crop) {
-							((Crop) item).tend();
-						}
-					}
-				} else {
-					throw new OutOfActionsException();
-				}
-				break;
+			case TEND_CROPS: tendCrops(); break;
 				
-			case FEED_ANIMALS: //Feed the animals
-				if (Game.getFarmer().canWork()) {
-					for (FarmItem item : Game.getFarm().getPaddockItems()) {
-						if (item instanceof Animal) {
-							((Animal) item).feed();
-						}
-					}
-				} else {
-					throw new OutOfActionsException();
-				}
-				break;
+			case FEED_ANIMALS: feedAnimals(); break;
 				
-			case PLAY_ANIMALS: //Play with the animals
-				if (Game.getFarmer().canWork()) {
-					for (FarmItem item : Game.getFarm().getPaddockItems()) {
-						if (item instanceof Animal) {
-							((Animal) item).play();
-						}
-					}
-				} else {
-					throw new OutOfActionsException();
-				}
-				break;
+			case PLAY_ANIMALS: playAnimals(); break;
 				
-			case HARVEST_CROPS: //Harvest crops
-				if (Game.getFarmer().canWork()) {
-					for (FarmItem item : Game.getFarm().getPaddockItems()) {
-						if (item instanceof Crop) {
-							((Crop) item).harvest();
-						}
-					}
-				} else {
-					throw new OutOfActionsException();
-				}
-				break;
+			case HARVEST_CROPS: harvestCrops(); break;
 				
-			case TEND_FARM: //Tend to the farmland (cleanliness)
-				if (Game.getFarmer().canWork()) {
-					Game.getFarm().cleanUp();
-					Game.getFarmer().work();
-				} else {
-					throw new OutOfActionsException();
-				}
-				break;
-				
-			default:
-				break;
+			case TEND_FARM: tendFarm(); break;
+	
+			default: break;
 		}
 	}
 		
@@ -122,6 +60,7 @@ abstract class ActionHandler {
 	 * @throws InvalidItemException
 	 */
 	public static void handle(Game.Actions action, Item consume) throws OutOfActionsException, InvalidActionException, InvalidItemException {
+
 		switch (action) {
 		case TEND_CROPS: //Tend to the crops with consumable
 			if (Game.getFarmer().canWork()) {
@@ -155,6 +94,119 @@ abstract class ActionHandler {
 			break;
 		default:
 				throw new InvalidActionException();
+		}
+	}
+	
+	public static boolean storeHandle(Game.StoreActions action) {
+		switch (action) {
+			case VIEW_STOCK: viewStock(); return true;
+			case BUY: buy(); return true;
+			case SELL: sell(); return true;
+			case HELP: helpStore(); return true;
+			case LEAVE: ;return false;
+			default: return false;}
+	}
+
+	private static void helpStore() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void sell() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void buy() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void viewStock() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private static void endGame() {
+		Game.getInstance().endGame();
+	}
+	
+	private static void help() {
+		Game.getInstance().displayHelp();
+	}
+	
+	private static void visitStore() {
+		Game.getInstance().visitStore();
+	}
+	
+	private static void endDay() {
+		Game.getFarmer().resetActions();
+		Game.getInstance().increaseDayCounter();
+		Game.getFarm().endDay();
+		for (FarmItem item : Game.getFarm().getPaddockItems()) {
+			item.endDay();
+		}
+	}
+	
+	private static void tendCrops() throws OutOfActionsException {
+		if (Game.getFarmer().canWork()) {
+			
+			for (FarmItem item : Game.getFarm().getPaddockItems()) {
+				if (item instanceof Crop) {
+					((Crop) item).tend();
+				}
+			}
+			Game.getFarmer().work();
+		} else {
+			throw new OutOfActionsException();
+		}
+	}
+	
+	private static void feedAnimals() throws OutOfActionsException {
+		if (Game.getFarmer().canWork()) {
+			for (FarmItem item : Game.getFarm().getPaddockItems()) {
+				if (item instanceof Animal) {
+					((Animal) item).feed();
+				}
+			}
+			Game.getFarmer().work();
+		} else {
+			throw new OutOfActionsException();
+		}
+	}
+	
+	private static void playAnimals() throws OutOfActionsException {
+		if (Game.getFarmer().canWork()) {
+			for (FarmItem item : Game.getFarm().getPaddockItems()) {
+				if (item instanceof Animal) {
+					((Animal) item).play();
+				}
+			}
+			Game.getFarmer().work();
+		} else {
+			throw new OutOfActionsException();
+		}
+	}
+	
+	private static void harvestCrops() throws OutOfActionsException {
+		if (Game.getFarmer().canWork()) {
+			for (FarmItem item : Game.getFarm().getPaddockItems()) {
+				if (item instanceof Crop) {
+					((Crop) item).harvest();
+				}
+			}
+			Game.getFarmer().work();
+		} else {
+			throw new OutOfActionsException();
+		}
+	}
+	
+	private static void tendFarm() throws OutOfActionsException {
+		if (Game.getFarmer().canWork()) {
+			Game.getFarm().cleanUp();
+			Game.getFarmer().work();
+		} else {
+			throw new OutOfActionsException();
 		}
 	}
 }

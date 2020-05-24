@@ -36,7 +36,7 @@ public abstract class Game {
      * Public enum to handle player actions at the store.
      * Contains all possible store actions.
      */
-    public enum StoreActions {VIEW_STOCK, BUY, SELL, LEAVE}
+    public enum StoreActions {VIEW_STOCK, BUY, SELL, LEAVE, HELP}
     
    
     /*=============================

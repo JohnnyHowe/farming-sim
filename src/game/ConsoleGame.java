@@ -1,8 +1,6 @@
 package game;
 import java.util.Scanner;
 
-import crops.Wheat;
-import exceptions.InsufficientFundsException;
 import exceptions.InvalidActionException;
 import exceptions.OutOfActionsException;
 import farm.FarmItem;
@@ -16,8 +14,7 @@ import farm.FarmItem;
  */
 public class ConsoleGame extends Game {
 
-    private static Scanner scanner;
-    public static boolean atStore;
+    public static Scanner scanner;
 
     /**
      * Constructor for ConsoleGame, same as super however initializes and stores a scanner
@@ -28,65 +25,19 @@ public class ConsoleGame extends Game {
         ConsoleGame.scanner = new Scanner(System.in);
     }
 
-
-    /**
-     * Prints the end game string to the console.
-     * String in the form "You ended the game with {points} points."
-     * points is the returned value from the getScore method.
-     */
-    public void endGame() {
-        System.out.println("You ended the game with " + ConsoleGame.getInstance().getScore() + " points.");
-        System.exit(0);
-    }
-
     /**
      * runDay serves as the code inside the main game loop.
      */
     public void runDay() {
+    	if (atStore) {
+    		System.out.println("\nWhat would you like to do at the store?");
+    		Game.getStore().handleInput();
+    	} else {
         System.out.println("\nWhat are you going to do today? (Day " + (Game.getInstance().getCurrentDay() + 1) + ")");
         handleInput();
-    }
-    
-    private void printInfo() {
-        System.out.println(Game.getFarm().toString());
-        System.out.println("It's day " + (Game.getInstance().getCurrentDay() + 1) + "/" + Game.getInstance().getGameLength() + 
-        		". You have $" + Game.getFarmer().getMoney() + " and " +
-        (2 - Game.getFarmer().getActions()) + " action(s) left.");
-        System.out.println("You have 9 paddocks, which contain: ");
-        for (FarmItem item: Game.getFarm().getPaddockItems()) {
-            System.out.println(item.getName());
-        }
-        System.out.println();
-        System.out.println("You have the following consumables:");
-        for (FarmItem item: Game.getFarm().getConsumables()) {
-            System.out.println(item.getName());
-        }
-    }
-
-    /**
-     * Takes user input from commandline, parses, and handles action
-     * accordingly. Catches relevant exceptions.
-     */
-    private void handleInput() {
-        String userIn = ConsoleGame.scanner.nextLine();
-    	Game.Actions input = Actions.HELP;
-    	
-    	try {
-			input = inputParser(userIn);
-		} catch (InvalidActionException e) {
-			System.out.println("Unknown Command:" + e.getMessage());
-		}
-    	if (input == Actions.INFO) {
-    		printInfo();
-    	} else {
-        	try {
-    			ActionHandler.handle(input);
-    		} catch (OutOfActionsException e) {
-    			System.out.println(e.getMessage());
-    		}
     	}
     }
-   
+    
     /**
      * Handles dirty user input 
      * @param input String input from scanner in
@@ -120,9 +71,59 @@ public class ConsoleGame extends Game {
     	}
     }
     
-    public void visitStore() {
-    	Game.getStore();
+    /**
+     * Takes user input from commandline, parses, and handles action
+     * accordingly. Catches relevant exceptions.
+     */
+    private void handleInput() {
+        String userIn = ConsoleGame.scanner.nextLine();
+    	Game.Actions input = Actions.HELP;
+    	
+    	try {
+			input = inputParser(userIn);
+		} catch (InvalidActionException e) {
+			System.out.println("Unknown Command:" + e.getMessage());
+		}
+    	
+    	if (input == Actions.INFO) {
+    		printInfo();
+    	} else {
+    		
+        	try {
+    			ActionHandler.handle(input);
+    		} catch (OutOfActionsException e) {
+    			System.out.println(e.getMessage());
+    		}
+        	
+    	}
     }
+   
+    /**
+     * Prints the end game string to the console.
+     * String in the form "You ended the game with {points} points."
+     * points is the returned value from the getScore method.
+     */
+    public void endGame() {
+        System.out.println("You ended the game with " + ConsoleGame.getInstance().getScore() + " points.");
+        System.exit(0);
+    }
+
+    private void printInfo() {
+        System.out.println(Game.getFarm().toString());
+        System.out.println("It's day " + (Game.getInstance().getCurrentDay() + 1) + "/" + Game.getInstance().getGameLength() + 
+        		". You have $" + Game.getFarmer().getMoney() + " and " +
+        (2 - Game.getFarmer().getActions()) + " action(s) left.");
+        System.out.println("You have 9 paddocks, which contain: ");
+        for (FarmItem item: Game.getFarm().getPaddockItems()) {
+            System.out.println(item.getName());
+        }
+        System.out.println();
+        System.out.println("You have the following consumables:");
+        for (FarmItem item: Game.getFarm().getConsumables()) {
+            System.out.println(item.getName());
+        }
+    }
+
     
     /**
      * Prints a string displaying all available commands to System.out
@@ -151,12 +152,6 @@ public class ConsoleGame extends Game {
     	new ConsoleGame(10);
     	Game.getFarm().setName("DEVFarmName");
     	Game.getFarmer().setName("DEVFarmerName");
-    	try {
-			Game.getStore().buy(new Wheat());
-		} catch (InsufficientFundsException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
         Game.getInstance().run();
     }
 

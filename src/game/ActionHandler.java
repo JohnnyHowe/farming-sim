@@ -14,7 +14,7 @@ import items.Item;
  * for player actions
  * @author Alex Burling(arb142)
  */
-abstract class ActionHandler {
+public abstract class ActionHandler {
 	
 	/**
 	 * Handles all of the actions a player can take
@@ -31,7 +31,7 @@ abstract class ActionHandler {
 				
 			case HELP: help(); break;
 				
-			case VISIT_STORE: visitStore(); break;
+			case VISIT_STORE: Game.getInstance().atStore(true); break;
 				
 			case END_DAY: endDay(); break;
 				
@@ -97,14 +97,15 @@ abstract class ActionHandler {
 		}
 	}
 	
-	public static boolean storeHandle(Game.StoreActions action) {
+	public static void storeHandle(Game.StoreActions action) {
 		switch (action) {
-			case VIEW_STOCK: viewStock(); return true;
-			case BUY: buy(); return true;
-			case SELL: sell(); return true;
-			case HELP: helpStore(); return true;
-			case LEAVE: ;return false;
-			default: return false;}
+			case VIEW_STOCK: viewStock(); break;
+			case BUY: buy(); break;
+			case SELL: sell(); break;
+			case HELP: Game.getStore().displayStoreHelp(); break;
+			case LEAVE: Game.getInstance().atStore(false); break;
+			default: break;
+		}
 	}
 
 	private static void helpStore() {
@@ -133,10 +134,6 @@ abstract class ActionHandler {
 	
 	private static void help() {
 		Game.getInstance().displayHelp();
-	}
-	
-	private static void visitStore() {
-		Game.getInstance().visitStore();
 	}
 	
 	private static void endDay() {

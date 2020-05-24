@@ -23,6 +23,7 @@ public abstract class Game {
 
     private static int gameLength;     // How many days the game will last
     private static int currentDay = 0;     // Current game day
+    public static boolean atStore;
     
     /**
      * Public enum to handle player actions.
@@ -155,6 +156,9 @@ public abstract class Game {
         return 69420;
     }
     
+    public void atStore(boolean status) {
+    	atStore = status;
+    }
     
     
     /*=============================
@@ -177,12 +181,6 @@ public abstract class Game {
      * Main game loop function
      */
     protected abstract void runDay();
-
-    /**
-     * Handles store events
-     * i.e. enteres another loop until player is done in store
-     */
-	protected abstract void visitStore();
 	
 	/**
 	 * Handles ending the game

@@ -22,6 +22,9 @@ public class StoreScreen {
     private JLabel itemNumberLabel;
     private JLabel itemNameLabel;
     private JButton buyButton;
+    private JLabel itemCostLabel;
+    private JLabel itemSellLabel;
+    private JLabel moneyLabel;
 
     private JFrame frame;
     private int currentSlot = 0;
@@ -48,6 +51,7 @@ public class StoreScreen {
             public void actionPerformed(ActionEvent e) {
                 try {
                     Game.getStore().buy(getSelectedItem());
+                    moneyLabel.setText("Money: $" + Game.getFarmer().getMoney());
                 } catch (InsufficientFundsException error) {
                     // Not enough money
                 }
@@ -62,14 +66,17 @@ public class StoreScreen {
         if (currentSlot < crops.size()) {
             return (FarmItem) crops.get(currentSlot);
         } else if (currentSlot < crops.size() + animals.size()) {
-            return (FarmItem) crops.get(currentSlot - crops.size());
+            return (FarmItem) animals.get(currentSlot - crops.size());
         } else {
-            return (FarmItem) crops.get(currentSlot - crops.size() - animals.size());
+            return (FarmItem) items.get(currentSlot - crops.size() - animals.size());
         }
     }
 
     private void updateCurrentItem() {
-        itemNameLabel.setText(getSelectedItem().getName());
+        FarmItem selection = getSelectedItem();
+        itemNameLabel.setText(selection.getName());
+        itemCostLabel.setText("Buy Price: $" + selection.getBuyPrice());
+        itemSellLabel.setText("Sell Price: $" + selection.getSellPrice());
     }
 
     /**

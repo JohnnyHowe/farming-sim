@@ -6,7 +6,10 @@ import java.util.Dictionary;
 import animals.Animal;
 import crops.Crop;
 import exceptions.InsufficientFundsException;
+import exceptions.InvalidActionException;
 import farm.FarmItem.FarmItems;
+import game.Game;
+import game.Game.StoreActions;
 import items.Item;
 
 /**
@@ -98,15 +101,93 @@ public class Store {
      * @return Whether the purchase was successful
      * @throws InsufficientFundsException 
      */
-    public boolean buy(Farmer farmer, Farm farm, String itemName) throws InsufficientFundsException {
-        FarmItem item = this.getFarmItemInfo(itemName);
-        if (farmer.hasFunds(item.getBuyPrice())) {
-            farmer.spendMoney(item.getBuyPrice());
-            //Game.getFarm().addFarmItem(ItemFactory.GetNew(itemName));
+    public void buy(FarmItem item) throws InsufficientFundsException {
+        if (Game.getFarmer().hasFunds(item.getBuyPrice())) {
+            Game.getFarmer().spendMoney(item.getBuyPrice());
+            Game.getFarm().addFarmItem(ItemFactory.GetNew(item));
         } else {
             throw new InsufficientFundsException();
         }
+    }
 
-        return false;
+    /*
+     * CONSOLE SPECIFIC STORE FUNCTIONS BELOW
+     */
+    
+    /**
+     * 
+     * @param userIn
+     * @return
+     * @throws InvalidActionException
+     */
+	public StoreActions storeInputParser(String userIn) throws InvalidActionException {
+    	switch (userIn.replace(" ", "").toLowerCase()) {	    
+    		case "viewstock": return StoreActions.VIEW_STOCK;
+	    		
+	    	case "buy": return StoreActions.BUY;
+	    		
+	    	case "sell": return StoreActions.SELL;
+	    		
+	    	case "leave": return StoreActions.LEAVE;
+	    		
+	    	case "help": return StoreActions.HELP;
+	    		
+	    	default: throw new InvalidActionException(userIn.replace(" ", "").toLowerCase());
+	    }
+	}
+	
+    public void displayStoreHelp() {
+    	System.out.println("Store Commands:\nView Stock\t|Buy\t|Sell\nLeave");
+    }
+    
+    /**
+     * Show the available store items
+     */
+    private static void viewStore() {
+    	/*
+    	atStore = true;
+        while(atStore) {
+            System.out.println("What would you like to do at the store?");
+            String userIn = ConsoleGame.scanner.nextLine();
+        	Game.StoreActions input = StoreActions.HELP;
+        	
+        	try {
+    			input = Game.getStore().storeInputParser(userIn);
+    		} catch (InvalidActionException e) {
+    			System.out.println("Unknown Command:" + e.getMessage());
+    		}
+    		ActionHandler.storeHandle(input);
+            }
+    	;
+        System.out.println("Crops:");
+        for (String name : Game.getStore().getCropNames()) {
+            Crop crop = Game.getStore().getCrop(name);
+            System.out.println(crop.getName() + " ($" + crop.getBuyPrice() + ")");
+        }
+        */
+    }
+
+    /**
+     * Ask the user what they want to buy
+     */
+    private static void buyItem() {
+    	;
+    	/*
+        boolean done = false;
+        String item = "";
+
+        while (!done) {
+            System.out.println("What would you like to buy?");
+            item = ConsoleGame.scanner.nextLine().toLowerCase();
+
+            if (Game.getStore().getCropNames().contains(item) || item.equals("nothing")) {
+                done = true;
+            } else {
+                System.out.println("Unknown item: " + item);
+                System.out.println("Try an item from the following: " + Game.getStore().getCropNames());
+            }
+        }
+        System.out.println("Bought " + item);
+        */
     }
 }

@@ -83,12 +83,7 @@ public class Farmer
 	 * @param money spending amount
 	 * @return whether the money was taken
 	 */
-	public boolean spendMoney(float money) {
-		if (hasFunds(money)) {
-			money -= money;
-			return true;
-		} else {
-			return false;
-		}
+	public void spendMoney(float amount) {
+		money -= amount;
 	}
 }

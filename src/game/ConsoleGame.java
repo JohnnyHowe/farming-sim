@@ -1,6 +1,8 @@
 package game;
 import java.util.Scanner;
 
+import crops.Wheat;
+import exceptions.InsufficientFundsException;
 import exceptions.InvalidActionException;
 import exceptions.OutOfActionsException;
 import farm.FarmItem;
@@ -117,75 +119,9 @@ public class ConsoleGame extends Game {
     		default: throw new InvalidActionException(input.replace(" ", "").toLowerCase());
     	}
     }
-
-    private Game.StoreActions storeInputParser(String input) throws InvalidActionException {
-    	switch (input.replace(" ", "").toLowerCase()) {
-    		case "viewstock": return StoreActions.VIEW_STOCK;
-    		
-    		case "buy": return StoreActions.BUY;
-    		
-    		case "sell": return StoreActions.SELL;
-    		
-    		case "leave": return StoreActions.LEAVE;
-    		
-    		case "help": return StoreActions.HELP;
-    		
-    		default: throw new InvalidActionException(input.replace(" ", "").toLowerCase());
-    	}
-    }
     
     public void visitStore() {
-    	atStore = true;
-        while(atStore) {
-            System.out.println("What would you like to do at the store?");
-            String userIn = ConsoleGame.scanner.nextLine();
-        	Game.StoreActions input = StoreActions.HELP;
-        	
-        	try {
-    			input = storeInputParser(userIn);
-    		} catch (InvalidActionException e) {
-    			System.out.println("Unknown Command:" + e.getMessage());
-    		}
-    		ActionHandler.storeHandle(input);
-            }
-    }
-
-
-    /**
-     * Show the available store items
-     */
-    private static void viewStore() {
-    	;/*
-        System.out.println("Crops:");
-        for (String name : Game.getStore().getCropNames()) {
-            Crop crop = Game.getStore().getCrop(name);
-            System.out.println(crop.getName() + " ($" + crop.getBuyPrice() + ")");
-        }
-        */
-    }
-
-    /**
-     * Ask the user what they want to buy
-     */
-    private static void buyItem() {
-    	;
-    	/*
-        boolean done = false;
-        String item = "";
-
-        while (!done) {
-            System.out.println("What would you like to buy?");
-            item = ConsoleGame.scanner.nextLine().toLowerCase();
-
-            if (Game.getStore().getCropNames().contains(item) || item.equals("nothing")) {
-                done = true;
-            } else {
-                System.out.println("Unknown item: " + item);
-                System.out.println("Try an item from the following: " + Game.getStore().getCropNames());
-            }
-        }
-        System.out.println("Bought " + item);
-        */
+    	Game.getStore();
     }
     
     /**
@@ -197,29 +133,31 @@ public class ConsoleGame extends Game {
 				+ "End Day\t\t|End Game\t|Help(this)\n"
 				+ "Farm Status");
 	}
-    
-    public void displayStoreHelp() {
-    	System.out.println("Store Commands:\nView Stock\t|Buy\t|Sell\nLeave");
-    }
 
     public static void main(String[] args) {
     	/* console game start code
         Scanner in = new Scanner(System.in);
         System.out.println("How many days will the game last?: ");
-        gameInstance = new ConsoleGame(Integer.parseInt(in.nextLine()));
+        new ConsoleGame(Integer.parseInt(in.nextLine()));
         System.out.println("Farm name: ");
         Game.getFarm().setName(in.nextLine());
         System.out.println("Farmer name: ");
         Game.getFarmer().setName(in.nextLine());
         in.close();
+        Game.getInstance().run();
         */
         
     	//dev quickstart code
     	new ConsoleGame(10);
     	Game.getFarm().setName("DEVFarmName");
     	Game.getFarmer().setName("DEVFarmerName");
+    	try {
+			Game.getStore().buy(new Wheat());
+		} catch (InsufficientFundsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         Game.getInstance().run();
-        //TODO split run to static
     }
 
 }

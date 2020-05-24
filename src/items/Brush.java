@@ -1,8 +1,14 @@
 package items;
 
 /**
- * Class to represent Brush Item
- * Item functions in game as a daily action booster
+ * Structure and attribute subclass to construct Brush objects.
+ * <p>
+ * This class provides the superclass constructor with the correct
+ * parameters, and provides an easy place for them to be set.<br>
+ * Every instance of this object is a deep-copy of each other.
+ * 
+ * @author Alex Burling(arb142)
+ * @version 1.0
  * @see Item
  */
 public class Brush extends Item {
@@ -13,11 +19,7 @@ public class Brush extends Item {
 	private final static String BRUSH_EFFECT = "mood";	
 	private final static float BRUSH_MULT = 2;		
 	private final static FarmItems BRUSH_ENUM = FarmItems.BRUSH;
-	
-	/**
-	 * Constructs the Brush object from public constant values defined in Brush.java.
-	 * Every Brush object is a deepcopy of each other (same attribute values and structure, but different objects)
-	 */
+
 	public Brush() {
 		super(BRUSH_NAME, BRUSH_DESC, BRUSH_PRICE, BRUSH_EFFECT, BRUSH_MULT, BRUSH_ENUM);
 	}

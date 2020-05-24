@@ -1,5 +1,16 @@
 package items;
 
+/**
+ * Structure and attribute subclass to construct Grain objects.
+ * <p>
+ * This class provides the superclass constructor with the correct
+ * parameters, and provides an easy place for them to be set.<br>
+ * Every instance of this object is a deep-copy of each other.
+ * 
+ * @author Alex Burling(arb142)
+ * @version 1.0
+ * @see Item
+ */
 public class Grain extends Item {
 
 	private final static String GRAIN_NAME = "Grain";		

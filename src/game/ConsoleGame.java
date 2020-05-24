@@ -1,7 +1,10 @@
 package game;
 import java.util.Scanner;
+
+import crops.Wheat;
 import exceptions.InvalidActionException;
 import exceptions.OutOfActionsException;
+import farm.FarmItem;
 
 
 /**
@@ -44,11 +47,32 @@ public class ConsoleGame extends Game {
         handleInput();
     }
     
-    /**
+    private void printInfo() {
+    	viewFarm();
+    	
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	/**
      * Prints farm as a string to console
      */
     public void viewFarm() {
         System.out.println(Game.getFarm().toString());
+        System.out.println("You have " + (2 - Game.getFarmer().getActions()) + " actions left.");
+        System.out.println("You have currently have: ");
+        Game.getFarm().addFarmItem(new Wheat());
+        try {
+            for (FarmItem item: Game.getFarm().getPaddockItems()) {
+            	System.out.println(item.getName());
+            }
+            for (FarmItem item: Game.getFarm().getConsumables()) {
+            	System.out.println(item.getName());
+            }
+        } catch (NullPointerException e) {
+        	System.out.println("Nothing in your inventory");
+        }
 
     }
 
@@ -65,12 +89,15 @@ public class ConsoleGame extends Game {
 		} catch (InvalidActionException e) {
 			System.out.println("Unknown Command:" + e.getMessage());
 		}
-    	
-    	try {
-			ActionHandler.handle(input);
-		} catch (OutOfActionsException e) {
-			System.out.println(e.getMessage());
-		}
+    	if (input == Actions.INFO) {
+    		printInfo();
+    	} else {
+        	try {
+    			ActionHandler.handle(input);
+    		} catch (OutOfActionsException e) {
+    			System.out.println(e.getMessage());
+    		}
+    	}
     }
    
     /**
@@ -100,6 +127,8 @@ public class ConsoleGame extends Game {
     			return Actions.END_GAME;
     		case "help":
     			return Actions.HELP;
+    		case "info":
+    			return Actions.INFO;
     		default:
     			throw new InvalidActionException(input.replace(" ", "").toLowerCase());
     	}

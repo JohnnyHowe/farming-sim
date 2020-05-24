@@ -13,10 +13,10 @@ package crops;
  */
 public class SugarCane extends Crop {
 	
-	public final static String CANE_NAME = "Sugar Cane";
-	public final static String CANE_DESC = "Sugary cane";
-	public final static float CANE_PRICE = 3;
-	public final static float CANE_INCOME = 150;
+	private final static String CANE_NAME = "Sugar Cane";
+	private final static String CANE_DESC = "Sugary cane";
+	private final static float CANE_PRICE = 3;
+	private final static float CANE_INCOME = 150;
 	private final static FarmItems CANE_ENUM = FarmItems.SUGAR_CANE;
 
     public SugarCane() {

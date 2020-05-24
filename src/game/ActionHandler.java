@@ -43,7 +43,7 @@ abstract class ActionHandler {
 			case END_DAY: //End the game day
 				Game.getFarmer().resetActions();
 				Game.getInstance().increaseDayCounter();
-				for (FarmItem item : Game.getFarm().getFarmItems()) {
+				for (FarmItem item : Game.getFarm().getPaddockItems()) {
 					item.endDay();
 				}
 				break;
@@ -51,7 +51,7 @@ abstract class ActionHandler {
 			case TEND_CROPS: //Tend to the crops
 				if (Game.getFarmer().canWork()) {
 					
-					for (FarmItem item : Game.getFarm().getFarmItems()) {
+					for (FarmItem item : Game.getFarm().getPaddockItems()) {
 						if (item instanceof Crop) {
 							((Crop) item).tend();
 						}
@@ -63,7 +63,7 @@ abstract class ActionHandler {
 				
 			case FEED_ANIMALS: //Feed the animals
 				if (Game.getFarmer().canWork()) {
-					for (FarmItem item : Game.getFarm().getFarmItems()) {
+					for (FarmItem item : Game.getFarm().getPaddockItems()) {
 						if (item instanceof Animal) {
 							((Animal) item).feed();
 						}
@@ -75,7 +75,7 @@ abstract class ActionHandler {
 				
 			case PLAY_ANIMALS: //Play with the animals
 				if (Game.getFarmer().canWork()) {
-					for (FarmItem item : Game.getFarm().getFarmItems()) {
+					for (FarmItem item : Game.getFarm().getPaddockItems()) {
 						if (item instanceof Animal) {
 							((Animal) item).play();
 						}
@@ -87,7 +87,7 @@ abstract class ActionHandler {
 				
 			case HARVEST_CROPS: //Harvest crops
 				if (Game.getFarmer().canWork()) {
-					for (FarmItem item : Game.getFarm().getFarmItems()) {
+					for (FarmItem item : Game.getFarm().getPaddockItems()) {
 						if (item instanceof Crop) {
 							((Crop) item).harvest();
 						}
@@ -100,6 +100,7 @@ abstract class ActionHandler {
 			case TEND_FARM: //Tend to the farmland (cleanliness)
 				if (Game.getFarmer().canWork()) {
 					Game.getFarm().cleanUp();
+					Game.getFarmer().work();
 				} else {
 					throw new OutOfActionsException();
 				}
@@ -124,7 +125,7 @@ abstract class ActionHandler {
 		switch (action) {
 		case TEND_CROPS: //Tend to the crops with consumable
 			if (Game.getFarmer().canWork()) {
-				for (FarmItem item : Game.getFarm().getFarmItems()) {
+				for (FarmItem item : Game.getFarm().getPaddockItems()) {
 					if (item instanceof Crop);
 						((Crop) item).tend(consume);
 				}
@@ -134,7 +135,7 @@ abstract class ActionHandler {
 			break;
 		case FEED_ANIMALS: //Feed the animals with consumable
 			if (Game.getFarmer().canWork()) {
-				for (FarmItem item : Game.getFarm().getFarmItems()) {
+				for (FarmItem item : Game.getFarm().getPaddockItems()) {
 					if (item instanceof Animal);
 						((Animal) item).feed(consume);
 				}
@@ -144,7 +145,7 @@ abstract class ActionHandler {
 			break;
 		case PLAY_ANIMALS: //Play with the animals with consumable
 			if (Game.getFarmer().canWork()) {
-				for (FarmItem item : Game.getFarm().getFarmItems()) {
+				for (FarmItem item : Game.getFarm().getPaddockItems()) {
 					if (item instanceof Animal);
 						((Animal) item).play(consume);
 				}

@@ -12,8 +12,6 @@ public class Farmer
 	private int actionsToday = 0;
 	
 	/**
-	 * Simple boolean function to check if the farmer can still complete
-	 * actions that come under the daily limit.
 	 * @return boolean actionsToday < 2
 	 */
 	public boolean canWork() {
@@ -21,8 +19,14 @@ public class Farmer
 	}
 	
 	/**
-	 * Increments actionsToday by one to keep track of 
-	 * daily actions taken.
+	 * @return int returns actionsToday
+	 */
+	public int getActions() {
+		return actionsToday;
+	}
+	
+	/**
+	 * Increments actionsToday by one
 	 */
 	public void work() {
 		actionsToday += 1;

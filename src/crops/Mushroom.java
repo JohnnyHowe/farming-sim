@@ -13,10 +13,10 @@ package crops;
  */
 public class Mushroom extends Crop {
 	
-	public final static String MUSH_NAME = "Mushroom";
-	public final static String MUSH_DESC = "Kind of, mushy...";
-	public final static float MUSH_PRICE = 4;
-	public final static float MUSH_INCOME = 200;
+	private final static String MUSH_NAME = "Mushroom";
+	private final static String MUSH_DESC = "Kind of, mushy...";
+	private final static float MUSH_PRICE = 4;
+	private final static float MUSH_INCOME = 200;
 	private final static FarmItems MUSH_ENUM = FarmItems.MUSHROOM;
 
     public Mushroom() {

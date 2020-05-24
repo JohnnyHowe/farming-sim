@@ -2,6 +2,8 @@ A private repo for SENG201 farm sim project
 arb142
 joh29
 
+java version "13.0.2"
+
 Links to UML Class Diagram on Lucidchart:
 https://www.lucidchart.com/documents/edit/4c57abff-1787-41c9-bb6e-94a08535901c/HWEp-vi-RSFO?beaconFlowId=934D2225EE857705
 Links to UML Use Case Diagram on Lucidchart:

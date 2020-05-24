@@ -3,6 +3,7 @@ package farm;
 import java.util.ArrayList;
 
 import game.Game;
+import items.Item;
 
 /**
  * Class representing the farm.
@@ -15,8 +16,9 @@ public class Farm
 	private double happinessMod = 1; //how effective is the farmer at keeping animals happy (bonus when playing) TODO stop mood from decreasing as quickly for higher mod? 0->2
 	private double incomeMod = 1; //how effective is the farmer at marketing (increases value of money in addMoney(money) 0->2
 	private double cleanliness = 1; //how clean is the farm (effects animal mood) TODO make effect other things too? 1->0
-	private ArrayList<FarmItem> farmItems; //farms "inventory"
-
+	private ArrayList<FarmItem> paddockItems; //farms "inventory"
+	private ArrayList<FarmItem> consumableItems;
+	
 	/**
 	 * Gets the name of the farm
 	 * @return name of farm
@@ -32,12 +34,12 @@ public class Farm
 
 	/**
 	 * Returns a string representation of the farm.
-	 * In the form "This is farm {farm name}."
+	 * In the form "This is farm {farmName} manned by {farmerName}"
 	 * @return string representation of farm
 	 */
 	public String toString()
 	{
-		return "This is farm " + name + ".";
+		return "This is farm " + Game.getFarm().getName() + " manned by " + Game.getFarmer().getName() + ".";
 	}
 
 	/**
@@ -45,7 +47,11 @@ public class Farm
  	 * @param farmItem item to add
 	 */
 	public void addFarmItem(FarmItem farmItem) {
-		this.farmItems.add(farmItem);
+		if (farmItem instanceof Item) {
+			consumableItems.add(farmItem);
+		} else {
+			paddockItems.add(farmItem);
+		}
 	}
 	
 	/**
@@ -53,15 +59,23 @@ public class Farm
  	 * @param farmItem item to remove
 	 */
 	public void removeFarmItem(FarmItem farmItem) {
-		this.farmItems.remove(farmItem);
+		if (farmItem instanceof Item) {
+			consumableItems.remove(farmItem);
+		} else {
+			paddockItems.remove(farmItem);
+		}
 	}
 	
 	/**
 	 * Returns the farms "inventory"
  	 * @return ArrayList<FarmItem> List of FarmItems the farm "owns"
  	 */
-	public ArrayList<FarmItem> getFarmItems() {
-		return farmItems;
+	public ArrayList<FarmItem> getPaddockItems() {
+		return paddockItems;
+	}
+	
+	public ArrayList<FarmItem> getConsumables() {
+		return consumableItems;
 	}
 	
 	public void cleanUp() {

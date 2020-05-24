@@ -22,4 +22,4 @@ local.properties
 .metadata*
 *.iml*
 /out
-.kotlin_module
+*.kotlin_module

@@ -3,8 +3,11 @@ package items;
 import farm.FarmItem;
 
 /**
- * Class for representing a useable Item.
- * Generally used to boost daily actions
+ * Logic and structure superclass to construct different Items (consumables).
+ * <p>
+ * This class provides each crop with the logic and structure required, by
+ * expanding on the FarmItem structure.<br>
+ * Used as consumables to boost daily actions
  * @author Alex Burling(arb142), Jonathon Howe(joh29)
  * @see AnimalFeed
  * @see Bonemeal

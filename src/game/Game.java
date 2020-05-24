@@ -30,7 +30,7 @@ public abstract class Game {
      */
     public enum Actions {VISIT_STORE, END_DAY, TEND_CROPS,
     					FEED_ANIMALS, PLAY_ANIMALS, HARVEST_CROPS, 
-    					TEND_FARM, GAME_INFO, END_GAME, HELP} 
+    					TEND_FARM, GAME_INFO, END_GAME, HELP, INFO} //info console use only
 
     /**
      * Public enum to handle player actions at the store.

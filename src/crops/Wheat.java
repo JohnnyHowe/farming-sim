@@ -13,10 +13,10 @@ package crops;
  */
 public class Wheat extends Crop {
 	
-	public final static String WHEAT_NAME = "Wheat";
-	public final static String WHEAT_DESC = "Wheaty wheat";
-	public final static float WHEAT_PRICE = 2;
-	public final static float WHEAT_INCOME = 100;
+	private final static String WHEAT_NAME = "Wheat";
+	private final static String WHEAT_DESC = "Wheaty wheat";
+	private final static float WHEAT_PRICE = 2;
+	private final static float WHEAT_INCOME = 100;
 	private final static FarmItems WHEAT_ENUM = FarmItems.WHEAT;
 	
     public Wheat() {

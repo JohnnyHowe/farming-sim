@@ -1,8 +1,14 @@
 package items;
 
 /**
- * Class to represent Animal Feed Item.
- * Item functions in game as a daily action booster.
+ * Structure and attribute subclass to construct FeedBag objects.
+ * <p>
+ * This class provides the superclass constructor with the correct
+ * parameters, and provides an easy place for them to be set.<br>
+ * Every instance of this object is a deep-copy of each other.
+ * 
+ * @author Alex Burling(arb142)
+ * @version 1.0
  * @see Item
  */
 public class FeedBag extends Item {
@@ -14,10 +20,6 @@ public class FeedBag extends Item {
 	private final static float FEED_MULT = 3;	
 	private final static FarmItems FEED_ENUM = FarmItems.FEED_BAG;
 	
-	/**
-	 * Constructs the Animal feed object from public constant values defined in AnimalFeed.java.
-	 * Every Animal feed object is a deepcopy of each other (same attribute values and structure, but different objects)
-	 */
 	public FeedBag() {
 		super(FEED_NAME, FEED_DESC, FEED_PRICE, FEED_EFFECT, FEED_MULT, FEED_ENUM);
 	}

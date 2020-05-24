@@ -2,7 +2,6 @@ package farm;
 
 import java.util.ArrayList;
 
-import crops.Wheat;
 import game.Game;
 import items.Item;
 
@@ -20,6 +19,8 @@ public class Farm
 	private ArrayList<FarmItem> paddockItems = new ArrayList<FarmItem>(); //farms "inventory"
 	private ArrayList<FarmItem> consumableItems = new ArrayList<FarmItem>();
 	
+	public enum cleanState {CLEAN, UNTIDY, DIRTY, FILTHY};
+
 	/**
 	 * Gets the name of the farm
 	 * @return name of farm
@@ -40,7 +41,20 @@ public class Farm
 	 */
 	public String toString()
 	{
-		return "This is farm " + Game.getFarm().getName() + " manned by " + Game.getFarmer().getName() + ".";
+		return "This is farm " + Game.getFarm().getName() + " manned by " + Game.getFarmer().getName() + 
+	". It is currently: " + getCleanState();
+	}
+	
+	public cleanState getCleanState() {
+		if (cleanliness < 0.25) {
+			return cleanState.FILTHY;
+		} else if (cleanliness < 0.5) {
+			return cleanState.DIRTY;
+		} else if (cleanliness < 0.75) {
+			return cleanState.UNTIDY;
+		}else {
+			return cleanState.CLEAN;
+		}
 	}
 
 	/**
@@ -83,7 +97,7 @@ public class Farm
 		cleanliness = 1;
 	}
 	public void endDay() {
-		cleanliness -= 0.2;
+		cleanliness -= 0.1;
 	}
 	
 	public void tend() {
@@ -104,11 +118,6 @@ public class Farm
 				return 1;
 		}
 		
-	}
-	
-	public static void main(String[] args) {
-		ArrayList<FarmItem> paddockItems;
-		paddockItems.add(new Wheat());
 	}
 	
 }

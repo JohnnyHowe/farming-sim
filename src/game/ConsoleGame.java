@@ -110,7 +110,7 @@ public class ConsoleGame extends Game {
     			return Actions.TEND_CROPS;
     		case "harvestcrops":
     			return Actions.HARVEST_CROPS;
-    		case "playwithanimals":
+    		case "playwanimals":
     			return Actions.PLAY_ANIMALS;
     		case "feedanimals":
     			return Actions.FEED_ANIMALS;
@@ -122,7 +122,7 @@ public class ConsoleGame extends Game {
     			return Actions.END_GAME;
     		case "help":
     			return Actions.HELP;
-    		case "info":
+    		case "farmstatus":
     			return Actions.INFO;
     		default:
     			throw new InvalidActionException(input.replace(" ", "").toLowerCase());
@@ -191,7 +191,10 @@ public class ConsoleGame extends Game {
      * Prints a string displaying all available commands to System.out
      */
     public void displayHelp() {
-		System.out.println("Commands:\nTend Farmland\nTend Crops\nHarvest Crops\nPlay with Animals\nFeed Animals\nVisit Store\nEnd Day\nEnd Game\nHelp(this)");
+		System.out.println("Commands:\nTend Farmland\t| Tend Crops\t| Harvest Crops\n"
+				+ "Play w Animals\t| Feed Animals\t| Visit Store\n"
+				+ "End Day\t\t| End Game\t| Help(this)\n"
+				+ "Farm Status");
 	}
 
     public static void main(String[] args) {

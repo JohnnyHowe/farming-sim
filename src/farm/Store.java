@@ -84,14 +84,16 @@ public class Store {
      * @throws InsufficientFundsException
      */
     public void buy(FarmItem item) throws InsufficientFundsException {
-        if (Game.getFarmer().hasFunds(item.getBuyPrice())) {
-            Game.getFarmer().spendMoney(item.getBuyPrice());
-            Game.getFarm().addFarmItem(ItemFactory.GetNew(item));
-        } else {
-            throw new InsufficientFundsException();
-        }
+    	if (Game.getFarm().getPaddockItems().size() < 9) {
+    		if (Game.getFarmer().hasFunds(item.getBuyPrice())) {
+    			Game.getFarmer().spendMoney(item.getBuyPrice());
+    			Game.getFarm().addFarmItem(ItemFactory.GetNew(item));
+    	   } else {
+    		   throw new InsufficientFundsException();
+    	   }
+    	}
     }
-
+    
     /*
      * CONSOLE SPECIFIC STORE FUNCTIONS BELOW
      */

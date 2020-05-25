@@ -54,6 +54,8 @@ public class MainScreen {
     private JButton tendNothingButton;
     private JButton playNothingButton;
     private JButton feedNothingButton;
+    private JLabel extraInfoLabel0;
+    private JLabel extraInfoLabel1;
 
     private JPanel paddockPanel;
 
@@ -270,15 +272,30 @@ public class MainScreen {
             if (item instanceof Crop) {
                 Crop crop = (Crop) item;
                 showCrop(crop);
+            } else {
+                showAnimal((Animal) item);
             }
         } else {
             showEmptySlot();
         }
     }
 
+    private void showAnimal(Animal animal) {
+        harvestButton.setVisible(false);
+        growthLabel.setVisible(true);
+        extraInfoLabel0.setVisible(true);
+        extraInfoLabel1.setVisible(true);
+        growthLabel.setText("Mood: " + animal.getMoodString());
+        extraInfoLabel0.setText("Daily Profit: " + animal.getCurrentProfit());
+        extraInfoLabel1.setText("Health: " + animal.getHealth());
+
+    }
+
     private void showCrop(Crop crop) {
         int growthPercent = Math.round(100 * crop.getGrowth() / ((float) crop.getGrowTime()));
         growthLabel.setText("Grown: " + growthPercent + "%");
+        extraInfoLabel0.setVisible(false);
+        extraInfoLabel1.setVisible(false);
         growthLabel.setVisible(true);
         harvestButton.setVisible(true);
         harvestButton.setText("Harvest for $" + crop.getIncome());
@@ -293,6 +310,8 @@ public class MainScreen {
         paddockItemName.setText("Slot Empty");
         growthLabel.setVisible(false);
         harvestButton.setVisible(false);
+        extraInfoLabel0.setVisible(false);
+        extraInfoLabel1.setVisible(false);
     }
 
     private void updateAll() {

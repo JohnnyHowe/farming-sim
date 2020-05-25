@@ -1,6 +1,7 @@
 package animals;
 
 import exceptions.InvalidItemException;
+import farm.Farm;
 import farm.FarmItem;
 import game.Game;
 import items.Item;
@@ -16,8 +17,7 @@ import items.Item;
  * @version 1.0
  * @author Alex Burling(arb142)
  * @see FarmItem
- * @see Chicken
- * @see Cow
+ * @see Chicken * @see Cow
  * @see Sheep
  */
 public abstract class Animal extends FarmItem {
@@ -25,7 +25,11 @@ public abstract class Animal extends FarmItem {
 	private float dailyProfit;
 	private float health;
 	private float mood;
-	
+
+	public enum AnimalMood {
+	    SAD, UNHAPPY, CONTENT, HAPPY, VERY_HAPPY
+	}
+
 	/**
 	 * Constructs the Animal from the FarmItem constructor and animal specific values (dailyProfit, health, mood)
 	 * @param name Animal's name, e.g. Cow, Chicken etc
@@ -57,7 +61,7 @@ public abstract class Animal extends FarmItem {
 	public float getMood() {
 		return this.mood;
 	}
-	
+
 	/**
 	 * Handles end of the day actions for Animal objects
 	 * <p>
@@ -73,14 +77,47 @@ public abstract class Animal extends FarmItem {
 	public void endDay() {
 		health -= 0.5;
 		mood -= 0.5 / Game.getFarm().getMod("cleanliness");
+		Game.getFarmer().addMoney(getCurrentProfit());
+	}
+
+	/**
+	 * Get the animals profit - Subject to its mood and farm cleanliness
+	 * @return profit
+	 */
+	public float getCurrentProfit() {
 		if (health <= 0) {
 			Game.getFarm().removeFarmItem(this);
 		} else if (health < 2) {
 			mood -= 1;
 		}
-		Game.getFarmer().addMoney(dailyProfit * health * mood);
+		return mood * health * dailyProfit;
 	}
-	
+
+	public AnimalMood getMoodEnum() {
+		if (mood < 2) {
+			return AnimalMood.SAD;
+		} else if (mood < 3) {
+			return AnimalMood.UNHAPPY;
+		} else if (mood < 4) {
+			return AnimalMood.CONTENT;
+		} else if (mood < 6) {
+			return AnimalMood.HAPPY;
+		} else {
+		    return  AnimalMood.VERY_HAPPY;
+		}
+	}
+
+	public String getMoodString() {
+		switch (getMoodEnum()) {
+			case SAD: return "Sad";
+			case UNHAPPY: return "Unhappy";
+			case HAPPY: return "Happy";
+			case VERY_HAPPY: return "Very Happy";
+			default: return "Content";
+		}
+	}
+
+
 	/**
 	 * Updates object attributes consistent with feeding the animal as a daily action
 	 * <p>

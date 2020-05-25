@@ -97,8 +97,6 @@ public class Store {
      */
 
     public void handleInput() {
-        while (Game.atStore) {
-
             String userIn = ConsoleGame.scanner.nextLine();
             Game.StoreActions input = StoreActions.HELP;
 
@@ -108,7 +106,6 @@ public class Store {
                 System.out.println("Unknown Command:" + e.getMessage());
             }
             ActionHandler.storeHandle(input);
-        }
     }
 
     /**

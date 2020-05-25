@@ -129,7 +129,6 @@ public abstract class Crop extends FarmItem {
     public void tend(Item item) throws InvalidItemException {
     	if (item.getEffect().equals("growth")) {
     		this.grown += item.getMod() * Game.getFarm().getMod("growth");
-    		Game.getFarm().removeFarmItem(item);
     	} else {
     		throw new InvalidItemException();
     	}

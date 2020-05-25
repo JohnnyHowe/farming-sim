@@ -93,7 +93,6 @@ public abstract class Animal extends FarmItem {
     public void feed(Item item) throws InvalidItemException {
     	if (item.getEffect().equals("health")) {
     		this.health += item.getMod() * 2;
-    		Game.getFarm().removeFarmItem(item);
     	} else {
     		throw new InvalidItemException();
     	} 
@@ -126,7 +125,6 @@ public abstract class Animal extends FarmItem {
 	public void play(Item item) throws InvalidItemException {
     	if (item.getEffect().equals("mood")) {
     		mood += item.getMod() * 1 * Game.getFarm().getMod("happiness");
-    		Game.getFarm().removeFarmItem(item);
     	} else {
     		throw new InvalidItemException();
     	} 

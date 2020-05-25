@@ -91,6 +91,13 @@ public class Store {
     	   } else {
     		   throw new InsufficientFundsException();
     	   }
+    	} else if (item instanceof Item) {
+    		if (Game.getFarmer().hasFunds(item.getBuyPrice())) {
+    			Game.getFarmer().spendMoney(item.getBuyPrice());
+    			Game.getFarm().addFarmItem(ItemFactory.GetNew(item));
+    	   } else {
+    		   throw new InsufficientFundsException();
+    	   }
     	}
     }
     

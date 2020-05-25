@@ -51,7 +51,7 @@ public abstract class ActionHandler {
 	
 			case PLAY_ANIMALS: playAnimals((Animal) instance); break;
 			
-			default: throw new InvalidActionException();
+			default: break;
 		}
 	}
 		
@@ -73,7 +73,7 @@ public abstract class ActionHandler {
 		
 		case PLAY_ANIMALS: playAnimalsItem((Animal) instance, consume); break;
 		
-		default: throw new InvalidActionException();
+		default: break;
 		}
 	}
 	

@@ -14,7 +14,7 @@ package crops;
 public class Pumpkin extends Crop {
 	
 	private final static String PUMP_NAME = "Pumpkin";
-	private final static String PUMP_DESC = "Carve some eye holes and place on head to defeat Endermen!";
+	private final static String PUMP_DESC = "Thicc!";
 	private final static float PUMP_PRICE = 7;
 	private final static float PUMP_INCOME = 350;
 	private final static FarmItems PUMP_ENUM = FarmItems.PUMPKIN;

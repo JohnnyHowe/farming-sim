@@ -33,8 +33,8 @@ public class ConsoleGame extends Game {
     		System.out.println("\nWhat would you like to do at the store?");
     		Game.getStore().handleInput();
     	} else {
-        System.out.println("\nWhat are you going to do today? (Day " + (Game.getInstance().getCurrentDay() + 1) + ")");
-        handleInput();
+			System.out.println("\nWhat are you going to do today? (Day " + (Game.getInstance().getCurrentDay() + 1) + ")");
+			handleInput();
     	}
     }
     

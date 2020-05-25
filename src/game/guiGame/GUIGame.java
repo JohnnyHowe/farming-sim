@@ -20,7 +20,8 @@ public class GUIGame extends game.Game {
     }
 
     public void endGame() {
-
+        System.out.println("HOES");
+        System.exit(0);
     }
 
     public void displayHelp() {

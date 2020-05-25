@@ -4,8 +4,10 @@ import animals.Sheep;
 import crops.Melon;
 import crops.SugarCane;
 import crops.Wheat;
+import exceptions.OutOfActionsException;
 import farm.Farm;
 import farm.FarmItem;
+import game.ActionHandler;
 import game.Game;
 
 import javax.swing.*;
@@ -66,8 +68,9 @@ public class MainScreen {
         endGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("End Game");
-//                Game.getInstance().endGame();
+                try {
+                    ActionHandler.handle(Game.Actions.END_GAME);
+                } catch (OutOfActionsException ignore) {}
             }
         });
         nextButton.addActionListener(new ActionListener() {
@@ -91,6 +94,19 @@ public class MainScreen {
 //            public void actionPerformed(ActionEvent e) {
 //            }
 //        });
+        endDayButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    ActionHandler.handle(Game.Actions.END_DAY);
+                    if (Game.getInstance().getCurrentDay() >= Game.getInstance().getGameLength()) {
+                        ActionHandler.handle(Game.Actions.END_GAME);
+                    }
+                    setInfoPanel();
+                } catch (OutOfActionsException ignore) {
+                }
+            }
+        });
     }
 
     /**
@@ -138,7 +154,7 @@ public class MainScreen {
     }
 
     private void setInfoPanel() {
-        daysLabel.setText("Day: " + Game.getInstance().getCurrentDay());
+        daysLabel.setText("Day: " + (Game.getInstance().getCurrentDay() + 1) + "/" + Game.getInstance().getGameLength());
 //        actionsLeftLabel.setText(Game.getInstance().get());
         farmerInfoLabel.setText("Farmer " + Game.getFarmer().getName() + " on farm " + Game.getFarm().getName());
     }

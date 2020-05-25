@@ -1,4 +1,5 @@
 package farm;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Dictionary;
@@ -19,7 +20,7 @@ import items.Item;
  * has methods to buy crops and animals
  */
 public class Store {
-	
+
     private Dictionary<FarmItems, Crop> crops;
     private Dictionary<FarmItems, Item> items;
     private Dictionary<FarmItems, Animal> animals;
@@ -36,35 +37,39 @@ public class Store {
 
     /**
      * Get the arrayList of crop names
+     *
      * @return crops
      */
     public ArrayList<FarmItems> getCropNames() {
         return Collections.list(this.crops.keys());
     }
-    
+
     /**
      * Get the arrayList of items
+     *
      * @return items
      */
     public ArrayList<FarmItems> getItemNames() {
-    	return Collections.list(this.items.keys());
+        return Collections.list(this.items.keys());
     }
-    
+
     /**
      * Get the arrayList of animals
+     *
      * @return animals
      */
     public ArrayList<FarmItems> getAnimalNames() {
-    	return Collections.list(this.animals.keys());
+        return Collections.list(this.animals.keys());
     }
 
     /**
      * To be called when the farmer requests to buy something.
-     * @param farmer Farmer requesting to buy item
-     * @param farm Farm to send item to
+     *
+     * @param farmer   Farmer requesting to buy item
+     * @param farm     Farm to send item to
      * @param itemName Name of FarmItem to buy
      * @return Whether the purchase was successful
-     * @throws InsufficientFundsException 
+     * @throws InsufficientFundsException
      */
     public void buy(FarmItem item) throws InsufficientFundsException {
         if (Game.getFarmer().hasFunds(item.getBuyPrice())) {
@@ -78,46 +83,51 @@ public class Store {
     /*
      * CONSOLE SPECIFIC STORE FUNCTIONS BELOW
      */
-    
+
     public void handleInput() {
-        while(Game.atStore) {
-            
+        while (Game.atStore) {
+
             String userIn = ConsoleGame.scanner.nextLine();
-        	Game.StoreActions input = StoreActions.HELP;
- 
-        	try {
-    			input = Game.getStore().storeInputParser(userIn);
-    		} catch (InvalidActionException e) {
-    			System.out.println("Unknown Command:" + e.getMessage());
-    		}
-    		ActionHandler.storeHandle(input);
+            Game.StoreActions input = StoreActions.HELP;
+
+            try {
+                input = storeInputParser(userIn);
+            } catch (InvalidActionException e) {
+                System.out.println("Unknown Command:" + e.getMessage());
             }
+            ActionHandler.storeHandle(input);
+        }
     }
-    
+
     /**
-     * 
      * @param userIn
      * @return
      * @throws InvalidActionException
      */
-	public StoreActions storeInputParser(String userIn) throws InvalidActionException {
-    	switch (userIn.replace(" ", "").toLowerCase()) {	    
-    		case "viewstock": return StoreActions.VIEW_STOCK;
-	    		
-	    	case "buy": return StoreActions.BUY;
-	    		
-	    	case "sell": return StoreActions.SELL;
-	    		
-	    	case "leave": return StoreActions.LEAVE;
-	    		
-	    	case "help": return StoreActions.HELP;
-	    		
-	    	default: throw new InvalidActionException(userIn.replace(" ", "").toLowerCase());
-	    }
-	}
-	
+    public StoreActions storeInputParser(String userIn) throws InvalidActionException {
+        switch (userIn.replace(" ", "").toLowerCase()) {
+            case "viewstock":
+                return StoreActions.VIEW_STOCK;
+
+            case "buy":
+                return StoreActions.BUY;
+
+            case "sell":
+                return StoreActions.SELL;
+
+            case "leave":
+                return StoreActions.LEAVE;
+
+            case "help":
+                return StoreActions.HELP;
+
+            default:
+                throw new InvalidActionException(userIn.replace(" ", "").toLowerCase());
+        }
+    }
+
     public void displayStoreHelp() {
-    	System.out.println("Store Commands:\nView Stock\t|Buy\t|Sell\nLeave");
+        System.out.println("Store Commands:\nView Stock\t|Buy\t|Sell\nLeave");
     }
     
     /*

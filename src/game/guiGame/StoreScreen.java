@@ -61,9 +61,13 @@ public class StoreScreen {
     }
 
     private FarmItem getSelectedItem() {
-        List<Crop> crops = Collections.list(ItemFactory.GetAllCrops().elements());
-        List<Animal> animals = Collections.list(ItemFactory.GetAllAnimals().elements());
-        List<Item> items = Collections.list(ItemFactory.GetAllItems().elements());
+//        List<Crop> crops = Collections.list(ItemFactory.GetAllCrops().elements());
+//        List<Animal> animals = Collections.list(ItemFactory.GetAllAnimals().elements());
+//        List<Item> items = Collections.list(ItemFactory.GetAllItems().elements());
+        ArrayList<Crop> crops = Game.getStore().getCrops();
+        ArrayList<Animal> animals = Game.getStore().getAnimals();
+        ArrayList<Item> items = Game.getStore().getItems();
+
         if (currentSlot < crops.size()) {
             return (FarmItem) crops.get(currentSlot);
         } else if (currentSlot < crops.size() + animals.size()) {

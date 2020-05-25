@@ -58,12 +58,12 @@ public class MainScreen {
         tendFarmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                updateAll();
                 try {
                     ActionHandler.handle(Game.Actions.TEND_FARM);
                 } catch (OutOfActionsException error) {
                     System.out.println("OUT OF ACTIONS");
                 }
+                updateAll();
             }
         });
         helpButton.addActionListener(new ActionListener() {
@@ -164,6 +164,7 @@ public class MainScreen {
         growthLabel.setText("Grown: " + growthPercent + "%");
         growthLabel.setVisible(true);
         harvestButton.setVisible(true);
+        harvestButton.setText("Harvest for $" + crop.getIncome());
         if (crop.isGrown()) {
             harvestButton.setEnabled(true);
         } else {

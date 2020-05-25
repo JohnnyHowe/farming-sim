@@ -45,6 +45,14 @@ public abstract class Crop extends FarmItem {
     }
 
 	/**
+	 * How much will the player receive when they harvest the crop?
+	 * @return income
+	 */
+	public float getIncome() {
+    	return income;
+	}
+
+	/**
 	 * Is the crop fully grown?
 	 * @return grown
 	 */
@@ -91,7 +99,7 @@ public abstract class Crop extends FarmItem {
      */
     public void harvest() {
     	Game.getFarm().removeFarmItem(this);
-    	Game.getFarmer().addMoney((float) (income * (grown * 0.1)));
+    	Game.getFarmer().addMoney(getIncome());
     }
     
     /**

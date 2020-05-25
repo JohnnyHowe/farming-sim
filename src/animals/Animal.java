@@ -128,7 +128,7 @@ public abstract class Animal extends FarmItem {
      * ({@link #feed(Item)})
 	 */
     public void feed() {
-    	this.health += 2;
+    	this.health += 2 * Game.getFarm().getMod("happiness");
     }
     
     /**
@@ -145,7 +145,7 @@ public abstract class Animal extends FarmItem {
      */
     public void feed(Item item) throws InvalidItemException {
     	if (item.getEffect().equals("health")) {
-    		this.health += item.getMod() * 2;
+    		this.health += item.getMod() * 2 * Game.getFarm().getMod("happiness");
     	} else {
     		throw new InvalidItemException();
     	} 

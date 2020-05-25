@@ -115,6 +115,14 @@ public class Farm
 		cleanliness = 1;
 	}
 	
+	public void setHappiness(double mod) {
+		happinessMod = mod;
+	}
+	
+	public void setGrowth(double mod) {
+		growthMod = mod;
+	}
+	
 	public double getMod(String mod) {
 		switch (mod) {
 			case "growth":

@@ -60,6 +60,7 @@ public class StoreScreen {
                 updateMoneyLabel();
             }
         });
+        updateAll();
     }
 
     private FarmItem getSelectedItem() {

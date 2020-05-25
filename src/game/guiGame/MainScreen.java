@@ -82,13 +82,6 @@ public class MainScreen {
                 updateAll();
             }
         });
-        helpButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateAll();
-                System.out.println("Help!");
-            }
-        });
         endGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -193,6 +186,7 @@ public class MainScreen {
                 tendCurrentAnimal(FarmItem.FarmItems.GRAIN);
             }
         });
+        updateAll();
     }
 
     /**
@@ -285,9 +279,9 @@ public class MainScreen {
         growthLabel.setVisible(true);
         extraInfoLabel0.setVisible(true);
         extraInfoLabel1.setVisible(true);
-        growthLabel.setText("Mood: " + animal.getMoodString());
-        extraInfoLabel0.setText("Daily Profit: " + animal.getCurrentProfit());
-        extraInfoLabel1.setText("Health: " + animal.getHealth());
+        growthLabel.setText("Daily Profit: " + Math.round(animal.getCurrentProfit()));
+        extraInfoLabel0.setText("Mood: " + animal.getMoodString());
+        extraInfoLabel1.setText("Health: " + Math.round(animal.getHealth()));
 
     }
 
@@ -363,7 +357,8 @@ public class MainScreen {
     }
 
     private void setInfoPanel() {
-        daysLabel.setText("Day: " + (Game.getInstance().getCurrentDay() + 1) + "/" + Game.getInstance().getGameLength());
+        int dayNum = Math.min(Game.getInstance().getCurrentDay() + 1, Game.getInstance().getGameLength());
+        daysLabel.setText("Day: " + dayNum + "/" + Game.getInstance().getGameLength());
         actionsLeftLabel.setText((2 - Game.getInstance().getFarmer().getActions()) + "/2 Daily Actions Left");
         farmerInfoLabel.setText(Game.getFarm().toString());
     }

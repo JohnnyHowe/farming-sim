@@ -1,5 +1,7 @@
 package game.guiGame;
 
+import game.Game;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +10,7 @@ public class EndScreen {
     private JButton quitButton;
     private JLabel scoreLabel;
     private JPanel mainPanel;
+    private JLabel durationLabel;
 
     private JFrame frame;
 
@@ -18,11 +21,14 @@ public class EndScreen {
                 System.exit(0);
             }
         });
+        updateAll();
     }
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-        scoreLabel = new JLabel("AAAAAAAAAAAAAA");
+    private void updateAll() {
+        scoreLabel.setText("Farm " + Game.getInstance().getFarm().getName() + " managed by " +
+                Game.getInstance().getFarmer().getName() + " made a total profit of $" +
+                Game.getInstance().getFarmer().getTotalProfit());
+        durationLabel.setText("Game lasted for " + Game.getInstance().getCurrentDay() + " days.");
     }
 
     public static void make() {

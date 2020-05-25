@@ -8,7 +8,8 @@ import game.Game;
 public class Farmer
 {
 	private String name;
-	private float money = 100;
+	private float money = 0;
+	private float totalProfit = 0;
 	private int actionsToday = 0;
 	
 	/**
@@ -64,6 +65,14 @@ public class Farmer
 	public void setName(String newName) {
 		name = newName;
 	}
+
+	/**
+	 * get the total profit made by the player
+	 * @return totalProfit
+	 */
+	public float getTotalProfit() {
+		return totalProfit;
+	}
 	
 	public float getMoney() {
 		return money;
@@ -75,7 +84,9 @@ public class Farmer
 	 * @param money float Cash to add
 	 */
 	public void addMoney(float amount) {
-		money += amount * Game.getFarm().getMod("income");
+		double change = amount * Game.getFarm().getMod("income");
+		money += change;
+		totalProfit += change;
 	}
 
 	/**

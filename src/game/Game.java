@@ -1,5 +1,7 @@
 package game;
 
+import animals.Cow;
+import crops.Wheat;
 import farm.Farm;
 import farm.Farmer;
 import farm.Store;
@@ -53,6 +55,8 @@ public abstract class Game {
     public Game(int length) {
     	gameLength = length;
     	setInstance(this);
+        Game.getFarm().addFarmItem(new Wheat());
+        Game.getFarm().addFarmItem(new Cow());
     }
 
     public static void setInstance(Game instance) {
@@ -131,10 +135,10 @@ public abstract class Game {
     }
 
     /**
-     * Increase the day counter by one.
+     * Increase the day counter by one if not already at gameLength
      */
     public void increaseDayCounter() {
-        Game.currentDay += 1;
+        Game.currentDay = Math.min(Game.currentDay + 1, Game.gameLength);
     }
 
     /**

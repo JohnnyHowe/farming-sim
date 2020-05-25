@@ -1,43 +1,58 @@
 package game.guiGame;
 
-
-import animals.Cow;
-import crops.Wheat;
+import crops.Crop;
 import game.Game;
-
 import javax.swing.*;
 
+
+/**
+ * Class to control the game with a GUI
+ *
+ * @author Jonathon Howe (Joh29)
+ * @version 1.0
+ * @see game.Game
+ */
 public class GUIGame extends game.Game {
 
     public GUIGame() {
         super(0);
     }
 
-    public void runDay() {
-        System.out.println("Running day");
-    }
+    /**
+     * Placeholder
+     * Game does not require the loop as it's run off events
+     */
+    public void runDay() {}
 
-    public void visitStore() {
-        System.out.println("At Store");
-    }
+    /**
+     * Placeholder
+     * Store visiting is handled by MainScreen
+     */
+    public void visitStore() {}
 
-    public void endGame() {
-        System.out.println("Game Over");
-//        System.exit(0);
-    }
+    /**
+     * Placeholder
+     * MainScreen controls gameover for GUI
+     */
+    public void endGame() {}
 
-    public void displayHelp() {
+    /**
+     * Placeholder
+     * Ran out of time
+     */
+    public void displayHelp() {}
 
-    }
+    /**
+     * Placeholder
+     * Game does not require the loop as it's run off events
+     */
+    public void run() {}
 
-    public void run() {
-
-        while (Game.getInstance().getCurrentDay() < Game.getInstance().getGameLength()) {
-            this.runDay();
-        }
-        this.endGame();
-    }
-
+    /**
+     * Run the game (with GUI)
+     * Show intro screen, then main game screen.
+     * @param args default java args
+     */
     public static void main(String[] args) {
         // Make frame
         new GUIGame();

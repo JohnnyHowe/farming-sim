@@ -1,5 +1,6 @@
 package game.guiGame;
 
+// Many of these were automatically set, i do not wish to mess with them
 import animals.Animal;
 import crops.Crop;
 import exceptions.InvalidActionException;
@@ -8,18 +9,23 @@ import exceptions.OutOfActionsException;
 import farm.FarmItem;
 import game.ActionHandler;
 import game.Game;
-import items.Bonemeal;
-import items.Fertiliser;
-import items.Item;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.HierarchyListener;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+
+/**
+ * Class to control the main/inventory screen.
+ * @author Jonathon Howe (joh29)
+ */
 public class MainScreen {
+    // Intellij IDEA UI things - THIS WAS NOT DONE NOT BY THE STUDENTS
+    // I am so sorry for whoever has to mark this
+    // I promise I will never do this again
+    // If eclipse complains about these it's wrong (kinda)
+    // The UI was made with the help of IntelliJ IDEA, this is the format for that (kinda)
     private JPanel commandsPanel;
     private JLabel daysLabel;
     private JLabel commandsLabel;
@@ -57,12 +63,9 @@ public class MainScreen {
     private JLabel extraInfoLabel0;
     private JLabel extraInfoLabel1;
 
-    private JPanel paddockPanel;
-
     private int currentSlot = 0;
 
     public MainScreen() {
-
         // Listeners
         visitStoreButton.addActionListener(new ActionListener() {
             @Override
@@ -274,6 +277,10 @@ public class MainScreen {
         }
     }
 
+    /**
+     * Show the animal info in the view panel
+     * @param animal animal obj to show
+     */
     private void showAnimal(Animal animal) {
         harvestButton.setVisible(false);
         growthLabel.setVisible(true);
@@ -285,6 +292,10 @@ public class MainScreen {
 
     }
 
+    /**
+     * Show the crop in the view panel
+     * @param crop crop to show
+     */
     private void showCrop(Crop crop) {
         int growthPercent = Math.round(100 * crop.getGrowth() / ((float) crop.getGrowTime()));
         growthLabel.setText("Grown: " + growthPercent + "%");
@@ -300,6 +311,9 @@ public class MainScreen {
         }
     }
 
+    /**
+     * Clear the view slot and display "Slot Empty"
+     */
     private void showEmptySlot() {
         paddockItemName.setText("Slot Empty");
         growthLabel.setVisible(false);
@@ -308,6 +322,9 @@ public class MainScreen {
         extraInfoLabel1.setVisible(false);
     }
 
+    /**
+     * Update all the onscreen items that COULD change.
+     */
     private void updateAll() {
         updateMoneyLabel();
         updateItemNumberLabel();
@@ -347,6 +364,10 @@ public class MainScreen {
         }
     }
 
+    /**
+     * Show the game over screen!
+     * That's all folks!
+     */
     private void endGame() {
         try {
             EndScreen.make();
@@ -356,6 +377,10 @@ public class MainScreen {
         }
     }
 
+    /**
+     * Set the info in the top section of the frame.
+     * This includes the day number, the actions left and the farm/farmer info
+     */
     private void setInfoPanel() {
         int dayNum = Math.min(Game.getInstance().getCurrentDay() + 1, Game.getInstance().getGameLength());
         daysLabel.setText("Day: " + dayNum + "/" + Game.getInstance().getGameLength());
@@ -376,6 +401,10 @@ public class MainScreen {
         frame.pack();
     }
 
+    /**
+     * Update the consumables panels.
+     * Hide them all, updateTendPanel and updatePlayFeedPanel then show them if needed.
+     */
     private void updateConsumablePanels() {
         tendPanel.setVisible(false);
         feedPanel.setVisible(false);
@@ -400,6 +429,10 @@ public class MainScreen {
         return false;
     }
 
+    /**
+     * If the selected item is a crop, show the tend panel, hide if not.
+     * Only have buttons enabled if the player has the items each button represents
+     */
     private void updateTendPanel() {
         FarmItem item = getSelectedItem();
         if (item instanceof Crop) {
@@ -416,6 +449,10 @@ public class MainScreen {
         }
     }
 
+    /**
+     * If the selected item is an animal, show play and feed, hide if not.
+     * Only have buttons enabled if the player has the items each button represents
+     */
     private void updatePlayFeedPanel() {
         FarmItem item = getSelectedItem();
         if (item instanceof Animal) {
@@ -432,10 +469,6 @@ public class MainScreen {
             if (itemInConsumables(FarmItem.FarmItems.FEED_BAG)) {feedBagButton.setEnabled(true);}
             if (itemInConsumables(FarmItem.FarmItems.GRAIN)) {grainButton.setEnabled(true);}
         }
-    }
-
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
     }
 }
 

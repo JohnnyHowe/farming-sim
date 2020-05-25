@@ -21,9 +21,14 @@ public class EndScreen {
                 System.exit(0);
             }
         });
+        // Set the values
         updateAll();
     }
 
+    /**
+     * Update the information on the endScreen
+     * Specifically the farm name, farmer name, total profit and the days the game was played for
+     */
     private void updateAll() {
         scoreLabel.setText("Farm " + Game.getInstance().getFarm().getName() + " managed by " +
                 Game.getInstance().getFarmer().getName() + " made a total profit of $" +
@@ -31,6 +36,9 @@ public class EndScreen {
         durationLabel.setText("Game lasted for " + Game.getInstance().getCurrentDay() + " days.");
     }
 
+    /**
+     * Draw the end screen
+     */
     public static void make() {
         EndScreen screen = new EndScreen();
         screen.frame = new JFrame("Farming Simulator! - End Screen");

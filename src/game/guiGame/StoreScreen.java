@@ -3,12 +3,8 @@ package game.guiGame;
 import animals.Animal;
 import crops.*;
 import exceptions.InsufficientFundsException;
-import farm.Farm;
 import farm.FarmItem;
-import farm.ItemFactory;
 import game.Game;
-import items.Bonemeal;
-import items.Fertiliser;
 import items.Item;
 
 import javax.swing.*;
@@ -17,6 +13,8 @@ import java.awt.event.ActionListener;
 import java.util.*;
 
 public class StoreScreen {
+    // If eclipse complains about these it's wrong
+    // The UI was made with the help of IntelliJ IDEA, this is the format for that (kinda)
     private JPanel panel1;
     private JLabel storeLabel;
     private JButton nextButton;
@@ -63,10 +61,11 @@ public class StoreScreen {
         updateAll();
     }
 
+    /**
+     * Get the item that's selected ASSUMING IT EXISTS
+     * @return item selected
+     */
     private FarmItem getSelectedItem() {
-//        List<Crop> crops = Collections.list(ItemFactory.GetAllCrops().elements());
-//        List<Animal> animals = Collections.list(ItemFactory.GetAllAnimals().elements());
-//        List<Item> items = Collections.list(ItemFactory.GetAllItems().elements());
         ArrayList<Crop> crops = Game.getStore().getCrops();
         ArrayList<Animal> animals = Game.getStore().getAnimals();
         ArrayList<Item> items = Game.getStore().getItems();
@@ -80,15 +79,25 @@ public class StoreScreen {
         }
     }
 
+    /**
+     * Update all the bits that can change on the screen
+     * includes money and current item (name desc etc)
+     */
     private void updateAll() {
         updateCurrentItem();
         updateMoneyLabel();
     }
 
+    /**
+     * set the money label to "Money :$x" where x is the players money
+     */
     private void updateMoneyLabel() {
         moneyLabel.setText("Money: $" + Game.getFarmer().getMoney());
     }
 
+    /**
+     * Update the name, description income etc of the selected item being displayed
+     */
     private void updateCurrentItem() {
         FarmItem selection = getSelectedItem();
         itemNameLabel.setText(selection.getName());
@@ -128,9 +137,12 @@ public class StoreScreen {
         itemNumberLabel.setText("Showing Item " + (currentSlot + 1) + "/x");
     }
 
+    /**
+     * Make the store window
+     */
     public static void make() {
         StoreScreen screen = new StoreScreen();
-        screen.frame = new JFrame("ASS");
+        screen.frame = new JFrame("Store");
         screen.frame.setContentPane(screen.panel1);
         screen.frame.setVisible(true);
         screen.frame.pack();

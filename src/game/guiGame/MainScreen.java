@@ -1,20 +1,19 @@
 package game.guiGame;
 
-import animals.Sheep;
+import animals.Animal;
 import crops.Crop;
-import crops.Melon;
-import crops.SugarCane;
-import crops.Wheat;
 import exceptions.OutOfActionsException;
-import farm.Farm;
 import farm.FarmItem;
 import game.ActionHandler;
 import game.Game;
+import items.Bonemeal;
+import items.Fertiliser;
+import items.Item;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class MainScreen {
@@ -40,6 +39,18 @@ public class MainScreen {
     private JLabel growthLabel;
     private JButton harvestButton;
     private JLabel moneyLabel;
+    private JButton shampooButton;
+    private JButton brushButton;
+    private JButton grainButton;
+    private JButton feedBagButton;
+    private JPanel playPanel;
+    private JButton fertiliserButton;
+    private JButton bonemealButton;
+    private JPanel tendPanel;
+    private JPanel feedPanel;
+    private JButton tendNothingButton;
+    private JButton playNothingButton;
+    private JButton feedNothingButton;
 
     private JPanel paddockPanel;
 
@@ -115,6 +126,25 @@ public class MainScreen {
                 updateAll();
             }
         });
+        tendNothingButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Crop crop = (Crop) getSelectedItem();
+//                ActionHandler.handle(Game.Actions.TEND_CROPS, crop);
+            }
+        });
+        playNothingButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Animal animal = (Animal) getSelectedItem();
+            }
+        });
+        feedNothingButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Animal animal = (Animal) getSelectedItem();
+            }
+        });
     }
 
     /**
@@ -183,6 +213,7 @@ public class MainScreen {
         updateItemNumberLabel();
         updateCurrentItem();
         setInfoPanel();
+        updateConsumablePanels();
     }
 
     /**
@@ -242,6 +273,68 @@ public class MainScreen {
     public void draw(JFrame frame) {
         frame.setContentPane(new MainScreen().mainPanel);
         frame.pack();
+    }
+
+    private void updateConsumablePanels() {
+        tendPanel.setVisible(false);
+        feedPanel.setVisible(false);
+        playPanel.setVisible(false);
+        if (itemIsSelected()) {
+            updateTendPanel();
+            updatePlayFeedPanel();
+        }
+    }
+
+    /**
+     * Is item in the consumables inventory?
+     * @param item instance of item to check for
+     * @return whether item exists in the inventory
+     */
+    private boolean itemInConsumables(FarmItem.FarmItems item) {
+        for (FarmItem i : Game.getFarm().getConsumables()) {
+            if (item == i.getEnum()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void updateTendPanel() {
+        FarmItem item = getSelectedItem();
+        if (item instanceof Crop) {
+            tendPanel.setVisible(true);
+
+            bonemealButton.setEnabled(false);
+            fertiliserButton.setEnabled(false);
+            if (itemInConsumables(FarmItem.FarmItems.BONEMEAL)) {
+                bonemealButton.setEnabled(true);
+            }
+            if (itemInConsumables(FarmItem.FarmItems.FERTILISER)) {
+                fertiliserButton.setEnabled(true);
+            }
+        }
+    }
+
+    private void updatePlayFeedPanel() {
+        FarmItem item = getSelectedItem();
+        if (item instanceof Animal) {
+            playPanel.setVisible(true);
+            feedPanel.setVisible(true);
+
+            brushButton.setEnabled(false);
+            shampooButton.setEnabled(false);
+            feedBagButton.setEnabled(false);
+            grainButton.setEnabled(false);
+
+            if (itemInConsumables(FarmItem.FarmItems.BRUSH)) {brushButton.setEnabled(true);}
+            if (itemInConsumables(FarmItem.FarmItems.SHAMPOO)) {shampooButton.setEnabled(true);}
+            if (itemInConsumables(FarmItem.FarmItems.FEED_BAG)) {feedBagButton.setEnabled(true);}
+            if (itemInConsumables(FarmItem.FarmItems.GRAIN)) {grainButton.setEnabled(true);}
+        }
+    }
+
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
     }
 }
 

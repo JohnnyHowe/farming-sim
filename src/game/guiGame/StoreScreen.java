@@ -7,6 +7,8 @@ import farm.Farm;
 import farm.FarmItem;
 import farm.ItemFactory;
 import game.Game;
+import items.Bonemeal;
+import items.Fertiliser;
 import items.Item;
 
 import javax.swing.*;

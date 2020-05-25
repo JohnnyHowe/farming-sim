@@ -72,6 +72,7 @@ public abstract class Crop extends FarmItem {
 	 */
     public void endDay() {
     	this.grown += 1 * Game.getFarm().getMod("growth"); //natural daily growth
+        this.grown = Math.min(this.grown, this.growTime);
     }
     
     /**

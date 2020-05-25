@@ -100,6 +100,7 @@ public class MainScreen {
         endDayButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                updateAll();
                 try {
                     ActionHandler.handle(Game.Actions.END_DAY);
                     if (Game.getInstance().getCurrentDay() >= Game.getInstance().getGameLength()) {
@@ -128,6 +129,11 @@ public class MainScreen {
         } else {
             paddockItemName.setText("Slot Empty");
         }
+    }
+
+    private void updateAll() {
+        updateItemNumberLabel();
+        updateCurrentItem();
     }
 
     /**

@@ -134,9 +134,29 @@ public class Store {
                 throw new InvalidActionException(userIn.replace(" ", "").toLowerCase());
         }
     }
+    
+    public FarmItems storeSelectionParser(String userIn) {
+        switch (userIn.replace(" ", "").toLowerCase()) {
+        
+        case "cow": return FarmItems.COW;
+
+        case "sheep": return FarmItems.SHEEP;
+
+        case "chicken": return StoreActions.SELL;
+
+        case "leave":
+            return StoreActions.LEAVE;
+
+        case "help":
+            return StoreActions.HELP;
+
+        default:
+            throw new InvalidActionException(userIn.replace(" ", "").toLowerCase());
+    }
+    }
 
     public void displayStoreHelp() {
-        System.out.println("Store Commands:\nView Stock\t|Buy\t|Sell\nLeave");
+        System.out.println("Store Commands:\nView Stock\t|Buy\t|Sell\nLeave\t|Help(this)");
     }
     
     /*

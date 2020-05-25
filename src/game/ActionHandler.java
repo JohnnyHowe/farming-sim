@@ -43,7 +43,7 @@ public abstract class ActionHandler {
 		}
 	}
 	
-	public static void handle(Game.Actions action, FarmItem instance) throws OutOfActionsException{
+	public static void handle(Game.Actions action, FarmItem instance) throws OutOfActionsException, InvalidActionException {
 		switch (action) {
 			case TEND_CROPS: tendCrops((Crop) instance); break;
 
@@ -51,7 +51,7 @@ public abstract class ActionHandler {
 	
 			case PLAY_ANIMALS: playAnimals((Animal) instance); break;
 			
-			default: break;
+			default: throw new InvalidActionException();
 		}
 	}
 		
@@ -73,7 +73,7 @@ public abstract class ActionHandler {
 		
 		case PLAY_ANIMALS: playAnimalsItem((Animal) instance, consume); break;
 		
-		default: break;
+		default: throw new InvalidActionException();
 		}
 	}
 	

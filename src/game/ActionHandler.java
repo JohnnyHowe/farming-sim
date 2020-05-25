@@ -6,6 +6,7 @@ import exceptions.InvalidActionException;
 import exceptions.InvalidItemException;
 import exceptions.OutOfActionsException;
 import farm.FarmItem;
+import farm.FarmItem.FarmItems;
 import items.Item;
 
 /**
@@ -65,7 +66,8 @@ public abstract class ActionHandler {
 	 * @throws InvalidActionException
 	 * @throws InvalidItemException
 	 */
-	public static void handle(Game.Actions action, FarmItem instance, Item consume) throws OutOfActionsException, InvalidActionException, InvalidItemException {
+	public static void handle(Game.Actions action, FarmItem instance, FarmItems consumeEnum) throws OutOfActionsException, InvalidActionException, InvalidItemException {
+		Item consume = (Item) Game.getFarm().getItem(consumeEnum);
 		switch (action) {
 		case TEND_CROPS: tendCropsItem((Crop) instance, consume); break;
 		

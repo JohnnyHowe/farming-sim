@@ -2,6 +2,8 @@ package farm;
 
 import java.util.ArrayList;
 
+import exceptions.InvalidItemException;
+import farm.FarmItem.FarmItems;
 import game.Game;
 import items.Item;
 
@@ -79,6 +81,15 @@ public class Farm
 		} else {
 			paddockItems.remove(farmItem);
 		}
+	}
+	
+	public FarmItem getItem(FarmItems itemEnum) throws InvalidItemException {
+		for (FarmItem item: consumableItems) {
+			if (item.getEnum() == itemEnum) {
+				return item;
+			}
+		}
+		throw new InvalidItemException("Item not found");
 	}
 	
 	/**

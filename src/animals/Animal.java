@@ -41,6 +41,14 @@ public abstract class Animal extends FarmItem {
 		this.health = health;
 		this.mood = mood;
 	}
+
+	/**
+	 * Get the daily profit of the animal
+	 * @return dailyProfit
+	 */
+	public float getDailyProfit() {
+		return dailyProfit;
+	}
 	
 	/**
 	 * Handles end of the day actions for Animal objects

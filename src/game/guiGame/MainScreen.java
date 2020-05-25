@@ -38,6 +38,8 @@ public class MainScreen {
     private JButton goToFarmButton;
     private JButton endDayButton;
     private JLabel growthLabel;
+    private JButton harvestButton;
+    private JLabel moneyLabel;
 
     private JPanel paddockPanel;
 
@@ -56,17 +58,18 @@ public class MainScreen {
         tendFarmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                updateAll();
                 try {
                     ActionHandler.handle(Game.Actions.TEND_FARM);
                 } catch (OutOfActionsException error) {
                     System.out.println("OUT OF ACTIONS");
                 }
-                setInfoPanel();
             }
         });
         helpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                updateAll();
                 System.out.println("Help!");
             }
         });
@@ -80,27 +83,19 @@ public class MainScreen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 changeSelectedSlot(1);
-                updateItemNumberLabel();
-                updateCurrentItem();
+                updateAll();
             }
         });
         previousButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 changeSelectedSlot(-1);
-                updateItemNumberLabel();
-                updateCurrentItem();
+                updateAll();
             }
         });
-//        endDayButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//            }
-//        });
         endDayButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                updateAll();
                 try {
                     ActionHandler.handle(Game.Actions.END_DAY);
                     if (Game.getInstance().getCurrentDay() >= Game.getInstance().getGameLength()) {
@@ -109,31 +104,84 @@ public class MainScreen {
                     setInfoPanel();
                 } catch (OutOfActionsException ignore) {
                 }
+                updateAll();
             }
         });
+        harvestButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Crop crop = (Crop) getSelectedItem();   // Button only pressed when it's a crop
+                crop.harvest();
+                updateAll();
+            }
+        });
+    }
+
+    /**
+     * Update the money label to
+     * "Money: $x" where x is the players money
+     */
+    private void updateMoneyLabel() {
+        moneyLabel.setText("Money: $" + Game.getFarmer().getMoney());
+    }
+
+    /**
+     * Get the selected farm item
+     * An empty farmitem is returned if no item is selected
+     * @return item in selected paddock slot
+     */
+    private FarmItem getSelectedItem() {
+        ArrayList<FarmItem> items = Game.getInstance().getFarm().getPaddockItems();
+        return items.get(currentSlot);
+    }
+
+    /**
+     * Is there an item in the current slot?
+     * @return whether an item is selected
+     */
+    private boolean itemIsSelected() {
+        return currentSlot < Game.getInstance().getFarm().getPaddockItems().size();
     }
 
     /**
      * Update the shown item in the visible slot
      */
     private void updateCurrentItem() {
-        ArrayList<FarmItem> items = Game.getInstance().getFarm().getPaddockItems();
-        if (currentSlot < items.size()) {
-            FarmItem item = items.get(currentSlot);
+        if (itemIsSelected()) {
+            FarmItem item = getSelectedItem();
             paddockItemName.setText(item.getName());
             if (item instanceof Crop) {
                 Crop crop = (Crop) item;
-                int growthPercent = Math.round(100 * crop.getGrowth() / ((float) crop.getGrowTime()));
-                growthLabel.setText("Grown: " + growthPercent + "%");
+                showCrop(crop);
             }
         } else {
-            paddockItemName.setText("Slot Empty");
+            showEmptySlot();
         }
     }
 
+    private void showCrop(Crop crop) {
+        int growthPercent = Math.round(100 * crop.getGrowth() / ((float) crop.getGrowTime()));
+        growthLabel.setText("Grown: " + growthPercent + "%");
+        growthLabel.setVisible(true);
+        harvestButton.setVisible(true);
+        if (crop.isGrown()) {
+            harvestButton.setEnabled(true);
+        } else {
+            harvestButton.setEnabled(false);
+        }
+    }
+
+    private void showEmptySlot() {
+        paddockItemName.setText("Slot Empty");
+        growthLabel.setVisible(false);
+        harvestButton.setVisible(false);
+    }
+
     private void updateAll() {
+        updateMoneyLabel();
         updateItemNumberLabel();
         updateCurrentItem();
+        setInfoPanel();
     }
 
     /**

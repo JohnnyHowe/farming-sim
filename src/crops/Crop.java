@@ -45,6 +45,14 @@ public abstract class Crop extends FarmItem {
     }
 
 	/**
+	 * Is the crop fully grown?
+	 * @return grown
+	 */
+	public boolean isGrown() {
+    	return this.grown >= this.growTime;
+	}
+
+	/**
 	 * How much has the crop grown?
 	 * @return growth
 	 */

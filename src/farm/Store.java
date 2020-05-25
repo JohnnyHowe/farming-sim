@@ -34,6 +34,18 @@ public class Store {
         this.items = ItemFactory.GetAllItems();
         this.animals = ItemFactory.GetAllAnimals();
     }
+    
+    public ArrayList<Crop> getCrops() {
+    	return Collections.list(crops.elements());
+    }
+    
+    public ArrayList<Item> getItems() {
+    	return Collections.list(items.elements());
+    }
+    
+    public ArrayList<Animal> getAnimals() {
+    	return Collections.list(animals.elements());
+    }
 
     /**
      * Get the arrayList of crop names

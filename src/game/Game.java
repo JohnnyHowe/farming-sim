@@ -156,7 +156,11 @@ public abstract class Game {
         return 69420;
     }
     
-    public void atStore(boolean status) {
+    public boolean getAtStore() {
+    	return atStore;
+    }
+    
+    public void setAtStore(boolean status) {
     	atStore = status;
     }
     

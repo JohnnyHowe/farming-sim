@@ -31,7 +31,7 @@ public abstract class ActionHandler {
 				
 			case HELP: help(); break;
 				
-			case VISIT_STORE: Game.getInstance().atStore(true); break;
+			case VISIT_STORE: Game.getInstance().setAtStore(true); break;
 				
 			case END_DAY: endDay(); break;
 				
@@ -103,14 +103,9 @@ public abstract class ActionHandler {
 			case BUY: buy(); break;
 			case SELL: sell(); break;
 			case HELP: Game.getStore().displayStoreHelp(); break;
-			case LEAVE: Game.getInstance().atStore(false); break;
+			case LEAVE: Game.getInstance().setAtStore(false); break;
 			default: break;
 		}
-	}
-
-	private static void helpStore() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	private static void sell() {
@@ -124,8 +119,18 @@ public abstract class ActionHandler {
 	}
 
 	private static void viewStock() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("\nAvailable Crops:");
+		for (Crop crop: Game.getStore().getCrops()) {
+			System.out.print(crop.getName() + " ");
+		}
+		System.out.println("\nAvailable Animals:");
+		for (Animal animal: Game.getStore().getAnimals()) {
+			System.out.print(animal.getName() + " ");
+		}
+		System.out.println("\nAvailable Consumables:");
+		for (Item item: Game.getStore().getItems()) {
+			System.out.print(item.getName() + " ");
+		}
 	}
 
 	private static void endGame() {

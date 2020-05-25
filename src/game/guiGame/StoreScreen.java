@@ -92,8 +92,14 @@ public class StoreScreen {
         FarmItem selection = getSelectedItem();
         itemNameLabel.setText(selection.getName());
         itemCostLabel.setText("Buy Price: $" + selection.getBuyPrice());
-        itemSellLabel.setText("Sell Price: $" + selection.getSellPrice());
         itemDescLabel.setText("<html>" + selection.getDescription() + "</html>");
+        if (selection instanceof Animal) {
+            itemSellLabel.setText("Daily Income: $" + ((Animal) selection).getDailyProfit());
+        } else if (selection instanceof Crop) {
+            itemSellLabel.setText("Harvest Income: $" + ((Crop) selection).getIncome());
+        } else {
+            itemSellLabel.setText("");
+        }
     }
 
     /**

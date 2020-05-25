@@ -2,6 +2,8 @@ package game.guiGame;
 
 import animals.Animal;
 import crops.Crop;
+import exceptions.InvalidActionException;
+import exceptions.InvalidItemException;
 import exceptions.OutOfActionsException;
 import farm.FarmItem;
 import game.ActionHandler;
@@ -13,6 +15,7 @@ import items.Item;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.HierarchyListener;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -129,22 +132,106 @@ public class MainScreen {
         tendNothingButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Crop crop = (Crop) getSelectedItem();
-//                ActionHandler.handle(Game.Actions.TEND_CROPS, crop);
+                tendCurrentCrop();
             }
         });
         playNothingButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Animal animal = (Animal) getSelectedItem();
+                try {
+                    ActionHandler.handle(Game.Actions.PLAY_ANIMALS, animal);
+                } catch (OutOfActionsException | InvalidActionException ignore) {}
+                updateAll();
             }
         });
         feedNothingButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Animal animal = (Animal) getSelectedItem();
+                try {
+                    ActionHandler.handle(Game.Actions.FEED_ANIMALS, animal);
+                } catch (OutOfActionsException | InvalidActionException ignore) {}
+            updateAll();
             }
         });
+        bonemealButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tendCurrentCrop(FarmItem.FarmItems.BONEMEAL);
+            }
+        });
+        fertiliserButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tendCurrentCrop(FarmItem.FarmItems.FERTILISER);
+            }
+        });
+        brushButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tendCurrentAnimal(FarmItem.FarmItems.BRUSH);
+            }
+        });
+        shampooButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tendCurrentAnimal(FarmItem.FarmItems.SHAMPOO);
+            }
+        });
+        feedBagButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tendCurrentAnimal(FarmItem.FarmItems.FEED_BAG);
+            }
+        });
+        grainButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                tendCurrentAnimal(FarmItem.FarmItems.GRAIN);
+            }
+        });
+    }
+
+    /**
+     * Assuming a crop is selected, tend it with no item
+     */
+    private void tendCurrentCrop() {
+        Crop crop = (Crop) getSelectedItem();
+        try {
+            ActionHandler.handle(Game.Actions.TEND_CROPS, crop);
+        } catch (OutOfActionsException | InvalidActionException ignore) {
+        }
+        updateAll();
+    }
+
+    /**
+     * Assuming a crop is selected, tend it with the item given
+     * @param item item to tend with
+     */
+    private void tendCurrentCrop(FarmItem.FarmItems item) {
+        Crop crop = (Crop) getSelectedItem();
+        try {
+            ActionHandler.handle(Game.Actions.TEND_CROPS, crop, item);
+        } catch (OutOfActionsException | InvalidActionException | InvalidItemException ignore) {
+        }
+        updateAll();
+    }
+
+    /**
+     * Assuming an animal is selected, tend to it with item
+     * @param item item to tend with
+     */
+    private void tendCurrentAnimal(FarmItem.FarmItems item) {
+        Animal animal = (Animal) getSelectedItem();
+        try {
+            if (item == FarmItem.FarmItems.BRUSH || item == FarmItem.FarmItems.SHAMPOO) {
+                ActionHandler.handle(Game.Actions.PLAY_ANIMALS, animal, item);
+            } else {
+                ActionHandler.handle(Game.Actions.FEED_ANIMALS, animal, item);
+            }
+        } catch (OutOfActionsException | InvalidActionException | InvalidItemException ignore) { }
+        updateAll();
     }
 
     /**

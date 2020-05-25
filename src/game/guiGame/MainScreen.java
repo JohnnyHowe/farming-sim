@@ -35,8 +35,6 @@ public class MainScreen {
     private JLabel itemNumberLabel;
     private JLabel paddockItemName;
     private JButton goToFarmButton;
-    private JPanel titlePanel;
-    private JLabel gamePanelTitle;
     private JButton endDayButton;
 
     private JPanel paddockPanel;
@@ -56,7 +54,12 @@ public class MainScreen {
         tendFarmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Tend Farm");
+                try {
+                    ActionHandler.handle(Game.Actions.TEND_FARM);
+                } catch (OutOfActionsException error) {
+                    System.out.println("OUT OF ACTIONS");
+                }
+                setInfoPanel();
             }
         });
         helpButton.addActionListener(new ActionListener() {
@@ -162,8 +165,9 @@ public class MainScreen {
 
     private void setInfoPanel() {
         daysLabel.setText("Day: " + (Game.getInstance().getCurrentDay() + 1) + "/" + Game.getInstance().getGameLength());
-//        actionsLeftLabel.setText(Game.getInstance().get());
-        farmerInfoLabel.setText("Farmer " + Game.getFarmer().getName() + " on farm " + Game.getFarm().getName());
+        actionsLeftLabel.setText((2 - Game.getInstance().getFarmer().getActions()) + "/2 Daily Actions Left");
+//        farmerInfoLabel.setText("Farmer " + Game.getFarmer().getName() + " on farm " + Game.getFarm().getName());
+        farmerInfoLabel.setText(Game.getFarm().toString());
     }
 
     /**

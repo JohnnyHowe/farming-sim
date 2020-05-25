@@ -43,6 +43,23 @@ public abstract class Crop extends FarmItem {
     	this.grown = 0;
     	this.growTime = growTime;
     }
+
+	/**
+	 * How much has the crop grown?
+	 * @return growth
+	 */
+	public float getGrowth() {
+		return grown;
+	}
+
+	/**
+	 * How many days will it take for the crop to grow?
+	 * (if no multiplier)
+	 * @return growTime
+	 */
+	public int getGrowTime() {
+		return growTime;
+	}
     
 	/**
 	 * Handles end of the day actions for Crop objects

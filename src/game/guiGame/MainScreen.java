@@ -1,6 +1,7 @@
 package game.guiGame;
 
 import animals.Sheep;
+import crops.Crop;
 import crops.Melon;
 import crops.SugarCane;
 import crops.Wheat;
@@ -36,6 +37,7 @@ public class MainScreen {
     private JLabel paddockItemName;
     private JButton goToFarmButton;
     private JButton endDayButton;
+    private JLabel growthLabel;
 
     private JPanel paddockPanel;
 
@@ -118,6 +120,11 @@ public class MainScreen {
         if (currentSlot < items.size()) {
             FarmItem item = items.get(currentSlot);
             paddockItemName.setText(item.getName());
+            if (item instanceof Crop) {
+                Crop crop = (Crop) item;
+                int growthPercent = Math.round(100 * crop.getGrowth() / ((float) crop.getGrowTime()));
+                growthLabel.setText("Grown: " + growthPercent + "%");
+            }
         } else {
             paddockItemName.setText("Slot Empty");
         }

@@ -68,9 +68,7 @@ public class MainScreen {
         endGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    ActionHandler.handle(Game.Actions.END_GAME);
-                } catch (OutOfActionsException ignore) {}
+                endGame();
             }
         });
         nextButton.addActionListener(new ActionListener() {
@@ -100,7 +98,7 @@ public class MainScreen {
                 try {
                     ActionHandler.handle(Game.Actions.END_DAY);
                     if (Game.getInstance().getCurrentDay() >= Game.getInstance().getGameLength()) {
-                        ActionHandler.handle(Game.Actions.END_GAME);
+                        endGame();
                     }
                     setInfoPanel();
                 } catch (OutOfActionsException ignore) {
@@ -150,6 +148,15 @@ public class MainScreen {
             previousButton.setEnabled(false);
         } else if (currentSlot == 8) {
             nextButton.setEnabled(false);
+        }
+    }
+
+    private void endGame() {
+        try {
+            EndScreen.make();
+            ActionHandler.handle(Game.Actions.END_GAME);
+        } catch (OutOfActionsException ignore) {
+            // Will never happen
         }
     }
 

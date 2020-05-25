@@ -18,8 +18,9 @@ public class Wheat extends Crop {
 	private final static float WHEAT_PRICE = 2;
 	private final static float WHEAT_INCOME = 100;
 	private final static FarmItems WHEAT_ENUM = FarmItems.WHEAT;
-	
+	private final static int GROW_TIME = 3;
+
     public Wheat() {
-		super(WHEAT_NAME, WHEAT_DESC, WHEAT_PRICE, WHEAT_INCOME, WHEAT_ENUM);
+		super(WHEAT_NAME, WHEAT_DESC, WHEAT_PRICE, WHEAT_INCOME, WHEAT_ENUM, GROW_TIME);
 	}
 }

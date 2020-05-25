@@ -18,8 +18,9 @@ public class Cactus extends Crop {
 	private final static float CACTUS_PRICE = 5;
 	private final static float CACTUS_INCOME = 250;
 	private final static FarmItems CACTUS_ENUM = FarmItems.CACTUS;
+	private final static int GROW_TIME = 3;
 	
     public Cactus() {
-		super(CACTUS_NAME, CACTUS_DESC, CACTUS_PRICE, CACTUS_INCOME,CACTUS_ENUM);
+		super(CACTUS_NAME, CACTUS_DESC, CACTUS_PRICE, CACTUS_INCOME,CACTUS_ENUM, GROW_TIME);
 	}
 }

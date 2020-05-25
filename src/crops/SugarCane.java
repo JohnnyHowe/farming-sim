@@ -18,8 +18,9 @@ public class SugarCane extends Crop {
 	private final static float CANE_PRICE = 3;
 	private final static float CANE_INCOME = 150;
 	private final static FarmItems CANE_ENUM = FarmItems.SUGAR_CANE;
+	private final static int GROW_TIME = 3;
 
     public SugarCane() {
-		super(CANE_NAME, CANE_DESC, CANE_PRICE, CANE_INCOME, CANE_ENUM);
+		super(CANE_NAME, CANE_DESC, CANE_PRICE, CANE_INCOME, CANE_ENUM, GROW_TIME);
 	}
 }

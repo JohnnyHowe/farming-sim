@@ -22,7 +22,7 @@ public abstract class FarmItem {
 	/**
 	 * 
 	 * @param name FarmItem name, used when viewing status of item
-	 * @param description FarmItem description, used when viewing status of item
+ * @param description FarmItem description, used when viewing status of item
 	 * @param price FarmItem price, used when buying or selling to store
 	 */
 	public FarmItem (String name, String description, float price, FarmItems selfEnum) {

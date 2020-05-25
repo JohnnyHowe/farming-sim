@@ -18,8 +18,9 @@ public class Pumpkin extends Crop {
 	private final static float PUMP_PRICE = 7;
 	private final static float PUMP_INCOME = 350;
 	private final static FarmItems PUMP_ENUM = FarmItems.PUMPKIN;
-	
+	private final static int GROW_TIME = 3;
+
     public Pumpkin() {
-		super(PUMP_NAME, PUMP_DESC, PUMP_PRICE, PUMP_INCOME, PUMP_ENUM);
+		super(PUMP_NAME, PUMP_DESC, PUMP_PRICE, PUMP_INCOME, PUMP_ENUM, GROW_TIME);
 	}
 }

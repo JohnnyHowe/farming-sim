@@ -36,21 +36,20 @@ public class StoreScreen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 changeSelectedSlot(-1);
-                updateItemNumberLabel();
-                updateCurrentItem();
+                updateAll();
             }
         });
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 changeSelectedSlot(1);
-                updateItemNumberLabel();
-                updateCurrentItem();
+                updateAll();
             }
         });
         buyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                updateAll();
                 try {
                     Game.getStore().buy(getSelectedItem());
                 } catch (InsufficientFundsException error) {
@@ -72,6 +71,11 @@ public class StoreScreen {
         } else {
             return (FarmItem) items.get(currentSlot - crops.size() - animals.size());
         }
+    }
+
+    private void updateAll() {
+        updateCurrentItem();
+        updateMoneyLabel();
     }
 
     private void updateMoneyLabel() {

@@ -18,8 +18,9 @@ public class Melon extends Crop {
 	private final static float MELON_PRICE = 6;
 	private final static float MELON_INCOME = 300;
 	private final static FarmItems MELON_ENUM = FarmItems.MELON;
-	
+	private final static int GROW_TIME = 3;
+
     public Melon() {
-		super(MELON_NAME, MELON_DESC, MELON_PRICE, MELON_INCOME, MELON_ENUM);
+		super(MELON_NAME, MELON_DESC, MELON_PRICE, MELON_INCOME, MELON_ENUM, GROW_TIME);
 	}
 }

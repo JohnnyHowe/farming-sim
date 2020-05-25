@@ -166,7 +166,6 @@ public class MainScreen {
     private void setInfoPanel() {
         daysLabel.setText("Day: " + (Game.getInstance().getCurrentDay() + 1) + "/" + Game.getInstance().getGameLength());
         actionsLeftLabel.setText((2 - Game.getInstance().getFarmer().getActions()) + "/2 Daily Actions Left");
-//        farmerInfoLabel.setText("Farmer " + Game.getFarmer().getName() + " on farm " + Game.getFarm().getName());
         farmerInfoLabel.setText(Game.getFarm().toString());
     }
 

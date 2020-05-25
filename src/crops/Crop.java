@@ -25,7 +25,8 @@ import items.Item;
 public abstract class Crop extends FarmItem {
 	
     private float grown;
-    private float income;
+	private int growTime;
+	private float income;
     
     /**
      * Constructs the Crop from the FarmItem constructor and crop specific values 
@@ -36,10 +37,11 @@ public abstract class Crop extends FarmItem {
      * @param price Crop price, used when buying or selling to store
      * @param income Crop income, used when crop is harvested
      */
-    public Crop (String name, String description, float price, float income, FarmItems selfEnum) {
+    public Crop (String name, String description, float price, float income, FarmItems selfEnum, int growTime) {
     	super(name, description, price, selfEnum);
     	this.income = income;
     	this.grown = 0;
+    	this.growTime = growTime;
     }
     
 	/**

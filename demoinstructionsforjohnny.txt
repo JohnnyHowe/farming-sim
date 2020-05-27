@@ -1,0 +1,10 @@
+Open a command prompt and change to a directory containing only your project zip file. To minimise the time needed to verify your project, please perform this step before your demo
+Run the appropriate command to generate the checksum of your zip file. Note you need to replace <filename> with the name of your project zip file
+For Windows: certutil -hashfile <filename> md5
+For Mac: md5 <filename>
+For Linux: md5sum <filename>
+We will check that the checksum matches the one we have calculated from your project submission. If they do not match the demo will not continue
+Unzip your archive by running
+jar xf <filename> where <filename> is the name of your project zip file
+Start your game by running
+java -jar <filename> where <filename> is the name of your JAR file

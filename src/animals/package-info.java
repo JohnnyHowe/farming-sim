@@ -7,6 +7,8 @@
  * @author Alex Burling(arb142)
  * @version 1.0
  * @see Animal
- * @see FarmItem
+ * @see Chicken
+ * @see Cow
+ * @see Sheep
  */
 package animals;

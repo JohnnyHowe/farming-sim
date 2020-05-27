@@ -9,10 +9,12 @@ import farm.FarmItem;
  * expanding on the FarmItem structure.<br>
  * Used as consumables to boost daily actions
  * @author Alex Burling(arb142), Jonathon Howe(joh29)
- * @see AnimalFeed
  * @see Bonemeal
  * @see Brush
- * @see GolemRose
+ * @see FeedBag
+ * @see Fertiliser
+ * @see Grain
+ * @see Shampoo
  */
 public abstract class Item extends FarmItem {
 	

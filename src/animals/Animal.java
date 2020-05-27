@@ -1,7 +1,6 @@
 package animals;
 
 import exceptions.InvalidItemException;
-import farm.Farm;
 import farm.FarmItem;
 import game.Game;
 import items.Item;
@@ -38,6 +37,7 @@ public abstract class Animal extends FarmItem {
 	 * @param dailyProfit Animal's daily profit, used when calculating the income from each animal (along with health and mood)
 	 * @param health Animal's base health, deteriorates daily, used when calculating the income from each animal
 	 * @param mood Animal's base mood, deteriorates daily, used when calculating the income from each animal
+	 * @param selfEnum holds the enum representing the object for easier cloning
 	 */
 	public Animal(String name, String description, float price, float dailyProfit, float health, float mood, FarmItems selfEnum) {
 		super(name, description, price, selfEnum);
@@ -161,7 +161,7 @@ public abstract class Animal extends FarmItem {
      * ({@link #play(Item)})
      */
 	public void play() {
-		this.mood += 1 * Game.getFarm().getMod("happiness") ; //play with animals/pat
+		this.mood += 1 * Game.getFarm().getMod("happiness") ;
 	}
 	
     /**

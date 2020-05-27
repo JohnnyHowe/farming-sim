@@ -82,24 +82,10 @@ public abstract class ActionHandler {
 	public static void storeHandle(Game.StoreActions action) {
 		switch (action) {
 			case VIEW_STOCK: viewStock(); break;
-			case BUY: buy(); break;
-			case SELL: sell(); break;
 			case HELP: Game.getStore().displayStoreHelp(); break;
 			case LEAVE: Game.getInstance().setAtStore(false); break;
 			default: break;
 		}
-	}
-
-	private static void sell() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private static void buy() {
-		System.out.println("\nWhat do you want to buy?");
-		String userIn = ConsoleGame.scanner.nextLine();
-		// TODO Auto-generated method stub
-		
 	}
 
 	private static void viewStock() {

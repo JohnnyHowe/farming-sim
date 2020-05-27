@@ -8,7 +8,11 @@
  * @author Alex Burling(arb142), Jonathon Howe(joh29)
  * @version 1.0
  * @see Item
- * @see FarmItem
- * @see farm
+ * @see Bonemeal
+ * @see Brush
+ * @see FeedBag
+ * @see Fertiliser
+ * @see Grain
+ * @see Shampoo
  */
 package items;

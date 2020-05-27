@@ -36,6 +36,8 @@ public abstract class Crop extends FarmItem {
      * @param description Crop description, used when viewing status of item
      * @param price Crop price, used when buying or selling to store
      * @param income Crop income, used when crop is harvested
+     * @param selfEnum holds the enum representing the object for easier cloning
+     * @param growTime int used to set and check when the crop is fully grown
      */
     public Crop (String name, String description, float price, float income, FarmItems selfEnum, int growTime) {
     	super(name, description, price, selfEnum);
@@ -122,7 +124,7 @@ public abstract class Crop extends FarmItem {
      * This function takes one item, to be consumed.
      * i.e. increases growth of crop multiplied by item modifier ({@link Item#getMod()})<br>
      * 
-     * To play without a growth item, call without Item as parameter ({@link #play()})
+     * To play without a growth item, call without Item as parameter ({@link #tend()})
      * @param item FarmItem to use while playing
      * @throws InvalidItemException if ({@link Item#getEffect()}) != "growth"
      */

@@ -7,6 +7,11 @@
  * @author Alex Burling(arb142)
  * @version 1.0
  * @see Crop
- * @see FarmItem
+ * @see Cactus
+ * @see Melon
+ * @see Mushroom
+ * @see Pumpkin
+ * @see SugarCane
+ * @see Wheat
  */
 package crops;
